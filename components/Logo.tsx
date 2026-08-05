@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 export function Logo({ light = false, className }: { light?: boolean; className?: string }) {
   return (
     <Link
-      href="#home"
+      href="/"
       aria-label="Shivalik Ganga Adventure — Home"
       className={cn("group inline-flex flex-col leading-none", className)}
     >
       <span
         className={cn(
-          "font-display text-2xl font-bold tracking-wide sm:text-3xl",
+          "font-heading text-2xl font-bold tracking-wide sm:text-3xl",
           light ? "text-white" : "text-heading"
         )}
       >

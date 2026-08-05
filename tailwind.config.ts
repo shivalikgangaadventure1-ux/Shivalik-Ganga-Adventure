@@ -28,9 +28,8 @@ const config: Config = {
         success: THEME.success,
       },
       fontFamily: {
-        heading: ["var(--font-poppins)", "sans-serif"],
+        heading: ["var(--font-manrope)", "sans-serif"],
         body: ["var(--font-inter)", "sans-serif"],
-        display: ["var(--font-playfair)", "serif"],
       },
       maxWidth: {
         container: "1320px",
@@ -50,7 +49,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
 
 export default config;

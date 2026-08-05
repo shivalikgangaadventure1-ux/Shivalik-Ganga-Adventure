@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
         pathname: "/travel/**",
       },
     ],
+    formats: ["image/avif", "image/webp"],
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion"],
   },
 };
 

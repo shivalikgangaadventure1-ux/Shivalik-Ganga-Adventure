@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { COMPANY, getCallLink } from "@/constants/config";
 import { NAV_ITEMS } from "@/constants/nav";
 import { IMAGES } from "@/constants/images";
@@ -15,7 +16,7 @@ const SOCIAL_LINKS = [
 
 export function Footer() {
   return (
-    <footer id="contact" className="bg-dark text-white/80">
+    <footer className="bg-dark text-white/80">
       <Newsletter />
 
       <Container className="grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
@@ -49,9 +50,9 @@ export function Footer() {
           <ul className="mt-5 space-y-3 text-sm">
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
-                <a href={item.href} className="transition-colors hover:text-primary">
+                <Link href={item.href} className="transition-colors hover:text-primary">
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -63,24 +64,24 @@ export function Footer() {
           </h3>
           <ul className="mt-5 space-y-3 text-sm">
             <li>
-              <a href="#" className="transition-colors hover:text-primary">
+              <Link href="/about" className="transition-colors hover:text-primary">
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="transition-colors hover:text-primary">
+              <Link href="/about#safety" className="transition-colors hover:text-primary">
                 Safety Guidelines
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="transition-colors hover:text-primary">
+              <Link href="/privacy" className="transition-colors hover:text-primary">
                 Privacy Policy
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="transition-colors hover:text-primary">
+              <Link href="/terms" className="transition-colors hover:text-primary">
                 Terms of Use
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -126,12 +127,12 @@ export function Footer() {
             &copy; {new Date().getFullYear()} {COMPANY.legalName}. All Rights Reserved.
           </p>
           <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-primary">
+            <Link href="/terms" className="hover:text-primary">
               Terms of Use
-            </a>
-            <a href="#" className="hover:text-primary">
+            </Link>
+            <Link href="/privacy" className="hover:text-primary">
               Privacy Policy
-            </a>
+            </Link>
           </div>
         </Container>
       </div>

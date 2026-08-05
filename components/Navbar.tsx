@@ -2,6 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Clock, Menu, MessageCircle, Phone, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { COMPANY, CTA, getCallLink, getWhatsAppLink } from "@/constants/config";
 import { NAV_ITEMS } from "@/constants/nav";
@@ -13,6 +15,8 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -58,15 +62,15 @@ export function Navbar() {
           <ul className="hidden items-center gap-8 lg:flex">
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
-                <a
+                <Link
                   href={item.href}
                   className={cn(
                     "font-heading text-sm font-semibold uppercase tracking-wide transition-colors hover:text-primary",
-                    scrolled ? "text-heading" : "text-white"
+                    isActive(item.href) ? "text-primary" : scrolled ? "text-heading" : "text-white"
                   )}
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -146,13 +150,16 @@ export function Navbar() {
               <ul className="flex flex-col gap-1">
                 {NAV_ITEMS.map((item) => (
                   <li key={item.href}>
-                    <a
+                    <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block rounded-lg px-3 py-3 font-heading text-base font-semibold uppercase tracking-wide text-heading hover:bg-light hover:text-primary"
+                      className={cn(
+                        "block rounded-lg px-3 py-3 font-heading text-base font-semibold uppercase tracking-wide hover:bg-light hover:text-primary",
+                        isActive(item.href) ? "text-primary" : "text-heading"
+                      )}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

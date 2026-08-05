@@ -1,5 +1,6 @@
 import { COMPANY } from "@/constants/config";
-import { PACKAGES } from "@/constants/packages";
+import { PACKAGES, type PackageFAQ } from "@/constants/packages";
+import type { BlogPostMeta } from "@/lib/blog";
 
 export function getLocalBusinessSchema() {
   return {
@@ -12,7 +13,7 @@ export function getLocalBusinessSchema() {
     telephone: COMPANY.phone,
     email: COMPANY.email,
     priceRange: "₹₹",
-    image: `${COMPANY.url}/og-image.jpg`,
+    image: `${COMPANY.url}/opengraph-image`,
     address: {
       "@type": "PostalAddress",
       streetAddress: COMPANY.address.street,
@@ -92,17 +93,41 @@ export function getPackagesItemListSchema() {
   };
 }
 
-export function getBreadcrumbSchema() {
+export function getBreadcrumbSchema(crumbs: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: COMPANY.url,
-      },
-    ],
+    itemListElement: crumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      item: `${COMPANY.url}${crumb.path}`,
+    })),
+  };
+}
+
+export function getBlogPostingSchema(post: BlogPostMeta) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt ?? post.publishedAt,
+    author: { "@type": "Organization", name: post.author },
+    image: `${COMPANY.url}${post.coverImage}`,
+    mainEntityOfPage: `${COMPANY.url}/blog/${post.slug}`,
+  };
+}
+
+export function getFAQPageSchema(faqs: PackageFAQ[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
   };
 }

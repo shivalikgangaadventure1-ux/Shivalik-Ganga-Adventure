@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { MapPin, MessageCircle, Star } from "lucide-react";
 import type { RaftingPackage } from "@/constants/packages";
 import { getWhatsAppLink } from "@/constants/config";
@@ -21,7 +22,7 @@ export function PackageCard({ pkg, index = 0 }: { pkg: RaftingPackage; index?: n
       whileHover={{ y: -8 }}
       className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover"
     >
-      <div className="relative aspect-[430/305] w-full overflow-hidden">
+      <Link href={`/packages/${pkg.slug}`} className="relative aspect-[430/305] w-full overflow-hidden">
         <Image
           src={pkg.image}
           alt={`${pkg.name} river rafting package on the Ganga`}
@@ -52,7 +53,7 @@ export function PackageCard({ pkg, index = 0 }: { pkg: RaftingPackage; index?: n
             Save {Math.round((1 - pkg.salePrice / pkg.price) * 100)}%
           </span>
         )}
-      </div>
+      </Link>
 
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-secondary">
@@ -62,7 +63,11 @@ export function PackageCard({ pkg, index = 0 }: { pkg: RaftingPackage; index?: n
           </span>
         </div>
 
-        <h3 className="font-heading text-lg font-bold text-heading">{pkg.name}</h3>
+        <Link href={`/packages/${pkg.slug}`}>
+          <h3 className="font-heading text-lg font-bold text-heading transition-colors hover:text-primary-dark">
+            {pkg.name}
+          </h3>
+        </Link>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-body">{pkg.description}</p>
 
         <div className="mt-5 flex items-center justify-between border-t border-border pt-4">

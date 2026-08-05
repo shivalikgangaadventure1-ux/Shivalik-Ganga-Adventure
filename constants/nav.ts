@@ -4,11 +4,11 @@ export interface NavItem {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "#home" },
-  { label: "Packages", href: "#packages" },
-  { label: "Why Us", href: "#why-us" },
-  { label: "Destinations", href: "#destinations" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Reviews", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Packages", href: "/packages" },
+  { label: "Destinations", href: "/destinations" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];

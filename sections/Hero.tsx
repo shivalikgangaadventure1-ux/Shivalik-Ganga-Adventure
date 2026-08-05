@@ -63,7 +63,7 @@ export function Hero() {
             >
               {CTA.bookYourAdventure}
             </Button>
-            <Button href="#packages" variant="outline" size="lg" ariaLabel="View rafting packages">
+            <Button href="/packages" variant="outline" size="lg" ariaLabel="View rafting packages">
               {CTA.viewPackages}
             </Button>
           </div>

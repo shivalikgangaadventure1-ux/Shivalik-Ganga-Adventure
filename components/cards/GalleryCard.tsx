@@ -8,13 +8,18 @@ export function GalleryCard({
   src,
   alt,
   index = 0,
+  onClick,
 }: {
   src: string;
   alt: string;
   index?: number;
+  onClick?: () => void;
 }) {
   return (
-    <motion.div
+    <motion.button
+      type="button"
+      onClick={onClick}
+      aria-label={`View larger image: ${alt}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
@@ -32,6 +37,6 @@ export function GalleryCard({
       <div className="absolute inset-0 flex items-center justify-center bg-heading/0 opacity-0 transition-all duration-300 group-hover:bg-heading/50 group-hover:opacity-100">
         <Expand className="text-white" size={24} aria-hidden="true" />
       </div>
-    </motion.div>
+    </motion.button>
   );
 }

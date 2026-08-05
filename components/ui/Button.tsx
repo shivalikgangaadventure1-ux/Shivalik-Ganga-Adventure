@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+
+const MotionLink = motion.create(Link);
 
 type ButtonVariant = "primary" | "outline" | "whatsapp" | "call" | "white" | "ghost";
 
@@ -73,6 +76,16 @@ export function Button({
   };
 
   if (href) {
+    const isInternal = href.startsWith("/") && !target;
+
+    if (isInternal) {
+      return (
+        <MotionLink href={href} onClick={onClick} aria-label={ariaLabel} className={classes} {...motionProps}>
+          {content}
+        </MotionLink>
+      );
+    }
+
     return (
       <motion.a
         href={href}

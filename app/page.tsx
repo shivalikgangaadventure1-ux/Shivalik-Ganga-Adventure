@@ -5,12 +5,13 @@ import { WhyChooseUs } from "@/sections/WhyChooseUs";
 import { PopularTours } from "@/sections/PopularTours";
 import { Destinations } from "@/sections/Destinations";
 import { Achievements } from "@/sections/Achievements";
+import { WeatherWidget } from "@/components/WeatherWidget";
 import { DealsPromo } from "@/sections/DealsPromo";
 import { Testimonials } from "@/sections/Testimonials";
 
 export default function HomePage() {
   const itemListSchema = getPackagesItemListSchema();
-  const breadcrumbSchema = getBreadcrumbSchema();
+  const breadcrumbSchema = getBreadcrumbSchema([{ name: "Home", path: "/" }]);
 
   return (
     <>
@@ -28,9 +29,10 @@ export default function HomePage() {
       <Hero />
       <SearchBooking />
       <WhyChooseUs />
-      <PopularTours />
-      <Destinations />
+      <PopularTours limit={3} showViewAllLink />
+      <Destinations limit={6} showViewAllLink />
       <Achievements />
+      <WeatherWidget />
       <DealsPromo />
       <Testimonials />
     </>
