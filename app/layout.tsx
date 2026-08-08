@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { MobileBookingBar } from "@/components/MobileBookingBar";
 import { DesktopFloatingWhatsApp } from "@/components/DesktopFloatingWhatsApp";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { PromoPopup } from "@/components/PromoPopup";
 import "./globals.css";
 
 const inter = Inter({
@@ -103,6 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <MobileBookingBar />
         <DesktopFloatingWhatsApp />
+        <PromoPopup />
       </body>
     </html>
   );

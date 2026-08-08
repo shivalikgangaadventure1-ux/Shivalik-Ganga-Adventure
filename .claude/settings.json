@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://localhost:4323/\")",
+      "Bash(jobs -l)",
+      "Bash(pkill -f \"next start\")"
+    ]
+  }
+}
