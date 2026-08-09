@@ -5,6 +5,7 @@ import { Clock, Menu, MessageCircle, Phone, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { COMPANY, CTA, getCallLink, getWhatsAppLink } from "@/constants/config";
 import { NAV_ITEMS } from "@/constants/nav";
 import { Container } from "@/components/ui/Container";
@@ -15,8 +16,13 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -32,7 +38,7 @@ export function Navbar() {
     };
   }, [mobileOpen]);
 
-  return (
+  const header = (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
@@ -112,84 +118,98 @@ export function Navbar() {
           </button>
         </Container>
       </nav>
-
-      <AnimatePresence>
-        {mobileOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-50 bg-heading/60 lg:hidden"
-              onClick={() => setMobileOpen(false)}
-              aria-hidden="true"
-            />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="fixed inset-y-0 right-0 z-50 flex w-[85%] max-w-sm flex-col bg-white p-6 shadow-2xl lg:hidden"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation"
-            >
-              <div className="mb-8 flex items-center justify-between">
-                <Logo />
-                <button
-                  type="button"
-                  onClick={() => setMobileOpen(false)}
-                  aria-label="Close menu"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full text-heading hover:bg-light"
-                >
-                  <X size={24} aria-hidden="true" />
-                </button>
-              </div>
-
-              <ul className="flex flex-col gap-1">
-                {NAV_ITEMS.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      className={cn(
-                        "block rounded-lg px-3 py-3 font-heading text-base font-semibold uppercase tracking-wide hover:bg-light hover:text-primary",
-                        isActive(item.href) ? "text-primary" : "text-heading"
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-auto flex flex-col gap-3 pt-8">
-                <Button
-                  href={getCallLink()}
-                  variant="call"
-                  icon={Phone}
-                  className="w-full"
-                  ariaLabel={`Call ${COMPANY.name} now`}
-                >
-                  {CTA.callNow}
-                </Button>
-                <Button
-                  href={getWhatsAppLink()}
-                  variant="whatsapp"
-                  icon={MessageCircle}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full"
-                  ariaLabel="Book via WhatsApp"
-                >
-                  {CTA.whatsappBooking}
-                </Button>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </header>
+  );
+
+  // Portaled to document.body so the drawer's paint/stacking is fully
+  // decoupled from the header's own backdrop-blur — rendering it inline
+  // inside <header> caused page content behind it to bleed through once
+  // scrolled (Chromium compositing ambiguity between a backdrop-filter
+  // element and its position:fixed descendants).
+  const drawer = (
+    <AnimatePresence>
+      {mobileOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] bg-heading/60 lg:hidden"
+            onClick={() => setMobileOpen(false)}
+            aria-hidden="true"
+          />
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed inset-y-0 right-0 z-[100] flex w-[85%] max-w-sm flex-col bg-white p-6 shadow-2xl lg:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
+          >
+            <div className="mb-8 flex items-center justify-between">
+              <Logo />
+              <button
+                type="button"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close menu"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full text-heading hover:bg-light"
+              >
+                <X size={24} aria-hidden="true" />
+              </button>
+            </div>
+
+            <ul className="flex flex-col gap-1">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      "block rounded-lg px-3 py-3 font-heading text-base font-semibold uppercase tracking-wide hover:bg-light hover:text-primary",
+                      isActive(item.href) ? "text-primary" : "text-heading"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-auto flex flex-col gap-3 pt-8">
+              <Button
+                href={getCallLink()}
+                variant="call"
+                icon={Phone}
+                className="w-full"
+                ariaLabel={`Call ${COMPANY.name} now`}
+              >
+                {CTA.callNow}
+              </Button>
+              <Button
+                href={getWhatsAppLink()}
+                variant="whatsapp"
+                icon={MessageCircle}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full"
+                ariaLabel="Book via WhatsApp"
+              >
+                {CTA.whatsappBooking}
+              </Button>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+
+  return (
+    <>
+      {header}
+      {mounted && createPortal(drawer, document.body)}
+    </>
   );
 }

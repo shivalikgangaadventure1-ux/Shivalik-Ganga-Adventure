@@ -1,11 +1,41 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CalendarDays, Search, Users } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { CalendarDays, ChevronDown, Search, Users } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { PACKAGES } from "@/constants/packages";
 import { getWhatsAppLink } from "@/constants/config";
 import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
+
+function Field({
+  htmlFor,
+  icon: Icon,
+  label,
+  children,
+}: {
+  htmlFor: string;
+  icon: LucideIcon;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <div>
+      <label htmlFor={htmlFor} className="mb-2 flex items-center gap-2">
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
+          <Icon size={14} aria-hidden="true" />
+        </span>
+        <span className="text-xs font-bold uppercase tracking-wide text-muted">{label}</span>
+      </label>
+      {children}
+    </div>
+  );
+}
+
+const fieldClasses =
+  "h-12 w-full rounded-xl border border-border bg-light px-4 text-sm text-heading transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40";
 
 export function SearchBooking() {
   const [packageSlug, setPackageSlug] = useState(PACKAGES[0].slug);
@@ -21,7 +51,7 @@ export function SearchBooking() {
   }
 
   return (
-    <div className="relative z-20 -mt-24 sm:-mt-28">
+    <div className="relative z-20 -mt-20 mb-6 sm:-mt-24 sm:mb-10">
       <Container>
         <motion.form
           onSubmit={handleSubmit}
@@ -30,78 +60,74 @@ export function SearchBooking() {
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease: "easeOut" }}
           aria-label="Search and book a rafting package"
-          className="grid grid-cols-1 gap-4 rounded-2xl bg-white p-6 shadow-card sm:grid-cols-2 sm:p-8 lg:grid-cols-[1.3fr_1fr_1fr_auto] lg:items-end"
+          className="rounded-2xl bg-white p-6 shadow-card sm:p-8"
         >
-          <div>
-            <label
-              htmlFor="package"
-              className="mb-2 block text-xs font-bold uppercase tracking-wide text-muted"
-            >
-              Rafting Package
-            </label>
-            <select
-              id="package"
-              name="package"
-              value={packageSlug}
-              onChange={(e) => setPackageSlug(e.target.value)}
-              className="h-12 w-full rounded-lg border border-border bg-light px-3 text-sm text-heading focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
-            >
-              {PACKAGES.map((pkg) => (
-                <option key={pkg.slug} value={pkg.slug}>
-                  {pkg.name} &middot; {pkg.distanceKm} KM
-                </option>
-              ))}
-            </select>
-          </div>
+          <p className="mb-6 font-heading text-xs font-bold uppercase tracking-[0.2em] text-primary">
+            Plan Your Adventure
+          </p>
 
-          <div>
-            <label
-              htmlFor="group-size"
-              className="mb-2 block text-xs font-bold uppercase tracking-wide text-muted"
-            >
-              <Users size={13} className="mr-1 inline" aria-hidden="true" />
-              Group Size
-            </label>
-            <select
-              id="group-size"
-              name="group-size"
-              value={groupSize}
-              onChange={(e) => setGroupSize(e.target.value)}
-              className="h-12 w-full rounded-lg border border-border bg-light px-3 text-sm text-heading focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
-            >
-              {["1", "2", "3-5", "6-10", "10+"].map((size) => (
-                <option key={size} value={size}>
-                  {size} {size === "1" ? "Person" : "People"}
-                </option>
-              ))}
-            </select>
-          </div>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_auto] lg:items-end lg:gap-4">
+            <Field htmlFor="package" icon={Search} label="Rafting Package">
+              <div className="relative">
+                <select
+                  id="package"
+                  name="package"
+                  value={packageSlug}
+                  onChange={(e) => setPackageSlug(e.target.value)}
+                  className={cn(fieldClasses, "appearance-none pr-10")}
+                >
+                  {PACKAGES.map((pkg) => (
+                    <option key={pkg.slug} value={pkg.slug}>
+                      {pkg.name} &middot; {pkg.distanceKm} KM
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown
+                  size={16}
+                  className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-muted"
+                  aria-hidden="true"
+                />
+              </div>
+            </Field>
 
-          <div>
-            <label
-              htmlFor="date"
-              className="mb-2 block text-xs font-bold uppercase tracking-wide text-muted"
-            >
-              <CalendarDays size={13} className="mr-1 inline" aria-hidden="true" />
-              Preferred Date
-            </label>
-            <input
-              id="date"
-              name="date"
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="h-12 w-full rounded-lg border border-border bg-light px-3 text-sm text-heading focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
-            />
-          </div>
+            <Field htmlFor="group-size" icon={Users} label="Group Size">
+              <div className="relative">
+                <select
+                  id="group-size"
+                  name="group-size"
+                  value={groupSize}
+                  onChange={(e) => setGroupSize(e.target.value)}
+                  className={cn(fieldClasses, "appearance-none pr-10")}
+                >
+                  {["1", "2", "3-5", "6-10", "10+"].map((size) => (
+                    <option key={size} value={size}>
+                      {size} {size === "1" ? "Person" : "People"}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown
+                  size={16}
+                  className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-muted"
+                  aria-hidden="true"
+                />
+              </div>
+            </Field>
 
-          <button
-            type="submit"
-            className="inline-flex h-12 min-h-[44px] items-center justify-center gap-2 rounded-lg bg-primary px-6 font-heading text-sm font-bold uppercase tracking-wide text-heading transition-colors hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-          >
-            <Search size={18} aria-hidden="true" />
-            Search
-          </button>
+            <Field htmlFor="date" icon={CalendarDays} label="Preferred Date">
+              <input
+                id="date"
+                name="date"
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className={fieldClasses}
+              />
+            </Field>
+
+            <Button type="submit" variant="primary" icon={Search} className="w-full lg:w-auto">
+              Search
+            </Button>
+          </div>
         </motion.form>
       </Container>
     </div>

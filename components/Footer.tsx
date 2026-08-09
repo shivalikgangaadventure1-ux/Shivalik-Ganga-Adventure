@@ -6,7 +6,7 @@ import { NAV_ITEMS } from "@/constants/nav";
 import { IMAGES } from "@/constants/images";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/Logo";
-import { Newsletter } from "@/sections/Newsletter";
+import { BookingCTA } from "@/sections/BookingCTA";
 
 const SOCIAL_LINKS = [
   { label: "Facebook", href: COMPANY.social.facebook, icon: Facebook },
@@ -17,7 +17,7 @@ const SOCIAL_LINKS = [
 export function Footer() {
   return (
     <footer className="bg-dark text-white/80">
-      <Newsletter />
+      <BookingCTA />
 
       <Container className="grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
         <div>

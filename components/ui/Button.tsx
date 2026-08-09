@@ -33,6 +33,7 @@ interface ButtonProps {
   ariaLabel?: string;
   target?: string;
   rel?: string;
+  type?: "button" | "submit";
 }
 
 const SIZE_CLASSES: Record<NonNullable<ButtonProps["size"]>, string> = {
@@ -53,6 +54,7 @@ export function Button({
   ariaLabel,
   target,
   rel,
+  type = "button",
 }: ButtonProps) {
   const classes = cn(
     "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full font-heading font-semibold uppercase tracking-wide transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer",
@@ -103,7 +105,7 @@ export function Button({
 
   return (
     <motion.button
-      type="button"
+      type={type}
       onClick={onClick}
       aria-label={ariaLabel}
       className={classes}

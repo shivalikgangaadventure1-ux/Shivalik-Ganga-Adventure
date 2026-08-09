@@ -10,7 +10,25 @@
       "Bash(curl -s \"https://images.unsplash.com/photo-1699002458581-2f3aa39304b6?w=500&q=60\" -o camp.jpg)",
       "Bash(npm run *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:4325/\")",
-      "Bash(cp /tmp/optimized.jpg \"C:\\\\Users\\\\ADITYA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Shivalik-Ganga-Adventure\\\\a5eceb6f-4824-4557-8d12-e8e68d848f57\\\\scratchpad\\\\preview\\\\optimized-hero.jpg\" *)"
+      "Bash(cp /tmp/optimized.jpg \"C:\\\\Users\\\\ADITYA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Shivalik-Ganga-Adventure\\\\a5eceb6f-4824-4557-8d12-e8e68d848f57\\\\scratchpad\\\\preview\\\\optimized-hero.jpg\" *)",
+      "Bash(grep -Hm1 ^description: 'c:\\\\Shivalik-Ganga-Adventure/.claude/skills/*/SKILL.md')",
+      "Bash(node -e \"require.resolve\\('playwright'\\)\")",
+      "Bash(npx --yes playwright --version)",
+      "Bash(npx --yes playwright install chromium --with-deps)",
+      "Bash(npx --yes playwright install chromium)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(npm init *)",
+      "Bash(node navbar-diagnose.mjs)",
+      "Bash(node navbar-diagnose2.mjs)",
+      "Bash(node navbar-diagnose3.mjs)",
+      "Bash(node navbar-diagnose4.mjs)",
+      "Bash(lsof -ti:3000 -sTCP:LISTEN)",
+      "Bash(xargs -r kill)",
+      "Bash(node final-verify.mjs)",
+      "Bash(sed -i 's/localhost:3000/localhost:3001/g' \"C:\\\\Users\\\\ADITYA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Shivalik-Ganga-Adventure\\\\a5eceb6f-4824-4557-8d12-e8e68d848f57\\\\scratchpad\\\\final-verify.mjs\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/)",
+      "Bash(node desktop-search-full.mjs)",
+      "Bash(lsof -ti:3001 -sTCP:LISTEN)"
     ],
     "additionalDirectories": [
       "\\tmp"
