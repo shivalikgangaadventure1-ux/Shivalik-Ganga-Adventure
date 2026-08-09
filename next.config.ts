@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
         hostname: "html.physcode.com",
         pathname: "/travel/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
     formats: ["image/avif", "image/webp"],
   },

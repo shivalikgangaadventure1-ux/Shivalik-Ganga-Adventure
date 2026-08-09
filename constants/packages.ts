@@ -12,6 +12,7 @@ export interface PackageFAQ {
 
 export interface RaftingPackage {
   slug: string;
+  category: string;
   name: string;
   distanceKm: number;
   duration: string;
@@ -34,6 +35,7 @@ export interface RaftingPackage {
 export const PACKAGES: RaftingPackage[] = [
   {
     slug: "brahmpuri-to-rishikesh",
+    category: "rafting",
     name: "Brahmpuri to Rishikesh",
     distanceKm: 9,
     duration: "2 Hours",
@@ -68,6 +70,7 @@ export const PACKAGES: RaftingPackage[] = [
   },
   {
     slug: "shivpuri-to-rishikesh",
+    category: "rafting",
     name: "Shivpuri to Rishikesh",
     distanceKm: 16,
     duration: "3 Hours",
@@ -101,6 +104,7 @@ export const PACKAGES: RaftingPackage[] = [
   },
   {
     slug: "marine-drive-to-rishikesh",
+    category: "rafting",
     name: "Marine Drive to Rishikesh",
     distanceKm: 12,
     duration: "2.5 Hours",
@@ -133,6 +137,7 @@ export const PACKAGES: RaftingPackage[] = [
   },
   {
     slug: "kaudiyala-to-rishikesh",
+    category: "rafting",
     name: "Kaudiyala to Rishikesh",
     distanceKm: 26,
     duration: "Full Day",
@@ -170,6 +175,7 @@ export const PACKAGES: RaftingPackage[] = [
   },
   {
     slug: "camping-rafting-combo",
+    category: "rafting",
     name: "Camping + Rafting Combo",
     distanceKm: 16,
     duration: "1 Night 2 Days",
@@ -205,6 +211,7 @@ export const PACKAGES: RaftingPackage[] = [
   },
   {
     slug: "kaudiyala-to-shivpuri-extreme",
+    category: "rafting",
     name: "Kaudiyala to Shivpuri Extreme",
     distanceKm: 36,
     duration: "Full Day",

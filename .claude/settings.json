@@ -3,7 +3,17 @@
     "allow": [
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://localhost:4323/\")",
       "Bash(jobs -l)",
-      "Bash(pkill -f \"next start\")"
+      "Bash(pkill -f \"next start\")",
+      "Bash(mkdir -p \"C:\\\\Users\\\\ADITYA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Shivalik-Ganga-Adventure\\\\a5eceb6f-4824-4557-8d12-e8e68d848f57\\\\scratchpad\\\\preview\")",
+      "Bash(curl -s \"https://images.unsplash.com/photo-1599443380179-33737c17ca81?w=500&q=60\" -o hero.jpg)",
+      "Bash(curl -s \"https://images.unsplash.com/photo-1606349779646-b6ca5df78bdf?w=500&q=60\" -o destination-shivpuri.jpg)",
+      "Bash(curl -s \"https://images.unsplash.com/photo-1699002458581-2f3aa39304b6?w=500&q=60\" -o camp.jpg)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:4325/\")",
+      "Bash(cp /tmp/optimized.jpg \"C:\\\\Users\\\\ADITYA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Shivalik-Ganga-Adventure\\\\a5eceb6f-4824-4557-8d12-e8e68d848f57\\\\scratchpad\\\\preview\\\\optimized-hero.jpg\" *)"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
     ]
   }
 }

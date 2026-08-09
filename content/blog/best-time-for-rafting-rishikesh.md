@@ -3,7 +3,7 @@ title: "Best Time for River Rafting in Rishikesh"
 slug: "best-time-for-rafting-rishikesh"
 excerpt: "A season-by-season guide to planning your Ganga rafting trip — when the rapids are biggest, when the water is calmest, and when we're closed."
 publishedAt: "2026-03-01"
-coverImage: "https://html.physcode.com/travel/images/instagram/2.jpg"
+coverImage: "https://images.unsplash.com/photo-1606349779646-b6ca5df78bdf?q=80&w=2000&auto=format&fit=crop"
 author: "Shivalik Ganga Adventure Team"
 tags: ["planning", "seasons", "rishikesh"]
 ---

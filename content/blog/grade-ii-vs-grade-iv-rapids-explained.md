@@ -3,7 +3,7 @@ title: "Grade II vs Grade IV Rapids Explained"
 slug: "grade-ii-vs-grade-iv-rapids-explained"
 excerpt: "What do rapid grades actually mean, and which one is right for you? A plain-English breakdown of the international whitewater grading scale."
 publishedAt: "2026-03-08"
-coverImage: "https://html.physcode.com/travel/images/instagram/4.jpg"
+coverImage: "https://images.unsplash.com/photo-1641584495089-5914d85d9bcc?q=80&w=2000&auto=format&fit=crop"
 author: "Shivalik Ganga Adventure Team"
 tags: ["rapids", "grading", "beginners"]
 ---

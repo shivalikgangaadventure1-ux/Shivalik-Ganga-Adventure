@@ -3,7 +3,7 @@ title: "What to Pack for Your Rafting Trip in Rishikesh"
 slug: "what-to-pack-rafting-trip"
 excerpt: "A practical packing checklist for your day on the Ganga — what to wear, what to bring, and what to leave at your hotel."
 publishedAt: "2026-03-15"
-coverImage: "https://html.physcode.com/travel/images/instagram/6.jpg"
+coverImage: "https://images.unsplash.com/photo-1629248457649-b082812aea6c?q=80&w=2000&auto=format&fit=crop"
 author: "Shivalik Ganga Adventure Team"
 tags: ["packing", "tips", "beginners"]
 ---
