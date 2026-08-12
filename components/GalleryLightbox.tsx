@@ -4,20 +4,23 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect } from "react";
+import type { GalleryItem } from "@/constants/gallery";
 
 interface GalleryLightboxProps {
-  images: string[];
+  items: GalleryItem[];
   index: number;
   onClose: () => void;
   onNavigate: (index: number) => void;
 }
 
-export function GalleryLightbox({ images, index, onClose, onNavigate }: GalleryLightboxProps) {
+export function GalleryLightbox({ items, index, onClose, onNavigate }: GalleryLightboxProps) {
+  const item = items[index];
+
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") onNavigate((index + 1) % images.length);
-      if (e.key === "ArrowLeft") onNavigate((index - 1 + images.length) % images.length);
+      if (e.key === "ArrowRight") onNavigate((index + 1) % items.length);
+      if (e.key === "ArrowLeft") onNavigate((index - 1 + items.length) % items.length);
     };
     window.addEventListener("keydown", onKeyDown);
     document.body.style.overflow = "hidden";
@@ -25,7 +28,7 @@ export function GalleryLightbox({ images, index, onClose, onNavigate }: GalleryL
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
     };
-  }, [index, images.length, onClose, onNavigate]);
+  }, [index, items.length, onClose, onNavigate]);
 
   return (
     <AnimatePresence>
@@ -37,7 +40,7 @@ export function GalleryLightbox({ images, index, onClose, onNavigate }: GalleryL
         className="fixed inset-0 z-[60] flex items-center justify-center bg-heading/90 p-4"
         role="dialog"
         aria-modal="true"
-        aria-label="Image gallery viewer"
+        aria-label="Gallery viewer"
         onClick={onClose}
       >
         <button
@@ -53,9 +56,9 @@ export function GalleryLightbox({ images, index, onClose, onNavigate }: GalleryL
           type="button"
           onClick={(e) => {
             e.stopPropagation();
-            onNavigate((index - 1 + images.length) % images.length);
+            onNavigate((index - 1 + items.length) % items.length);
           }}
-          aria-label="Previous image"
+          aria-label="Previous item"
           className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 sm:left-4"
         >
           <ChevronLeft size={24} aria-hidden="true" />
@@ -66,25 +69,30 @@ export function GalleryLightbox({ images, index, onClose, onNavigate }: GalleryL
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.2 }}
-          className="relative h-[70vh] w-full max-w-3xl"
+          className="relative h-[80vh] w-full max-w-3xl"
           onClick={(e) => e.stopPropagation()}
         >
-          <Image
-            src={images[index]}
-            alt="Shivalik Ganga Adventure rafting gallery image"
-            fill
-            sizes="100vw"
-            className="object-contain"
-          />
+          {item.type === "video" ? (
+            <video
+              controls
+              autoPlay
+              poster={item.poster}
+              className="mx-auto h-full max-h-[80vh] w-auto max-w-full rounded-lg"
+            >
+              <source src={item.src} type="video/mp4" />
+            </video>
+          ) : (
+            <Image src={item.src} alt={item.alt} fill sizes="100vw" className="object-contain" />
+          )}
         </motion.div>
 
         <button
           type="button"
           onClick={(e) => {
             e.stopPropagation();
-            onNavigate((index + 1) % images.length);
+            onNavigate((index + 1) % items.length);
           }}
-          aria-label="Next image"
+          aria-label="Next item"
           className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 sm:right-4"
         >
           <ChevronRight size={24} aria-hidden="true" />

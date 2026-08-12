@@ -28,10 +28,30 @@
       "Bash(sed -i 's/localhost:3000/localhost:3001/g' \"C:\\\\Users\\\\ADITYA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Shivalik-Ganga-Adventure\\\\a5eceb6f-4824-4557-8d12-e8e68d848f57\\\\scratchpad\\\\final-verify.mjs\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/)",
       "Bash(node desktop-search-full.mjs)",
-      "Bash(lsof -ti:3001 -sTCP:LISTEN)"
+      "Bash(lsof -ti:3001 -sTCP:LISTEN)",
+      "Bash(find 'C:\\\\Users\\\\Aditya bisht/AppData/Local/ms-playwright' -maxdepth 1 -iname webkit*)",
+      "Bash(node iphone-repro.mjs)",
+      "Bash(sed -i 's/localhost:3000/localhost:3002/g' \"C:\\\\Users\\\\ADITYA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Shivalik-Ganga-Adventure\\\\a5eceb6f-4824-4557-8d12-e8e68d848f57\\\\scratchpad\\\\iphone-repro.mjs\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3002/)",
+      "Bash(lsof -ti:3002 -sTCP:LISTEN)",
+      "PowerShell(Get-Process -Id 16456 -ErrorAction SilentlyContinue)",
+      "PowerShell(Stop-Process -Id 16456 -Force -ErrorAction SilentlyContinue)",
+      "Bash(sed -i 's/localhost:3002/localhost:3003/g' \"C:\\\\Users\\\\ADITYA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Shivalik-Ganga-Adventure\\\\a5eceb6f-4824-4557-8d12-e8e68d848f57\\\\scratchpad\\\\iphone-repro.mjs\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3003/)",
+      "Bash(node iphone-repro2.mjs)",
+      "Bash(lsof -ti:3003 -sTCP:LISTEN)",
+      "Bash(node scroll-reset-verify.mjs)",
+      "Bash(\"C:\\\\Users\\\\ADITYA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Shivalik-Ganga-Adventure\\\\a5eceb6f-4824-4557-8d12-e8e68d848f57\\\\scratchpad\\\\node_modules\\\\ffmpeg-static\\\\ffmpeg.exe\" -version)",
+      "Bash(awk '{print $5, $NF}')",
+      "Bash(awk '{sum+=$1} END {print \"raw total \\(approx MB\\):\", sum}')",
+      "Bash(mv \"c:\\\\Shivalik-Ganga-Adventure\\\\public\\\\videos\\\\gallery\"/GX*.MP4 \"c:\\\\Shivalik-Ganga-Adventure\\\\source-media\\\\videos-raw\\\\\" *)",
+      "Bash(mv \"c:\\\\Shivalik-Ganga-Adventure\\\\public\\\\videos\\\\gallery\"/GX*.MP4 \"c:\\\\Shivalik-Ganga-Adventure\\\\source-media\\\\videos-raw\" *)",
+      "Bash(node gallery-verify.mjs)",
+      "Bash(node gallery-network-check.mjs)"
     ],
     "additionalDirectories": [
-      "\\tmp"
+      "\\tmp",
+      "c:\\Shivalik-Ganga-Adventure\\public\\videos\\gallery"
     ]
   }
 }

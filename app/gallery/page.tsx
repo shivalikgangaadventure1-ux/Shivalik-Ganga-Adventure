@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { IMAGES } from "@/constants/images";
+import { GALLERY_ITEMS } from "@/constants/gallery";
 import { buildMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
-import { Container } from "@/components/ui/Container";
 import { GalleryGrid } from "@/components/GalleryGrid";
 
 export const metadata: Metadata = buildMetadata({
@@ -37,9 +37,9 @@ export default function GalleryPage() {
       />
 
       <section className="py-16 sm:py-24">
-        <Container>
-          <GalleryGrid images={[...IMAGES.gallery]} />
-        </Container>
+        <div className="mx-auto max-w-[1680px] px-4 sm:px-6 lg:px-8">
+          <GalleryGrid items={GALLERY_ITEMS} />
+        </div>
       </section>
     </>
   );

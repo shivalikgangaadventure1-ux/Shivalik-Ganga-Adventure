@@ -38,13 +38,15 @@ export const IMAGES = {
     unsplash("1696556654030-a74ec07e0fe8"), // byasi rapids
     unsplash("1781427012362-7990245fbce3"), // river camp
   ],
+  // Real client-supplied photography (converted to WebP, already compressed).
   gallery: [
-    unsplash("1692205610985-fc4c1fcacd98"),
-    unsplash("1516817153573-7b617832a471"),
-    unsplash("1594026634827-fe99c0a22e83"),
-    unsplash("1653379714531-47f3f491c509"),
-    unsplash("1758552396011-1610e8a4c1c8"),
-    unsplash("1636294734011-3a642de28d8a"),
+    "/images/gallery/rafting-img (1).webp",
+    "/images/gallery/rafting-img (2).webp",
+    "/images/gallery/rafting-img (3).webp",
+    "/images/gallery/rafting-img (4).webp",
+    "/images/gallery/rafting-img (5).webp",
+    "/images/gallery/rafting-img (6).webp",
+    "/images/gallery/rafting-img (7).webp",
   ],
   // Banner images for interior-page PageHero components.
   pageHeroes: {

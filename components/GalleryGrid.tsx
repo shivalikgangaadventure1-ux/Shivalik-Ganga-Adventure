@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import type { GalleryItem } from "@/constants/gallery";
 import { GalleryCard } from "@/components/cards/GalleryCard";
 
 const GalleryLightbox = dynamic(
@@ -9,17 +10,16 @@ const GalleryLightbox = dynamic(
   { ssr: false }
 );
 
-export function GalleryGrid({ images }: { images: string[] }) {
+export function GalleryGrid({ items }: { items: GalleryItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-        {images.map((src, index) => (
+      <div className="columns-2 gap-4 sm:columns-3 lg:columns-4 xl:columns-5">
+        {items.map((item, index) => (
           <GalleryCard
-            key={src + index}
-            src={src}
-            alt="Shivalik Ganga Adventure rafting moment"
+            key={item.src}
+            item={item}
             index={index}
             onClick={() => setOpenIndex(index)}
           />
@@ -28,7 +28,7 @@ export function GalleryGrid({ images }: { images: string[] }) {
 
       {openIndex !== null && (
         <GalleryLightbox
-          images={images}
+          items={items}
           index={openIndex}
           onClose={() => setOpenIndex(null)}
           onNavigate={setOpenIndex}

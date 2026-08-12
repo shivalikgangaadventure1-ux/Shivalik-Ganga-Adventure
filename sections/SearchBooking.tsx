@@ -22,7 +22,7 @@ function Field({
   children: ReactNode;
 }) {
   return (
-    <div>
+    <div className="min-w-0">
       <label htmlFor={htmlFor} className="mb-2 flex items-center gap-2">
         <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">
           <Icon size={14} aria-hidden="true" />
@@ -35,7 +35,7 @@ function Field({
 }
 
 const fieldClasses =
-  "h-12 w-full rounded-xl border border-border bg-light px-4 text-sm text-heading transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40";
+  "h-12 w-full min-w-0 max-w-full box-border overflow-hidden rounded-xl border border-border bg-light px-4 text-sm text-heading transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40";
 
 export function SearchBooking() {
   const [packageSlug, setPackageSlug] = useState(PACKAGES[0].slug);
@@ -120,7 +120,7 @@ export function SearchBooking() {
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className={fieldClasses}
+                className={cn(fieldClasses, "appearance-none")}
               />
             </Field>
 
