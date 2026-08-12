@@ -1,10 +1,16 @@
+import fs from "fs";
+import path from "path";
 import { ImageResponse } from "next/og";
-import { THEME } from "@/constants/theme";
 
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
 export default function Icon() {
+  const logoData = fs.readFileSync(
+    path.join(process.cwd(), "public/images/logo/logo-shivalik-adv-256.png")
+  );
+  const logoSrc = `data:image/png;base64,${logoData.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -14,20 +20,10 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: THEME.dark,
-          borderRadius: 6,
         }}
       >
-        <span
-          style={{
-            color: THEME.primary,
-            fontSize: 20,
-            fontWeight: 700,
-            fontFamily: "serif",
-          }}
-        >
-          S
-        </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logoSrc} width={32} height={32} alt="" />
       </div>
     ),
     { ...size }

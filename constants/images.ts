@@ -17,7 +17,7 @@ function unsplash(id: string) {
 
 export const IMAGES = {
   heroPoster: unsplash("1599443380179-33737c17ca81"), // rafters cresting a rapid at sunset
-  logo: `${DEMO_BASE}/images/logo.png`,
+  logo: "/images/logo/logo-shivalik-adv.webp",
   avatar: `${DEMO_BASE}/images/avata.jpeg`,
   bgPopular: unsplash("1512675628397-28288d1220ef"),
   bgParallax: unsplash("1665516627441-3edbd940dbfb"),

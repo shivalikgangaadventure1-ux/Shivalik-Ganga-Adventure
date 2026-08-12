@@ -47,7 +47,11 @@
       "Bash(mv \"c:\\\\Shivalik-Ganga-Adventure\\\\public\\\\videos\\\\gallery\"/GX*.MP4 \"c:\\\\Shivalik-Ganga-Adventure\\\\source-media\\\\videos-raw\\\\\" *)",
       "Bash(mv \"c:\\\\Shivalik-Ganga-Adventure\\\\public\\\\videos\\\\gallery\"/GX*.MP4 \"c:\\\\Shivalik-Ganga-Adventure\\\\source-media\\\\videos-raw\" *)",
       "Bash(node gallery-verify.mjs)",
-      "Bash(node gallery-network-check.mjs)"
+      "Bash(node gallery-network-check.mjs)",
+      "Bash(node logo-verify.mjs)",
+      "Bash(node logo-footer2.mjs)",
+      "Bash(curl -s -o \"C:\\\\Users\\\\ADITYA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Shivalik-Ganga-Adventure\\\\a5eceb6f-4824-4557-8d12-e8e68d848f57\\\\scratchpad\\\\favicon-test.png\" http://localhost:3001/icon)",
+      "Bash(curl -s -o \"C:\\\\Users\\\\ADITYA~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Shivalik-Ganga-Adventure\\\\a5eceb6f-4824-4557-8d12-e8e68d848f57\\\\scratchpad\\\\apple-icon-test.png\" http://localhost:3001/apple-icon)"
     ],
     "additionalDirectories": [
       "\\tmp",

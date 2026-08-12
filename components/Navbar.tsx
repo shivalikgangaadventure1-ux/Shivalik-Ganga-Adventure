@@ -63,7 +63,7 @@ export function Navbar() {
 
       <nav aria-label="Primary" className="py-3">
         <Container className="flex items-center justify-between gap-4">
-          <Logo light={!scrolled} />
+          <Logo />
 
           <ul className="hidden items-center gap-8 lg:flex">
             {NAV_ITEMS.map((item) => (

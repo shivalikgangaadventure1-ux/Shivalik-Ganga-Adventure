@@ -1,10 +1,16 @@
+import fs from "fs";
+import path from "path";
 import { ImageResponse } from "next/og";
-import { THEME } from "@/constants/theme";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
 export default function AppleIcon() {
+  const logoData = fs.readFileSync(
+    path.join(process.cwd(), "public/images/logo/logo-shivalik-adv-256.png")
+  );
+  const logoSrc = `data:image/png;base64,${logoData.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -14,19 +20,11 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: THEME.dark,
+          background: "#ffffff",
         }}
       >
-        <span
-          style={{
-            color: THEME.primary,
-            fontSize: 96,
-            fontWeight: 700,
-            fontFamily: "serif",
-          }}
-        >
-          S
-        </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logoSrc} width={170} height={170} alt="" />
       </div>
     ),
     { ...size }
