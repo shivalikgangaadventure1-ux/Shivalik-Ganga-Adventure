@@ -15,6 +15,7 @@ export interface BlogPostMeta {
   updatedAt?: string;
   coverImage: string;
   author: string;
+  authorTitle?: string;
   tags: string[];
 }
 

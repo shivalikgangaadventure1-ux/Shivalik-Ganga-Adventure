@@ -1,3 +1,4 @@
+import { PACKAGES } from "@/constants/packages";
 import { getBreadcrumbSchema, getPackagesItemListSchema } from "@/lib/schema";
 import { Hero } from "@/sections/Hero";
 import { SearchBooking } from "@/sections/SearchBooking";
@@ -10,7 +11,9 @@ import { DealsPromo } from "@/sections/DealsPromo";
 import { Testimonials } from "@/sections/Testimonials";
 
 export default function HomePage() {
-  const itemListSchema = getPackagesItemListSchema();
+  // Scoped to 3 items to match what <PopularTours limit={3}> actually renders on
+  // this page — the full 6-package list lives on /packages, which renders all 6.
+  const itemListSchema = getPackagesItemListSchema(PACKAGES.slice(0, 3));
   const breadcrumbSchema = getBreadcrumbSchema([{ name: "Home", path: "/" }]);
 
   return (

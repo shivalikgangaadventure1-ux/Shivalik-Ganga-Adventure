@@ -1,0 +1,1580 @@
+{
+  "home": {
+    "mobile_h1": {
+      "text": "Find Your Perfect Rafting Adventure Today",
+      "top": 236.5,
+      "bottom": 371.5,
+      "visible": true,
+      "fontSize": "36px",
+      "color": "rgb(255, 255, 255)"
+    },
+    "mobile_tap_targets": [
+      {
+        "text": "Skip to main content",
+        "top": -1,
+        "left": -1,
+        "width": 1,
+        "height": 1,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "Book Your Adventure",
+        "top": 532,
+        "left": 46,
+        "width": 283,
+        "height": 56,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "View Packages",
+        "top": 604,
+        "left": 89,
+        "width": 198,
+        "height": 60,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "Search",
+        "top": 1108,
+        "left": 40,
+        "width": 295,
+        "height": 48,
+        "aboveFold": false,
+        "tag": "BUTTON"
+      },
+      {
+        "text": "₹799₹599Save 25%",
+        "top": 2965,
+        "left": 16,
+        "width": 343,
+        "height": 243,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Brahmpuri to Rishikesh",
+        "top": 3256,
+        "left": 40,
+        "width": 295,
+        "height": 28,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 3375,
+        "left": 243,
+        "width": 92,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "₹899",
+        "top": 3439,
+        "left": 16,
+        "width": 343,
+        "height": 243,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Shivpuri to Rishikesh",
+        "top": 3730,
+        "left": 40,
+        "width": 295,
+        "height": 28,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 3849,
+        "left": 243,
+        "width": 92,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "₹799",
+        "top": 3913,
+        "left": 16,
+        "width": 343,
+        "height": 243,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Marine Drive to Rishikesh",
+        "top": 4204,
+        "left": 40,
+        "width": 295,
+        "height": 28,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 4322,
+        "left": 243,
+        "width": 92,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "View Packages",
+        "top": 4378,
+        "left": 105,
+        "width": 166,
+        "height": 52,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Grade IIIShivpuri",
+        "top": 4739,
+        "left": 21,
+        "width": 154,
+        "height": 205,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Grade IIBrahmpuri",
+        "top": 4739,
+        "left": 200,
+        "width": 154,
+        "height": 205,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Grade IIIMarine Drive",
+        "top": 4973,
+        "left": 21,
+        "width": 154,
+        "height": 205,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Grade III+ to IVKaudiyala",
+        "top": 4973,
+        "left": 200,
+        "width": 154,
+        "height": 205,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Grade IIIByasi Rapids",
+        "top": 5207,
+        "left": 21,
+        "width": 154,
+        "height": 205,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "All GradesRiver Camp",
+        "top": 5207,
+        "left": 200,
+        "width": 154,
+        "height": 205,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "View More",
+        "top": 5466,
+        "left": 122,
+        "width": 132,
+        "height": 52,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 6168,
+        "left": 99,
+        "width": 178,
+        "height": 56,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Reserve Your Raft",
+        "top": 7279,
+        "left": 61,
+        "width": 253,
+        "height": 56,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "WhatsApp Booking",
+        "top": 8927,
+        "left": 16,
+        "width": 343,
+        "height": 48,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Call Now",
+        "top": 8987,
+        "left": 16,
+        "width": 343,
+        "height": 52,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "+91 95688 68493",
+        "top": 9415,
+        "left": 44,
+        "width": 118,
+        "height": 20,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "info@shivalikgangaadventure.com",
+        "top": 9447,
+        "left": 44,
+        "width": 228,
+        "height": 20,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Home",
+        "top": 9548,
+        "left": 16,
+        "width": 39,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Packages",
+        "top": 9580,
+        "left": 16,
+        "width": 64,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Destinations",
+        "top": 9612,
+        "left": 16,
+        "width": 82,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Gallery",
+        "top": 9644,
+        "left": 16,
+        "width": 47,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "About",
+        "top": 9676,
+        "left": 16,
+        "width": 39,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Blog",
+        "top": 9708,
+        "left": 16,
+        "width": 30,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Contact",
+        "top": 9740,
+        "left": 16,
+        "width": 52,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "About Us",
+        "top": 9840,
+        "left": 16,
+        "width": 61,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Safety Guidelines",
+        "top": 9872,
+        "left": 16,
+        "width": 116,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Privacy Policy",
+        "top": 9904,
+        "left": 16,
+        "width": 93,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Terms of Use",
+        "top": 9936,
+        "left": 16,
+        "width": 89,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Terms of Use",
+        "top": 10438,
+        "left": 102,
+        "width": 76,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Privacy Policy",
+        "top": 10438,
+        "left": 194,
+        "width": 79,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 756,
+        "left": 8,
+        "width": 303,
+        "height": 48,
+        "aboveFold": true,
+        "tag": "A"
+      }
+    ],
+    "mobile_nav": {
+      "hamburgerCount": 1,
+      "visibleNavLinks": 8,
+      "totalNavLinks": 17
+    },
+    "mobile_dims": {
+      "scrollWidth": 375,
+      "innerWidth": 375,
+      "scrollHeight": 10478
+    },
+    "mobile_img_cls_risk": {
+      "total": 25,
+      "missingDims": 20
+    },
+    "mobile_image_requests": 5,
+    "mobile_image_total_kb": 258.4,
+    "mobile_largest_images": [
+      {
+        "url": "image?url=%2Fimages%2Flogo%2Flogo-shivalik-adv.webp&w=2048&q=75",
+        "kb": 85.0
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1599443380179-33737c17ca81%3",
+        "kb": 53.5
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1512675628397-28288d1220ef%3",
+        "kb": 43.1
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1503518406936-078df75d0c7c%3",
+        "kb": 43.0
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1629248457649-b082812aea6c%3",
+        "kb": 33.9
+      }
+    ]
+  },
+  "packages": {
+    "mobile_h1": {
+      "text": "Rafting Packages",
+      "top": 235.890625,
+      "bottom": 273.390625,
+      "visible": true,
+      "fontSize": "30px",
+      "color": "rgb(255, 255, 255)"
+    },
+    "mobile_tap_targets": [
+      {
+        "text": "Skip to main content",
+        "top": -1,
+        "left": -1,
+        "width": 1,
+        "height": 1,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "Home",
+        "top": 204,
+        "left": 16,
+        "width": 38,
+        "height": 16,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "₹799₹599Save 25%",
+        "top": 429,
+        "left": 16,
+        "width": 343,
+        "height": 243,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "Brahmpuri to Rishikesh",
+        "top": 721,
+        "left": 40,
+        "width": 295,
+        "height": 28,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 839,
+        "left": 243,
+        "width": 92,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "₹899",
+        "top": 935,
+        "left": 16,
+        "width": 343,
+        "height": 243,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Shivpuri to Rishikesh",
+        "top": 1226,
+        "left": 40,
+        "width": 295,
+        "height": 28,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 1345,
+        "left": 243,
+        "width": 92,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "₹799",
+        "top": 1409,
+        "left": 16,
+        "width": 343,
+        "height": 243,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Marine Drive to Rishikesh",
+        "top": 1700,
+        "left": 40,
+        "width": 295,
+        "height": 28,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 1819,
+        "left": 243,
+        "width": 92,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "₹1499",
+        "top": 1883,
+        "left": 16,
+        "width": 343,
+        "height": 243,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Kaudiyala to Rishikesh",
+        "top": 2174,
+        "left": 40,
+        "width": 295,
+        "height": 28,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 2293,
+        "left": 243,
+        "width": 92,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "₹2499",
+        "top": 2357,
+        "left": 16,
+        "width": 343,
+        "height": 243,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Camping + Rafting Combo",
+        "top": 2648,
+        "left": 40,
+        "width": 295,
+        "height": 28,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 2766,
+        "left": 243,
+        "width": 92,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "₹1999",
+        "top": 2830,
+        "left": 16,
+        "width": 343,
+        "height": 243,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Kaudiyala to Shivpuri Extreme",
+        "top": 3122,
+        "left": 40,
+        "width": 295,
+        "height": 28,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 3263,
+        "left": 243,
+        "width": 92,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "WhatsApp Booking",
+        "top": 3619,
+        "left": 16,
+        "width": 343,
+        "height": 48,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Call Now",
+        "top": 3679,
+        "left": 16,
+        "width": 343,
+        "height": 52,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "+91 95688 68493",
+        "top": 4107,
+        "left": 44,
+        "width": 118,
+        "height": 20,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "info@shivalikgangaadventure.com",
+        "top": 4139,
+        "left": 44,
+        "width": 228,
+        "height": 20,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Home",
+        "top": 4240,
+        "left": 16,
+        "width": 39,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Packages",
+        "top": 4272,
+        "left": 16,
+        "width": 64,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Destinations",
+        "top": 4304,
+        "left": 16,
+        "width": 82,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Gallery",
+        "top": 4336,
+        "left": 16,
+        "width": 47,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "About",
+        "top": 4368,
+        "left": 16,
+        "width": 39,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Blog",
+        "top": 4400,
+        "left": 16,
+        "width": 30,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Contact",
+        "top": 4432,
+        "left": 16,
+        "width": 52,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "About Us",
+        "top": 4532,
+        "left": 16,
+        "width": 61,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Safety Guidelines",
+        "top": 4564,
+        "left": 16,
+        "width": 116,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Privacy Policy",
+        "top": 4596,
+        "left": 16,
+        "width": 93,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Terms of Use",
+        "top": 4628,
+        "left": 16,
+        "width": 89,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Terms of Use",
+        "top": 5130,
+        "left": 102,
+        "width": 76,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Privacy Policy",
+        "top": 5130,
+        "left": 194,
+        "width": 79,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 756,
+        "left": 8,
+        "width": 303,
+        "height": 48,
+        "aboveFold": true,
+        "tag": "A"
+      }
+    ],
+    "mobile_nav": {
+      "hamburgerCount": 1,
+      "visibleNavLinks": 9,
+      "totalNavLinks": 18
+    },
+    "mobile_dims": {
+      "scrollWidth": 375,
+      "innerWidth": 375,
+      "scrollHeight": 5170
+    },
+    "mobile_img_cls_risk": {
+      "total": 16,
+      "missingDims": 14
+    },
+    "mobile_image_requests": 9,
+    "mobile_image_total_kb": 372.0,
+    "mobile_largest_images": [
+      {
+        "url": "image?url=%2Fimages%2Flogo%2Flogo-shivalik-adv.webp&w=2048&q=75",
+        "kb": 85.0
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1503518406936-078df75d0c7c%3",
+        "kb": 43.0
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1574116504481-e06341e984e1%3",
+        "kb": 42.5
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1641584495089-5914d85d9bcc%3",
+        "kb": 39.0
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1658355686821-f412c8397a0d%3",
+        "kb": 38.1
+      }
+    ]
+  },
+  "package-detail": {
+    "mobile_h1": {
+      "text": "Brahmpuri to Rishikesh",
+      "top": 218.390625,
+      "bottom": 293.390625,
+      "visible": true,
+      "fontSize": "30px",
+      "color": "rgb(255, 255, 255)"
+    },
+    "mobile_tap_targets": [
+      {
+        "text": "Skip to main content",
+        "top": -1,
+        "left": -1,
+        "width": 1,
+        "height": 1,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "Home",
+        "top": 186,
+        "left": 16,
+        "width": 38,
+        "height": 16,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "Packages",
+        "top": 186,
+        "left": 78,
+        "width": 66,
+        "height": 16,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "Is this route safe for beginners?",
+        "top": 1602,
+        "left": 17,
+        "width": 341,
+        "height": 52,
+        "aboveFold": false,
+        "tag": "BUTTON"
+      },
+      {
+        "text": "Do I need to know how to swim?",
+        "top": 1766,
+        "left": 17,
+        "width": 341,
+        "height": 52,
+        "aboveFold": false,
+        "tag": "BUTTON"
+      },
+      {
+        "text": "What should I wear?",
+        "top": 1819,
+        "left": 17,
+        "width": 341,
+        "height": 52,
+        "aboveFold": false,
+        "tag": "BUTTON"
+      },
+      {
+        "text": "WhatsApp Booking",
+        "top": 2105,
+        "left": 41,
+        "width": 293,
+        "height": 48,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "WhatsApp Booking",
+        "top": 2526,
+        "left": 16,
+        "width": 343,
+        "height": 48,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Call Now",
+        "top": 2586,
+        "left": 16,
+        "width": 343,
+        "height": 52,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "+91 95688 68493",
+        "top": 3014,
+        "left": 44,
+        "width": 118,
+        "height": 20,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "info@shivalikgangaadventure.com",
+        "top": 3046,
+        "left": 44,
+        "width": 228,
+        "height": 20,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Home",
+        "top": 3147,
+        "left": 16,
+        "width": 39,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Packages",
+        "top": 3179,
+        "left": 16,
+        "width": 64,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Destinations",
+        "top": 3211,
+        "left": 16,
+        "width": 82,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Gallery",
+        "top": 3243,
+        "left": 16,
+        "width": 47,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "About",
+        "top": 3275,
+        "left": 16,
+        "width": 39,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Blog",
+        "top": 3307,
+        "left": 16,
+        "width": 30,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Contact",
+        "top": 3339,
+        "left": 16,
+        "width": 52,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "About Us",
+        "top": 3439,
+        "left": 16,
+        "width": 61,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Safety Guidelines",
+        "top": 3471,
+        "left": 16,
+        "width": 116,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Privacy Policy",
+        "top": 3503,
+        "left": 16,
+        "width": 93,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Terms of Use",
+        "top": 3535,
+        "left": 16,
+        "width": 89,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Terms of Use",
+        "top": 4037,
+        "left": 102,
+        "width": 76,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Privacy Policy",
+        "top": 4037,
+        "left": 194,
+        "width": 79,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 756,
+        "left": 8,
+        "width": 303,
+        "height": 48,
+        "aboveFold": true,
+        "tag": "A"
+      }
+    ],
+    "mobile_nav": {
+      "hamburgerCount": 1,
+      "visibleNavLinks": 10,
+      "totalNavLinks": 19
+    },
+    "mobile_dims": {
+      "scrollWidth": 375,
+      "innerWidth": 375,
+      "scrollHeight": 4077
+    },
+    "mobile_img_cls_risk": {
+      "total": 10,
+      "missingDims": 8
+    },
+    "mobile_image_requests": 9,
+    "mobile_image_total_kb": 202.9,
+    "mobile_largest_images": [
+      {
+        "url": "image?url=%2Fimages%2Flogo%2Flogo-shivalik-adv.webp&w=2048&q=75",
+        "kb": 85.0
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1503518406936-078df75d0c7c%3",
+        "kb": 43.0
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1691347869738-16222993cc3a%3",
+        "kb": 33.3
+      },
+      {
+        "url": "image?url=%2Fimages%2Fgallery%2Frafting-img%20(3).webp&w=256&q=75",
+        "kb": 8.0
+      },
+      {
+        "url": "image?url=%2Fimages%2Fgallery%2Frafting-img%20(2).webp&w=256&q=75",
+        "kb": 7.6
+      }
+    ]
+  },
+  "gallery": {
+    "mobile_h1": {
+      "text": "Gallery",
+      "top": 235.890625,
+      "bottom": 273.390625,
+      "visible": true,
+      "fontSize": "30px",
+      "color": "rgb(255, 255, 255)"
+    },
+    "mobile_tap_targets": [
+      {
+        "text": "Skip to main content",
+        "top": -1,
+        "left": -1,
+        "width": 1,
+        "height": 1,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "Home",
+        "top": 204,
+        "left": 16,
+        "width": 38,
+        "height": 16,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "WhatsApp Booking",
+        "top": 2799,
+        "left": 16,
+        "width": 343,
+        "height": 48,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Call Now",
+        "top": 2859,
+        "left": 16,
+        "width": 343,
+        "height": 52,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "+91 95688 68493",
+        "top": 3286,
+        "left": 44,
+        "width": 118,
+        "height": 20,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "info@shivalikgangaadventure.com",
+        "top": 3318,
+        "left": 44,
+        "width": 228,
+        "height": 20,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Home",
+        "top": 3419,
+        "left": 16,
+        "width": 39,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Packages",
+        "top": 3451,
+        "left": 16,
+        "width": 64,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Destinations",
+        "top": 3483,
+        "left": 16,
+        "width": 82,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Gallery",
+        "top": 3515,
+        "left": 16,
+        "width": 47,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "About",
+        "top": 3547,
+        "left": 16,
+        "width": 39,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Blog",
+        "top": 3579,
+        "left": 16,
+        "width": 30,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Contact",
+        "top": 3611,
+        "left": 16,
+        "width": 52,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "About Us",
+        "top": 3711,
+        "left": 16,
+        "width": 61,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Safety Guidelines",
+        "top": 3743,
+        "left": 16,
+        "width": 116,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Privacy Policy",
+        "top": 3775,
+        "left": 16,
+        "width": 93,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Terms of Use",
+        "top": 3807,
+        "left": 16,
+        "width": 89,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Terms of Use",
+        "top": 4309,
+        "left": 102,
+        "width": 76,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Privacy Policy",
+        "top": 4309,
+        "left": 194,
+        "width": 79,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 756,
+        "left": 8,
+        "width": 303,
+        "height": 48,
+        "aboveFold": true,
+        "tag": "A"
+      }
+    ],
+    "mobile_nav": {
+      "hamburgerCount": 1,
+      "visibleNavLinks": 9,
+      "totalNavLinks": 18
+    },
+    "mobile_dims": {
+      "scrollWidth": 375,
+      "innerWidth": 375,
+      "scrollHeight": 4349
+    },
+    "mobile_img_cls_risk": {
+      "total": 25,
+      "missingDims": 8
+    },
+    "mobile_image_requests": 18,
+    "mobile_image_total_kb": 348.3,
+    "mobile_largest_images": [
+      {
+        "url": "image?url=%2Fimages%2Flogo%2Flogo-shivalik-adv.webp&w=2048&q=75",
+        "kb": 85.0
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1691347869738-16222993cc3a%3",
+        "kb": 33.3
+      },
+      {
+        "url": "image?url=%2Fimages%2Fgallery%2Frafting-clip-7-poster.jpg&w=384&q=75",
+        "kb": 22.6
+      },
+      {
+        "url": "image?url=%2Fimages%2Fgallery%2Frafting-clip-2-poster.jpg&w=384&q=75",
+        "kb": 19.0
+      },
+      {
+        "url": "image?url=%2Fimages%2Fgallery%2Frafting-clip-1-poster.jpg&w=384&q=75",
+        "kb": 17.2
+      }
+    ]
+  },
+  "contact": {
+    "mobile_h1": {
+      "text": "Contact & Book",
+      "top": 235.890625,
+      "bottom": 273.390625,
+      "visible": true,
+      "fontSize": "30px",
+      "color": "rgb(255, 255, 255)"
+    },
+    "mobile_tap_targets": [
+      {
+        "text": "Skip to main content",
+        "top": -1,
+        "left": -1,
+        "width": 1,
+        "height": 1,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "Home",
+        "top": 204,
+        "left": 16,
+        "width": 38,
+        "height": 16,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "Call Now",
+        "top": 596,
+        "left": 16,
+        "width": 343,
+        "height": 48,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "WhatsApp Booking",
+        "top": 660,
+        "left": 16,
+        "width": 343,
+        "height": 48,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "+91 95688 68493",
+        "top": 808,
+        "left": 46,
+        "width": 118,
+        "height": 20,
+        "aboveFold": true,
+        "tag": "A"
+      },
+      {
+        "text": "info@shivalikgangaadventure.com",
+        "top": 848,
+        "left": 46,
+        "width": 228,
+        "height": 20,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "WhatsApp Booking",
+        "top": 2876,
+        "left": 16,
+        "width": 343,
+        "height": 48,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Call Now",
+        "top": 2936,
+        "left": 16,
+        "width": 343,
+        "height": 52,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "+91 95688 68493",
+        "top": 3364,
+        "left": 44,
+        "width": 118,
+        "height": 20,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "info@shivalikgangaadventure.com",
+        "top": 3396,
+        "left": 44,
+        "width": 228,
+        "height": 20,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Home",
+        "top": 3497,
+        "left": 16,
+        "width": 39,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Packages",
+        "top": 3529,
+        "left": 16,
+        "width": 64,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Destinations",
+        "top": 3561,
+        "left": 16,
+        "width": 82,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Gallery",
+        "top": 3593,
+        "left": 16,
+        "width": 47,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "About",
+        "top": 3625,
+        "left": 16,
+        "width": 39,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Blog",
+        "top": 3657,
+        "left": 16,
+        "width": 30,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Contact",
+        "top": 3689,
+        "left": 16,
+        "width": 52,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "About Us",
+        "top": 3789,
+        "left": 16,
+        "width": 61,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Safety Guidelines",
+        "top": 3821,
+        "left": 16,
+        "width": 116,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Privacy Policy",
+        "top": 3853,
+        "left": 16,
+        "width": 93,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Terms of Use",
+        "top": 3885,
+        "left": 16,
+        "width": 89,
+        "height": 17,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Terms of Use",
+        "top": 4387,
+        "left": 102,
+        "width": 76,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Privacy Policy",
+        "top": 4387,
+        "left": 194,
+        "width": 79,
+        "height": 16,
+        "aboveFold": false,
+        "tag": "A"
+      },
+      {
+        "text": "Book Now",
+        "top": 756,
+        "left": 8,
+        "width": 303,
+        "height": 48,
+        "aboveFold": true,
+        "tag": "A"
+      }
+    ],
+    "mobile_nav": {
+      "hamburgerCount": 1,
+      "visibleNavLinks": 9,
+      "totalNavLinks": 18
+    },
+    "mobile_dims": {
+      "scrollWidth": 375,
+      "innerWidth": 375,
+      "scrollHeight": 4427
+    },
+    "mobile_img_cls_risk": {
+      "total": 13,
+      "missingDims": 8
+    },
+    "mobile_image_requests": 4,
+    "mobile_image_total_kb": 123.9,
+    "mobile_largest_images": [
+      {
+        "url": "image?url=%2Fimages%2Flogo%2Flogo-shivalik-adv.webp&w=2048&q=75",
+        "kb": 85.0
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1691347869738-16222993cc3a%3",
+        "kb": 33.3
+      },
+      {
+        "url": "StaticMapService.GetMapImage?1m2&1i3010020&2i1728062&2e1&3u14&4m2&1u341&2u318&5m",
+        "kb": 4.4
+      },
+      {
+        "url": "image?url=https%3A%2F%2Fhtml.physcode.com%2Ftravel%2Fimages%2Favata.jpeg&w=96&q=",
+        "kb": 1.1
+      }
+    ]
+  }
+}

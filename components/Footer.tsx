@@ -50,7 +50,10 @@ export function Footer() {
           <ul className="mt-5 space-y-3 text-sm">
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="transition-colors hover:text-primary">
+                <Link
+                  href={item.href}
+                  className="inline-block py-1.5 transition-colors hover:text-primary"
+                >
                   {item.label}
                 </Link>
               </li>
@@ -64,22 +67,25 @@ export function Footer() {
           </h3>
           <ul className="mt-5 space-y-3 text-sm">
             <li>
-              <Link href="/about" className="transition-colors hover:text-primary">
+              <Link href="/about" className="inline-block py-1.5 transition-colors hover:text-primary">
                 About Us
               </Link>
             </li>
             <li>
-              <Link href="/about#safety" className="transition-colors hover:text-primary">
+              <Link
+                href="/about#safety"
+                className="inline-block py-1.5 transition-colors hover:text-primary"
+              >
                 Safety Guidelines
               </Link>
             </li>
             <li>
-              <Link href="/privacy" className="transition-colors hover:text-primary">
+              <Link href="/privacy" className="inline-block py-1.5 transition-colors hover:text-primary">
                 Privacy Policy
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="transition-colors hover:text-primary">
+              <Link href="/terms" className="inline-block py-1.5 transition-colors hover:text-primary">
                 Terms of Use
               </Link>
             </li>

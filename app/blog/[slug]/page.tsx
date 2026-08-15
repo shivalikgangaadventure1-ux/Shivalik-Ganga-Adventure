@@ -64,7 +64,6 @@ export default async function BlogPostPage({
           month: "long",
           day: "numeric",
         })}
-        image={post.coverImage}
         breadcrumbs={[
           { name: "Home", path: "/" },
           { name: "Blog", path: "/blog" },
@@ -74,9 +73,15 @@ export default async function BlogPostPage({
 
       <section className="py-16 sm:py-24">
         <Container className="mx-auto max-w-3xl">
-          <div className="relative mb-10 aspect-[16/9] w-full overflow-hidden rounded-2xl">
-            <Image src={post.coverImage} alt={post.title} fill sizes="(min-width: 1024px) 768px, 100vw" className="object-cover" />
+          <div className="relative mb-6 h-56 w-full overflow-hidden rounded-2xl sm:h-72 md:h-80">
+            <Image src={post.coverImage} alt={post.title} fill sizes="(min-width: 1024px) 768px, 100vw" className="object-cover" priority />
           </div>
+          {post.authorTitle && (
+            <p className="mb-8 text-sm text-muted">
+              Written by <span className="font-semibold text-heading">{post.author}</span>,{" "}
+              {post.authorTitle}
+            </p>
+          )}
           <article
             className="prose prose-sm max-w-none prose-headings:font-heading prose-headings:text-heading prose-a:text-primary prose-a:no-underline hover:prose-a:underline sm:prose-base"
             // eslint-disable-next-line react/no-danger

@@ -1,8 +1,8 @@
 /**
- * Temporary image sources — real, freely-licensed Unsplash photography used as
- * placeholders (upgraded from the original low-res reference-template demo
- * assets). These are still NOT the client's actual business photography and
- * should be swapped for real trip/location photos once supplied.
+ * Hero, home-section, package, and destination images are the client's real,
+ * supplied photography (converted to WebP, compressed). Page-hero banners are
+ * still freely-licensed Unsplash placeholders pending real photos for those
+ * spots.
  *
  * Exception: `logo` and `avatar` are intentionally left on the old demo host —
  * a stock photo standing in for a specific named testimonial ("Priya Sharma")
@@ -16,27 +16,28 @@ function unsplash(id: string) {
 }
 
 export const IMAGES = {
-  heroPoster: unsplash("1599443380179-33737c17ca81"), // rafters cresting a rapid at sunset
+  // Real client-supplied photography (converted to WebP, already compressed).
+  heroPoster: "/images/hero/hero-home.webp",
+  achievementsBg: "/images/home/achievements-bg.webp",
   logo: "/images/logo/logo-shivalik-adv.webp",
   avatar: `${DEMO_BASE}/images/avata.jpeg`,
   bgPopular: unsplash("1512675628397-28288d1220ef"),
-  bgParallax: unsplash("1665516627441-3edbd940dbfb"),
-  bgNewsletter: unsplash("1691347869738-16222993cc3a"),
+  bgNewsletter: "/images/home/cta-bg.webp",
   packages: [
-    unsplash("1503518406936-078df75d0c7c"), // brahmpuri — calm, beginner-friendly
-    unsplash("1629248457649-b082812aea6c"), // shivpuri — action
-    unsplash("1658355686821-f412c8397a0d"), // marine drive
-    unsplash("1692095296859-60427614df87"), // kaudiyala
-    unsplash("1699002458581-2f3aa39304b6"), // camping + rafting combo
-    unsplash("1641584495089-5914d85d9bcc"), // kaudiyala extreme — big rapids
+    "/images/packages/brahmpuri-to-rishikesh.webp",
+    "/images/packages/shivpuri-to-rishikesh.webp",
+    "/images/packages/marine-drive-to-rishikesh.webp",
+    "/images/packages/kaudiyala-to-rishikesh.webp",
+    "/images/packages/camping-rafting-combo.webp",
+    "/images/packages/kaudiyala-to-shivpuri-extreme.webp",
   ],
   destinations: [
-    unsplash("1606349779646-b6ca5df78bdf"), // shivpuri
-    unsplash("1656179534360-6656e65c95ca"), // brahmpuri
-    unsplash("1611907046713-6699636ba2ec"), // marine drive
-    unsplash("1611907046358-e92ae1deadb2"), // kaudiyala
-    unsplash("1696556654030-a74ec07e0fe8"), // byasi rapids
-    unsplash("1781427012362-7990245fbce3"), // river camp
+    "/images/destinations/shivpuri.webp",
+    "/images/destinations/brahmpuri.webp",
+    "/images/destinations/marine-drive.webp",
+    "/images/destinations/kaudiyala.webp",
+    "/images/destinations/byasi-rapids.webp",
+    "/images/destinations/river-camp.webp",
   ],
   // Real client-supplied photography (converted to WebP, already compressed).
   gallery: [

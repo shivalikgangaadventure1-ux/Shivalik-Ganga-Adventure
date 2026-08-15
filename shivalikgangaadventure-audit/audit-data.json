@@ -1,0 +1,360 @@
+{
+  "summary": {
+    "health_score": 65,
+    "business_type": "Local Service — River Rafting & Adventure Tourism (Rishikesh, Uttarakhand, India)",
+    "top_findings": [
+      "Fabricated-looking testimonials: all 3 homepage reviews share one stock avatar image from a demo template, generic 5-star ratings — needs explicit client sign-off before launch",
+      "Homepage stat counters ('Happy Rafters', 'Rafting Routes') render as 0/0+ in server-rendered HTML — indistinguishable from an unfinished placeholder",
+      "Pervasive thin content: homepage ~200 words (floor 500), all 6 package pages 199-236 words (floor 800), all 3 blog posts 227-268 words (floor 1,500)",
+      "Package pricing has no reliable machine-readable home anywhere — missing from schema on the pages that sell each route, misallocated to a homepage ItemList that doesn't match on-page content, and absent from AI-crawler text extraction",
+      "Malformed BlogPosting.image URL (double-prefixed absolute Unsplash URL) confirmed broken today on all 3 blog posts, found independently by two audits"
+    ],
+    "quick_wins": [
+      "Fix the one-line blog schema image bug (guard against double-prefixing an absolute URL)",
+      "Fix oversized header logo (~85KB wasted per page load, sitewide, one component change)",
+      "Add Next.js priority prop to hero images on 4 templates to fix LCP 'Needs Improvement'",
+      "Add missing 'Sitemap:' directive to robots.txt",
+      "Enlarge 'Book Now' package-card tap target from ~16px to 48px+ (core conversion action)"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 82,
+      "what_works": [
+        "All 18 pages return HTTP 200, unique titles/meta descriptions/canonicals, single H1 each",
+        "Fully SSR/prerendered (X-Nextjs-Prerender: 1) — no JS execution required for crawlers to see content",
+        "Canonical tags and sitemap already correctly point to the production domain, not the preview host",
+        "HSTS well-configured; HTTP->HTTPS and trailing-slash redirects are clean single 308 hops",
+        "Custom 404 returns a real HTTP 404 status, not a soft-404"
+      ],
+      "findings": [
+        {
+          "title": "Sitewide noindex/robots Disallow must be removed before production launch",
+          "severity": "Critical",
+          "description": "robots.txt currently has Disallow: / and every page carries <meta name=\"robots\" content=\"noindex, nofollow\">. Correct and expected for this pre-launch preview; catastrophic if shipped unchanged to the production domain. Excluded from the numeric score by design.",
+          "recommendation": "Tie both rules to a single VERCEL_ENV === 'production' check so one deploy flips both. Treat as the top launch-day action item."
+        },
+        {
+          "title": "No security headers",
+          "severity": "Medium",
+          "description": "No Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, or Permissions-Policy on any response (HSTS is present and strong).",
+          "recommendation": "Add via next.config.js headers() or a Vercel vercel.json headers block."
+        },
+        {
+          "title": "4 homepage images missing alt text",
+          "severity": "Medium",
+          "description": "4 of 25 sampled homepage images have no alt attribute at all (not decorative alt=\"\").",
+          "recommendation": "Full-site image alt audit before launch."
+        },
+        {
+          "title": "robots.txt has no Sitemap: directive",
+          "severity": "Medium",
+          "description": "Independent of the current Disallow rule — a real gap that's easy to forget once the Disallow is removed.",
+          "recommendation": "Add 'Sitemap: https://www.shivalikgangaadventure.com/sitemap.xml' now."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 38,
+      "what_works": [
+        "Package-page prose (itineraries, inclusions/exclusions, route descriptions) reads as legitimate, operator-specific copy, not generic filler",
+        "Real, route-specific rapid names and grade-appropriate safety detail (kayak escort, senior crew on Grade IV)",
+        "Privacy/Terms pages are genuinely business-specific, not generic legal boilerplate",
+        "Real NAP (address, phone, email, hours) present and consistent"
+      ],
+      "findings": [
+        {
+          "title": "Testimonials use a shared stock/template demo avatar, not real customer photos",
+          "severity": "Critical",
+          "description": "All 3 homepage testimonials point to the identical avatar file (a demo asset from the underlying HTML template), with generic names and 5-star ratings on every quote.",
+          "recommendation": "Confirm with the client before launch whether these are real, consenting customers. Replace with real reviews or remove until real ones exist."
+        },
+        {
+          "title": "Homepage stat counters render as 0",
+          "severity": "Critical",
+          "description": "'Numbers That Speak for Themselves' (Happy Rafters, Rafting Routes, etc.) render 0/0+ in static server-rendered HTML with no real target value found.",
+          "recommendation": "Verify real numbers are wired into the count-up animation before launch, or remove the section."
+        },
+        {
+          "title": "Pervasive thin content across every page type",
+          "severity": "Critical",
+          "description": "Homepage ~200 words (floor 500), 6 package pages 199-236 words each (floor 800), 3 blog posts 227-268 words each (floor 1,500). Topical depth (FAQ breadth, gear/logistics detail, local specifics) is shallow throughout.",
+          "recommendation": "Expand each page type toward its floor with genuinely new detail, not padding."
+        },
+        {
+          "title": "No named certification/licensing authority",
+          "severity": "High",
+          "description": "Copy repeatedly claims 'certified guides' without naming who certifies them (Uttarakhand Tourism registration, IRF affiliation, first-aid body).",
+          "recommendation": "Add a real registration/license number and named certifying body — standard practice for legitimate Rishikesh rafting operators."
+        },
+        {
+          "title": "Blog posts have no author byline or credentials",
+          "severity": "High",
+          "description": "Safety-adjacent content (rapid grading, seasonal safety judgment calls) has zero visible author attribution.",
+          "recommendation": "Add an attributed, credentialed author (e.g. 'Written by [Name], Lead Rafting Guide')."
+        },
+        {
+          "title": "Manufactured urgency copy reads as synthetic",
+          "severity": "High",
+          "description": "'Limited slots per day... hurry and reserve your raft' style copy isn't tied to any real, verifiable live data.",
+          "recommendation": "Tie to real data or remove; generic scarcity language risks reading as manipulative."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 76,
+      "what_works": [
+        "100% unique titles and meta descriptions across all 18 pages",
+        "Single H1 per page sitewide",
+        "Clean, human-readable, hyphenated URL structure with no IDs or query strings",
+        "Strong package-detail page template: price, duration, distance, grade, group size, itinerary, inclusions/exclusions, and FAQ all above the fold"
+      ],
+      "findings": [
+        {
+          "title": "Homepage H1 omits the location keyword",
+          "severity": "Low",
+          "description": "H1 is 'Find Your Perfect Rafting Adventure Today' — generic; Rishikesh/Ganga appear in title/body but not the H1 itself.",
+          "recommendation": "Include the location in the H1 to match dominant SERP pattern for this query cluster."
+        },
+        {
+          "title": "/packages listing lacks decision-support content",
+          "severity": "Medium",
+          "description": "187 words total across 6 package cards with no 'which package is right for you' guidance or grade explainer for a comparison-stage searcher.",
+          "recommendation": "Add persona-routing copy and a Grade I-IV explainer."
+        },
+        {
+          "title": "Best existing AI/SEO asset (Grade II vs IV blog post) is under-linked",
+          "severity": "Low",
+          "description": "Only reachable via /blog despite being a strong comparison-style answer for 'which grade should I book' queries.",
+          "recommendation": "Cross-link from /packages and each package page's FAQ."
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 74,
+      "what_works": [
+        "Site-wide SportsActivityLocation + TouristAttraction + BreadcrumbList via app/layout.tsx, fully server-rendered",
+        "FAQPage on all 6 package pages, BlogPosting on all 3 posts — valid structure, no deprecated types",
+        "FAQPage correctly retained (not removed) despite Google's May 2026 FAQ rich-result retirement, for its AI-citation value"
+      ],
+      "findings": [
+        {
+          "title": "No TouristTrip/Offer schema on package detail pages",
+          "severity": "Critical",
+          "description": "The 6 pages that actually sell trips carry only Breadcrumb + FAQ — price/duration/grade shown on-page isn't represented in structured data there at all.",
+          "recommendation": "Add TouristTrip + Offer schema per package page. Generated code provided in findings/schema.md."
+        },
+        {
+          "title": "Malformed BlogPosting.image URL",
+          "severity": "Critical",
+          "description": "getBlogPostingSchema double-prefixes COMPANY.url onto an already-absolute Unsplash coverImage URL, producing a broken image field today.",
+          "recommendation": "Guard with post.coverImage.startsWith('http') before prefixing."
+        },
+        {
+          "title": "ItemList content mismatch on homepage",
+          "severity": "High",
+          "description": "Home's ItemList enumerates all 6 packages, but the homepage itself only renders 3 (PopularTours limit={3}) — violates Google's content-matches-markup guidance.",
+          "recommendation": "Move the full 6-item ItemList to /packages, which does render all 6."
+        },
+        {
+          "title": "BlogPosting missing publisher",
+          "severity": "High",
+          "description": "No Organization+logo publisher property, needed for full Article rich-result/AI attribution eligibility.",
+          "recommendation": "Add publisher object per findings/schema.md §4b."
+        },
+        {
+          "title": "No Review/AggregateRating schema",
+          "severity": "Medium",
+          "description": "A populated testimonials section exists but isn't expressed as structured data.",
+          "recommendation": "Ship only once testimonial authenticity is confirmed by the client — fabricated reviews in schema carry spam-action risk."
+        }
+      ]
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 72,
+      "what_works": [
+        "CLS measured at 0.000 on all 5 tested pages",
+        "TTFB excellent everywhere (39-59ms, Vercel edge)",
+        "TBT/INP-proxy comfortably 'Good' on every page (45-138ms)",
+        "AVIF image delivery already working correctly via Vercel Image Optimizer"
+      ],
+      "findings": [
+        {
+          "title": "4 of 5 pages miss 'Good' LCP threshold",
+          "severity": "High",
+          "description": "Home (3.12s), Package Detail (3.09s), Gallery (3.56s), Blog (3.44s) all land in the 2.5-4.0s 'Needs Improvement' band under simulated mobile throttling; only /packages (1.81s) passes. Lab data only, no CrUX field data available pre-launch.",
+          "recommendation": "Fix the oversized logo and missing priority hints below first, then re-measure."
+        },
+        {
+          "title": "Hero/LCP images not marked fetchpriority=high",
+          "severity": "High",
+          "description": "The hero image is eagerly loaded but not prioritized on Packages, Package Detail, Gallery, and Blog.",
+          "recommendation": "Add the Next.js priority prop to the hero/cover Image component on each template."
+        },
+        {
+          "title": "Header logo served ~40x larger than needed on every page",
+          "severity": "High",
+          "description": "Requested at w=2048 (native 1006x1024px) but displayed at 55x56px — 86.8 KB wasted per page load, and incorrectly loading=lazy on an above-fold element.",
+          "recommendation": "Constrain the sizes prop to the actual rendered box; remove loading=lazy."
+        },
+        {
+          "title": "Card/grid images oversized relative to display size",
+          "severity": "Medium",
+          "description": "Systemic sizes misconfiguration — up to 187 KB wasted on the Blog page alone.",
+          "recommendation": "Set sizes to match actual rendered width at each breakpoint across all card/grid Image usages."
+        },
+        {
+          "title": "Hotlinked Unsplash images for package/blog cover art",
+          "severity": "Medium",
+          "description": "External hotlinking is a production risk (rate limits, hotlink policy) with no preconnect hint.",
+          "recommendation": "Replace with self-hosted, pre-optimized assets before real launch."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness (GEO)",
+      "score": 56,
+      "what_works": [
+        "Fully SSR/prerendered site (is_spa: false on all 18 pages) — the strongest technical foundation this audit found for AI crawlers",
+        "100% consistent brand naming across all 18 pages, aiding LLM entity attribution",
+        "The Grade II vs Grade IV blog post already reads like a ready-made comparison answer for AI Overviews/Perplexity"
+      ],
+      "findings": [
+        {
+          "title": "FAQ answers absent from extractable text for 2 of every 3 questions",
+          "severity": "High",
+          "description": "Only the open accordion question's answer exists in the DOM; the other two are React-state-only, invisible to non-JS-executing crawlers. 18 of 24 FAQ answers across 6 package pages are affected.",
+          "recommendation": "Render all FAQ answers into the DOM at all times using native <details> or CSS-toggle instead of conditional JSX."
+        },
+        {
+          "title": "Price missing from extractable body text on all 6 package pages",
+          "severity": "High",
+          "description": "Price lives in a sidebar that boilerplate-stripping pipelines (used by ChatGPT/Perplexity-style browsing tools) drop entirely.",
+          "recommendation": "State price once in main-content prose in addition to the schema fix."
+        },
+        {
+          "title": "Package comparison collapses to 1-of-6 under text extraction",
+          "severity": "High",
+          "description": "Only the first package card's grade/duration/distance/price survives extraction on /packages; the other 5 are stripped as repeated boilerplate.",
+          "recommendation": "Add a real <table> comparison block outside the repeated card components."
+        },
+        {
+          "title": "No llms.txt and no AI-crawler-specific robots.txt allowlist",
+          "severity": "Medium",
+          "description": "Current robots.txt is a hardcoded blanket block with no per-crawler rules queued for launch day.",
+          "recommendation": "Ship the recommended production robots.txt and llms.txt templates in findings/geo.md."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 55,
+      "what_works": [
+        "Next/Image AVIF conversion working correctly across all sampled images",
+        "Above-the-fold hero images are eager-loaded (not lazy), which is correct for LCP candidates"
+      ],
+      "findings": [
+        {
+          "title": "Header logo served far larger than its rendered size",
+          "severity": "High",
+          "description": "~85 KB wasted per page load, sitewide, plus incorrectly lazy-loaded despite being always-visible.",
+          "recommendation": "Fix sizes prop and remove loading=lazy on the logo component."
+        },
+        {
+          "title": "Widespread missing width/height/aspect-ratio on images",
+          "severity": "High",
+          "description": "20/25 images on Home, 14/16 on Packages, 8/10 on Package Detail lack explicit dimensions or CSS aspect-ratio — a structural CLS-risk pattern (proxy check, not a live CLS measurement).",
+          "recommendation": "Audit image components for explicit sizing across all page templates."
+        },
+        {
+          "title": "Generic, non-descriptive gallery alt text",
+          "severity": "Low",
+          "description": "Alt text reads as 'rafting moment 1', 'rafting video clip 3' rather than naming the specific rapid/route shown.",
+          "recommendation": "Write descriptive, location-specific alt text once real trip photography replaces Unsplash placeholders."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 0: Launch Gate (before/at DNS cutover)",
+        "timeframe": "Before launch",
+        "items": [
+          "Remove robots.txt Disallow: / and add Sitemap: + AI-crawler allowlist",
+          "Remove sitewide noindex,nofollow meta tag",
+          "Add /llms.txt",
+          "Re-verify all 18 sitemap URLs return 200 on the live production host",
+          "Claim and verify Google Business Profile with matching NAP",
+          "Client sign-off on testimonial authenticity",
+          "Client sign-off on stat counter values",
+          "Add licensing/insurance copy to /about"
+        ]
+      },
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Fix malformed BlogPosting.image URL bug",
+          "Add TouristTrip/Offer schema to all 6 package detail pages",
+          "Move/duplicate ItemList schema to /packages",
+          "Render all FAQ answers into the DOM at all times",
+          "Add a real comparison table to /packages",
+          "State package price in main-content prose"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Enlarge Book Now tap targets to 48px+",
+          "Fix oversized header logo",
+          "Add priority prop to hero images",
+          "Add publisher property to BlogPosting schema",
+          "Add named certification/licensing authority to copy",
+          "Add author byline/credentials to blog posts",
+          "Expand blog posts to 600-900+ words",
+          "Fix images missing explicit dimensions (CLS risk)"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Expand package page FAQs to 3-5 questions each",
+          "Add decision-support copy to /packages",
+          "Add Review/AggregateRating schema (post sign-off)",
+          "Add logo property and entity linking to LocalBusiness schema",
+          "Increase geo coordinate precision",
+          "Add Maps embed to /about and /destinations",
+          "Set up post-trip review-generation workflow",
+          "Register on TripAdvisor, JustDial, GetYourGuide/Viator",
+          "Fix sizes misconfiguration on card/grid images",
+          "Replace hotlinked Unsplash images",
+          "Add security headers"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Re-run performance audit against production with real CrUX field data",
+          "Watch Gallery page Total Blocking Time as image count grows",
+          "Monitor review velocity post-launch",
+          "Add descriptive alt text once real trip photography ships",
+          "Re-audit Local SEO and GEO categories 4-6 weeks post-launch",
+          "Implement IndexNow"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { LifeBuoy, ShieldCheck, Siren, Users2 } from "lucide-react";
-import { COMPANY, CTA, getWhatsAppLink } from "@/constants/config";
+import { BadgeCheck, LifeBuoy, ShieldCheck, Siren, Users2 } from "lucide-react";
+import { COMPANY, CTA, TRUST, getWhatsAppLink } from "@/constants/config";
 import { IMAGES } from "@/constants/images";
 import { buildMetadata } from "@/lib/metadata";
 import { getBreadcrumbSchema } from "@/lib/schema";
@@ -25,7 +25,7 @@ const SAFETY_POINTS = [
   {
     icon: Users2,
     title: "Certified Guides on Every Raft",
-    description: "A trained guide leads each raft, briefing your group on paddling commands and river safety before launch.",
+    description: `A guide certified under the ${TRUST.certifyingBody} leads each raft, briefing your group on paddling commands and river safety before launch.`,
   },
   {
     icon: LifeBuoy,
@@ -113,6 +113,48 @@ export default function AboutPage() {
             >
               {CTA.bookNow}
             </Button>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-light py-16 sm:py-24">
+        <Container className="mx-auto max-w-3xl text-center">
+          <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/15 text-primary">
+            <BadgeCheck size={22} aria-hidden="true" />
+          </span>
+          <h2 className="font-heading text-2xl font-bold text-heading sm:text-3xl">
+            Licensing &amp; Insurance
+          </h2>
+          <div className="mt-5 space-y-3 text-sm leading-relaxed text-body">
+            <p>
+              Shivalik Ganga Adventure is registered with the {TRUST.registrationAuthority}{" "}
+              (registration no. {TRUST.registrationNumber}).
+            </p>
+            <p>{TRUST.insuranceStatement}</p>
+            <p>
+              All guides carry current certification under the {TRUST.certifyingBody}, and all
+              rafts operate with {TRUST.safetyEquipmentStandard}.
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-white py-16 sm:py-24">
+        <Container>
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-heading text-2xl font-bold text-heading sm:text-3xl">
+              Find Our Base Point
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-body">{COMPANY.address.full}</p>
+          </div>
+          <div className="mx-auto mt-8 h-[320px] max-w-4xl overflow-hidden rounded-2xl border border-border shadow-card">
+            <iframe
+              src={`https://www.google.com/maps?q=${COMPANY.geo.latitude},${COMPANY.geo.longitude}&z=14&output=embed`}
+              title={`${COMPANY.name} location map`}
+              loading="lazy"
+              className="h-full w-full border-0"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </Container>
       </section>

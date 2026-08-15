@@ -13,7 +13,6 @@ interface CounterProps {
 export function Counter({ icon: Icon, value, label }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [display, setDisplay] = useState("0");
 
   const numericMatch = value.match(/[\d,]+/);
   const numericTarget = numericMatch ? parseInt(numericMatch[0].replace(/,/g, ""), 10) : 0;
@@ -21,6 +20,12 @@ export function Counter({ icon: Icon, value, label }: CounterProps) {
   const suffix = numericMatch
     ? value.slice((numericMatch.index ?? 0) + numericMatch[0].length)
     : value;
+
+  // Server-rendered (and non-JS/crawler) output shows the real final number
+  // immediately, rather than "0" — the count-up below is a progressive
+  // enhancement for JS users scrolling the number into view, not the source
+  // of truth for the value itself.
+  const [display, setDisplay] = useState(() => numericTarget.toLocaleString("en-IN"));
 
   useEffect(() => {
     if (!isInView) return;

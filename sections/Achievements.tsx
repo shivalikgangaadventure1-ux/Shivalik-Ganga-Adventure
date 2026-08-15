@@ -16,7 +16,7 @@ export function Achievements() {
   return (
     <section className="relative overflow-hidden py-20 sm:py-28">
       <Image
-        src={IMAGES.bgParallax}
+        src={IMAGES.achievementsBg}
         alt=""
         fill
         loading="lazy"

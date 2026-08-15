@@ -89,7 +89,7 @@ export function PackageCard({ pkg, index = 0 }: { pkg: RaftingPackage; index?: n
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Book ${pkg.name} on WhatsApp`}
-            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-primary transition-colors hover:text-primary-dark"
+            className="-my-3 inline-flex min-h-[48px] items-center gap-1.5 px-1 py-3 text-xs font-bold uppercase tracking-wide text-primary transition-colors hover:text-primary-dark"
           >
             <MessageCircle size={16} aria-hidden="true" />
             Book Now

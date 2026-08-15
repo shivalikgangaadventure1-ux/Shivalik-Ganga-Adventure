@@ -1,5 +1,6 @@
 import { COMPANY } from "@/constants/config";
-import { PACKAGES, type PackageFAQ } from "@/constants/packages";
+import { IMAGES } from "@/constants/images";
+import { PACKAGES, type PackageFAQ, type RaftingPackage } from "@/constants/packages";
 import type { BlogPostMeta } from "@/lib/blog";
 
 export function getLocalBusinessSchema() {
@@ -14,6 +15,7 @@ export function getLocalBusinessSchema() {
     email: COMPANY.email,
     priceRange: "₹₹",
     image: `${COMPANY.url}/opengraph-image`,
+    logo: `${COMPANY.url}${IMAGES.logo}`,
     address: {
       "@type": "PostalAddress",
       streetAddress: COMPANY.address.street,
@@ -56,6 +58,7 @@ export function getTouristAttractionSchema() {
     url: COMPANY.url,
     touristType: ["Adventure travelers", "Families", "Groups", "Solo travelers"],
     isAccessibleForFree: false,
+    subjectOf: { "@id": `${COMPANY.url}/#business` },
     address: {
       "@type": "PostalAddress",
       addressLocality: COMPANY.address.locality,
@@ -70,26 +73,66 @@ export function getTouristAttractionSchema() {
   };
 }
 
-export function getPackagesItemListSchema() {
+export function getPackagesItemListSchema(packages: RaftingPackage[] = PACKAGES) {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: PACKAGES.map((pkg, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "TouristTrip",
-        name: `${pkg.name} Rafting`,
-        description: pkg.description,
-        touristType: "Adventure travelers",
-        offers: {
-          "@type": "Offer",
-          price: pkg.salePrice ?? pkg.price,
-          priceCurrency: "INR",
-          availability: "https://schema.org/InStock",
+    itemListElement: packages.map((pkg, index) => {
+      const url = `${COMPANY.url}/packages/${pkg.slug}`;
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "TouristTrip",
+          name: `${pkg.name} Rafting`,
+          description: pkg.description,
+          url,
+          image: pkg.image,
+          touristType: "Adventure travelers",
+          offers: {
+            "@type": "Offer",
+            url,
+            price: pkg.salePrice ?? pkg.price,
+            priceCurrency: "INR",
+            availability: "https://schema.org/InStock",
+            priceValidUntil: "2026-12-31",
+          },
         },
-      },
-    })),
+      };
+    }),
+  };
+}
+
+export function getPackageTouristTripSchema(pkg: RaftingPackage) {
+  const url = `${COMPANY.url}/packages/${pkg.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    "@id": `${url}#trip`,
+    name: `${pkg.name} Rafting`,
+    description: pkg.description,
+    url,
+    image: pkg.image,
+    touristType: ["Adventure travelers", "Families", "Groups", "Solo travelers"],
+    itinerary: {
+      "@type": "ItemList",
+      itemListElement: pkg.itinerary.map((step, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: step.time,
+        description: step.activity,
+      })),
+    },
+    provider: { "@id": `${COMPANY.url}/#business` },
+    offers: {
+      "@type": "Offer",
+      url,
+      price: pkg.salePrice ?? pkg.price,
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+      priceValidUntil: "2026-12-31",
+      validFrom: "2026-08-15",
+    },
   };
 }
 
@@ -114,9 +157,24 @@ export function getBlogPostingSchema(post: BlogPostMeta) {
     description: post.excerpt,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt ?? post.publishedAt,
-    author: { "@type": "Organization", name: post.author },
-    image: `${COMPANY.url}${post.coverImage}`,
-    mainEntityOfPage: `${COMPANY.url}/blog/${post.slug}`,
+    author: post.authorTitle
+      ? { "@type": "Person", name: post.author, jobTitle: post.authorTitle }
+      : { "@type": "Organization", name: post.author, url: COMPANY.url },
+    publisher: {
+      "@type": "Organization",
+      name: COMPANY.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${COMPANY.url}${IMAGES.logo}`,
+        width: 512,
+        height: 512,
+      },
+    },
+    image: post.coverImage.startsWith("http") ? post.coverImage : `${COMPANY.url}${post.coverImage}`,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${COMPANY.url}/blog/${post.slug}`,
+    },
   };
 }
 

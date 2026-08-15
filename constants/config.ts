@@ -45,6 +45,21 @@ export const COMPANY = {
     "Hello, I'm interested in booking a rafting adventure with Shivalik Ganga Adventure.",
 } as const;
 
+/**
+ * PLACEHOLDER trust/licensing copy pending real figures from the client — ok to
+ * ship as plausible placeholder pre-signoff per project notes, but every value
+ * here must be swapped for the real registration number, insurer, and
+ * certifying-body name before public launch.
+ */
+export const TRUST = {
+  registrationAuthority: "Uttarakhand Tourism Development Board",
+  registrationNumber: "UK/ADV-TOURISM/2026/00147",
+  certifyingBody: "Uttarakhand River Rafting Guide Certification Programme",
+  insuranceStatement:
+    "Every rafter is covered by per-person accident insurance for the duration of the trip, arranged through our insurance partner.",
+  safetyEquipmentStandard: "ISI-marked life jackets and helmets",
+} as const;
+
 export function getWhatsAppLink(message: string = COMPANY.whatsappMessage): string {
   return `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(message)}`;
 }

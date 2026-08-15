@@ -11,18 +11,22 @@ export interface Breadcrumb {
 interface PageHeroProps {
   title: string;
   subtitle?: string;
-  image: string;
+  image?: string;
   breadcrumbs: Breadcrumb[];
 }
 
 /**
  * Lightweight banner for interior pages — avoids reusing the homepage's
  * heavy parallax Hero (framer-motion + full-viewport height) on every route.
+ * `image` is optional: blog posts skip it here since the same cover photo is
+ * already shown, clearly, in the article body right below.
  */
 export function PageHero({ title, subtitle, image, breadcrumbs }: PageHeroProps) {
   return (
-    <section className="relative flex h-[45vh] min-h-[320px] items-end overflow-hidden pt-24">
-      <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" />
+    <section className="relative flex h-[45vh] min-h-[320px] items-end overflow-hidden bg-heading pt-24">
+      {image && (
+        <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" aria-hidden="true" />
+      )}
       <div className="absolute inset-0 bg-gradient-to-t from-heading/90 via-heading/60 to-heading/40" />
 
       <Container className="relative pb-10">

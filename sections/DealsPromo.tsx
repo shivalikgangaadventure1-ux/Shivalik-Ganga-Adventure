@@ -12,7 +12,7 @@ export function DealsPromo() {
   return (
     <section className="relative overflow-hidden py-20 sm:py-28">
       <Image
-        src={IMAGES.bgParallax}
+        src={IMAGES.achievementsBg}
         alt=""
         fill
         loading="lazy"
@@ -36,7 +36,8 @@ export function DealsPromo() {
           </h2>
           <span className="mx-auto mt-5 block h-1 w-16 rounded-full bg-primary" aria-hidden="true" />
           <p className="mt-5 text-base text-white/90">
-            Limited slots per day to keep every rafting group safe — hurry and reserve your raft.
+            We cap the number of rafts we run each day to keep every group properly supervised —
+            message us on WhatsApp to check availability for your dates.
           </p>
           <div className="mt-8">
             <Button

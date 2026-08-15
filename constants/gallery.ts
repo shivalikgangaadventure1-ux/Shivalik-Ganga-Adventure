@@ -23,7 +23,7 @@ const VIDEO_ITEMS: GalleryItem[] = Array.from({ length: VIDEO_COUNT }, (_, i) =>
   return {
     type: "video",
     src: `/videos/gallery/rafting-clip-${n}.mp4`,
-    poster: `/images/gallery/rafting-clip-${n}-poster.jpg`,
+    poster: `/images/gallery/rafting-clip-${n}-poster.webp`,
     alt: `Shivalik Ganga Adventure rafting video clip ${n}`,
     width: 608,
     height: 1080,

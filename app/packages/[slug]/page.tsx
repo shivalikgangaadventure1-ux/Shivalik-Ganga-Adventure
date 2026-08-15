@@ -4,7 +4,7 @@ import { Check, Clock, Users, X } from "lucide-react";
 import { getPackageBySlug, PACKAGES } from "@/constants/packages";
 import { getWhatsAppLink, CTA } from "@/constants/config";
 import { buildMetadata } from "@/lib/metadata";
-import { getBreadcrumbSchema, getFAQPageSchema } from "@/lib/schema";
+import { getBreadcrumbSchema, getFAQPageSchema, getPackageTouristTripSchema } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -49,6 +49,7 @@ export default async function PackageDetailPage({
     { name: pkg.name, path: `/packages/${pkg.slug}` },
   ]);
   const faqSchema = pkg.faqs.length > 0 ? getFAQPageSchema(pkg.faqs) : null;
+  const touristTripSchema = getPackageTouristTripSchema(pkg);
 
   return (
     <>
@@ -56,6 +57,11 @@ export default async function PackageDetailPage({
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(touristTripSchema) }}
       />
       {faqSchema && (
         <script
@@ -80,6 +86,20 @@ export default async function PackageDetailPage({
         <Container className="grid grid-cols-1 gap-12 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <p className="text-base leading-relaxed text-body">{pkg.longDescription}</p>
+            <p className="mt-4 text-base leading-relaxed text-body">
+              The {pkg.name} route currently costs{" "}
+              <strong className="text-heading">
+                ₹{pkg.salePrice ?? pkg.price} per person
+              </strong>
+              {pkg.salePrice && (
+                <>
+                  {" "}
+                  (down from ₹{pkg.price})
+                </>
+              )}
+              , covering {pkg.duration.toLowerCase()} on the water over {pkg.distanceKm} km of{" "}
+              {pkg.grade} rapids.
+            </p>
 
             <h2 className="mt-10 font-heading text-2xl font-bold text-heading">Itinerary</h2>
             <ol className="mt-6 space-y-6 border-l-2 border-border pl-6">

@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
@@ -35,19 +35,20 @@ export function Accordion({ items }: { items: AccordionItem[] }) {
                 <ChevronDown size={20} aria-hidden="true" />
               </motion.span>
             </button>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="overflow-hidden"
-                >
-                  <p className="px-5 pb-5 text-sm leading-relaxed text-body">{item.answer}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/*
+              The answer stays mounted in the DOM at all times (visibility toggled
+              via max-height, not conditional rendering) so every FAQ answer is
+              present in server-rendered HTML for crawlers/AI extraction that read
+              rendered text rather than parsing the FAQPage JSON-LD — previously
+              only the open item's answer existed in the DOM at all.
+            */}
+            <motion.div
+              animate={{ maxHeight: isOpen ? 400 : 0, opacity: isOpen ? 1 : 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="overflow-hidden"
+            >
+              <p className="px-5 pb-5 text-sm leading-relaxed text-body">{item.answer}</p>
+            </motion.div>
           </div>
         );
       })}

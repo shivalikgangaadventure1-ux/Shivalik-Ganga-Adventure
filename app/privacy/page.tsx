@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { COMPANY } from "@/constants/config";
 import { IMAGES } from "@/constants/images";
 import { buildMetadata } from "@/lib/metadata";
+import { getBreadcrumbSchema } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/ui/Container";
 
@@ -12,8 +13,18 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function PrivacyPage() {
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Privacy Policy", path: "/privacy" },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <PageHero
         title="Privacy Policy"
         image={IMAGES.pageHeroes.about}

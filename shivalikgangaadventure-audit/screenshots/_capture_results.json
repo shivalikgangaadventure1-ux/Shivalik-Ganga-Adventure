@@ -1,0 +1,162 @@
+[
+  {
+    "page": "home",
+    "viewport": "desktop",
+    "url": "https://shivalik-ganga-adventure.vercel.app/",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\home-desktop.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "home",
+    "viewport": "mobile",
+    "url": "https://shivalik-ganga-adventure.vercel.app/",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\home-mobile.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "home",
+    "viewport": "desktop",
+    "url": "https://shivalik-ganga-adventure.vercel.app/",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\home-desktop-full.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "home",
+    "viewport": "mobile",
+    "url": "https://shivalik-ganga-adventure.vercel.app/",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\home-mobile-full.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "packages",
+    "viewport": "desktop",
+    "url": "https://shivalik-ganga-adventure.vercel.app/packages",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\packages-desktop.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "packages",
+    "viewport": "mobile",
+    "url": "https://shivalik-ganga-adventure.vercel.app/packages",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\packages-mobile.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "packages",
+    "viewport": "desktop",
+    "url": "https://shivalik-ganga-adventure.vercel.app/packages",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\packages-desktop-full.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "packages",
+    "viewport": "mobile",
+    "url": "https://shivalik-ganga-adventure.vercel.app/packages",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\packages-mobile-full.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "package-detail",
+    "viewport": "desktop",
+    "url": "https://shivalik-ganga-adventure.vercel.app/packages/brahmpuri-to-rishikesh",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\package-detail-desktop.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "package-detail",
+    "viewport": "mobile",
+    "url": "https://shivalik-ganga-adventure.vercel.app/packages/brahmpuri-to-rishikesh",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\package-detail-mobile.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "package-detail",
+    "viewport": "desktop",
+    "url": "https://shivalik-ganga-adventure.vercel.app/packages/brahmpuri-to-rishikesh",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\package-detail-desktop-full.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "package-detail",
+    "viewport": "mobile",
+    "url": "https://shivalik-ganga-adventure.vercel.app/packages/brahmpuri-to-rishikesh",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\package-detail-mobile-full.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "gallery",
+    "viewport": "desktop",
+    "url": "https://shivalik-ganga-adventure.vercel.app/gallery",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\gallery-desktop.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "gallery",
+    "viewport": "mobile",
+    "url": "https://shivalik-ganga-adventure.vercel.app/gallery",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\gallery-mobile.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "gallery",
+    "viewport": "desktop",
+    "url": "https://shivalik-ganga-adventure.vercel.app/gallery",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\gallery-desktop-full.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "gallery",
+    "viewport": "mobile",
+    "url": "https://shivalik-ganga-adventure.vercel.app/gallery",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\gallery-mobile-full.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "contact",
+    "viewport": "desktop",
+    "url": "https://shivalik-ganga-adventure.vercel.app/contact",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\contact-desktop.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "contact",
+    "viewport": "mobile",
+    "url": "https://shivalik-ganga-adventure.vercel.app/contact",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\contact-mobile.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "contact",
+    "viewport": "desktop",
+    "url": "https://shivalik-ganga-adventure.vercel.app/contact",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\contact-desktop-full.png",
+    "success": true,
+    "error": null
+  },
+  {
+    "page": "contact",
+    "viewport": "mobile",
+    "url": "https://shivalik-ganga-adventure.vercel.app/contact",
+    "output": "C:\\Shivalik-Ganga-Adventure\\shivalikgangaadventure-audit\\screenshots\\contact-mobile-full.png",
+    "success": true,
+    "error": null
+  }
+]
