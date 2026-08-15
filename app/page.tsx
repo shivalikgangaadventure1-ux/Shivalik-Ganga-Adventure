@@ -12,7 +12,7 @@ import { Testimonials } from "@/sections/Testimonials";
 
 export default function HomePage() {
   // Scoped to 3 items to match what <PopularTours limit={3}> actually renders on
-  // this page — the full 6-package list lives on /packages, which renders all 6.
+  // this page. The full 5-package list lives on /packages, which renders all 5.
   const itemListSchema = getPackagesItemListSchema(PACKAGES.slice(0, 3));
   const breadcrumbSchema = getBreadcrumbSchema([{ name: "Home", path: "/" }]);
 

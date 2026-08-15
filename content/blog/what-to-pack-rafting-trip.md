@@ -10,14 +10,14 @@ authorTitle: "Lead Rafting Guide, 12 years on the Ganga"
 tags: ["packing", "tips", "beginners"]
 ---
 
-You will get wet, that's the whole point. Every package includes life jacket, helmet, and paddle, so the real packing question is what to wear underneath the gear, what to bring for after, and what to leave behind entirely. Here's how to pack so you're comfortable before, during, and after your rafting trip, whether you're doing a quick 2-hour run or our overnight [Camping + Rafting Combo](/packages/camping-rafting-combo).
+You will get wet, that's the whole point. Every package includes life jacket, helmet, and paddle, so the real packing question is what to wear underneath the gear, what to bring for after, and what to leave behind entirely. Here's how to pack so you're comfortable before, during, and after your rafting trip, whether you're doing a quick 2-hour run to Nim Beach or the full-day [Kaudiyala to Nim Beach](/packages/kaudiyala-to-nim-beach) expedition.
 
 ## Wear
 
 - Quick-dry shorts or leggings. Avoid cotton, since it stays wet and heavy for the rest of the day and doesn't insulate once soaked.
 - A t-shirt or rash guard, ideally quick-dry synthetic rather than cotton, for the same reason.
 - Secured footwear: sports sandals or old sneakers with a back strap. No flip-flops; they'll come off in the water within the first rapid.
-- Sunscreen, applied before you arrive, and reapplied if you're on a full-day route like [Kaudiyala to Rishikesh](/packages/kaudiyala-to-rishikesh), since reflected sunlight off the water adds up even on an overcast day.
+- Sunscreen, applied before you arrive, and reapplied if you're on a full-day route like [Kaudiyala to Nim Beach](/packages/kaudiyala-to-nim-beach), since reflected sunlight off the water adds up even on an overcast day.
 - In winter (December to February), a thin thermal or fleece layer under your rafting clothes. See our [best time to raft guide](/blog/best-time-for-rafting-rishikesh) for what water temperature to expect by season.
 
 ## Bring in a Sealed Bag
@@ -35,9 +35,9 @@ You will get wet, that's the whole point. Every package includes life jacket, he
 - Loose sunglasses without a strap. They will end up in the river the first time you lean into a wave.
 - Passports, large amounts of cash, or anything you'd genuinely be upset to lose in the water.
 
-## Packing for the Camping + Rafting Combo
+## Packing for the Full-Day Kaudiyala Expedition
 
-If you're booking the overnight [Camping + Rafting Combo](/packages/camping-rafting-combo), pack for two distinct parts of the day: rafting gear as above, plus an extra warm layer for the evening, since it gets noticeably cool by the river after sunset even in warmer months. A basic toiletries kit and a flashlight or phone torch are worth adding too, since camp lighting is minimal by design. It's meant to be a stars-and-bonfire evening, not a lit-up campsite.
+If you're booking [Kaudiyala to Nim Beach](/packages/kaudiyala-to-nim-beach), our longest run at 32 km, pack for a full day on and around the water: everything above, plus a packed snack or two if you tend to get hungry between the riverside lunch stop and drop-off, and a light jacket for the drive out to the Kaudiyala base point early in the morning. You'll be on the river for several hours longer than our shorter routes, so reapply sunscreen at the lunch break rather than only before you launch.
 
 ## On the Day
 

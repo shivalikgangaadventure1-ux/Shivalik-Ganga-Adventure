@@ -124,7 +124,12 @@
       "Bash(curl -s -o /dev/null -w \"packages/[slug] status: %{http_code}\\\\n\" http://localhost:3903/packages/brahmpuri-to-rishikesh)",
       "Bash(powershell -Command 'Get-NetTCPConnection -LocalPort 3903 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Stop-Process -Id $_ -Force }')",
       "Bash(rm \"destinations \\(1\\).jpg\" \"destinations \\(2\\).jpg\" \"destinations \\(3\\).jpg\" \"destinations \\(4\\).jpg\" \"destinations \\(5\\).jpg\" \"destinations \\(6\\).jpg\" \"destinations \\(7\\).jpg\" \"destinations \\(8\\).jpg\")",
-      "Bash(rm \"destinations \\(1\\).png\" \"destinations \\(2\\).png\")"
+      "Bash(rm \"destinations \\(1\\).png\" \"destinations \\(2\\).png\")",
+      "Bash(mv brahmpuri-to-rishikesh.webp brahmpuri-to-nim-beach.webp)",
+      "Bash(mv shivpuri-to-rishikesh.webp shivpuri-to-nim-beach.webp)",
+      "Bash(mv marine-drive-to-rishikesh.webp marine-drive-to-nim-beach.webp)",
+      "Bash(mv kaudiyala-to-rishikesh.webp kaudiyala-to-nim-beach.webp)",
+      "Bash(mv camping-rafting-combo.webp club-house-to-nim-beach.webp)"
     ],
     "additionalDirectories": [
       "\\tmp",

@@ -11,7 +11,7 @@ import { PackageComparisonTable } from "@/components/PackageComparisonTable";
 export const metadata: Metadata = buildMetadata({
   title: "Rafting Packages in Rishikesh",
   description:
-    "Compare all our river rafting packages on the Ganga in Rishikesh — from a gentle 9 km beginner run to the full-day 36 km Grade IV expedition, plus our camping combo.",
+    "Compare all 5 of our Ganga rafting packages to Nim Beach, from a gentle 9 km beginner run at ₹599 to the full-day 32 km Grade IV expedition at ₹2499.",
   path: "/packages",
 });
 
@@ -37,7 +37,7 @@ export default function PackagesPage() {
 
       <PageHero
         title="Rafting Packages"
-        subtitle="Every stretch of the Ganga we run, from beginner-friendly floats to full-day Grade IV expeditions."
+        subtitle="Every stretch of the Ganga we run to Nim Beach, from beginner-friendly floats to a full-day Grade IV expedition."
         image={IMAGES.pageHeroes.packages}
         breadcrumbs={[
           { name: "Home", path: "/" },
@@ -53,14 +53,15 @@ export default function PackagesPage() {
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-body sm:text-base">
               Rapid grades run from Grade I (flat, easy water) to Grade VI (unraftable
-              commercially). Our routes span <strong className="text-heading">Grade II</strong> —
-              gentle, forgiving, good for first-timers and families — through{" "}
-              <strong className="text-heading">Grade III</strong>, our most popular tier with real
-              rapids and teamwork paddling, up to{" "}
+              commercially). Our 5 routes to Nim Beach span{" "}
+              <strong className="text-heading">Grade I-II</strong>, gentle and forgiving, good for
+              first-timers and families, through <strong className="text-heading">Grade III</strong>,
+              our most popular tier with real rapids and teamwork paddling, up to{" "}
               <strong className="text-heading">Grade IV</strong>, a physically demanding run built
               for experienced, confident rafters. New to rafting or bringing kids? Start with
-              Brahmpuri. Want rapids without the extreme? Shivpuri or Marine Drive. Chasing the
-              biggest water on the Ganga? Kaudiyala to Shivpuri Extreme is our hardest run.
+              Brahmpuri to Nim Beach. Want more current without a big step up? Try Club House.
+              Want real rapids? Shivpuri or Marine Drive are our most popular picks. Chasing the
+              biggest water on the Ganga? Kaudiyala to Nim Beach is our hardest and longest run.
             </p>
           </div>
 

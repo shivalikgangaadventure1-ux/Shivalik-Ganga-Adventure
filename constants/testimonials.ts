@@ -1,36 +1,37 @@
-import { IMAGES } from "./images";
-
 export interface Testimonial {
   name: string;
   trip: string;
   quote: string;
   rating: number;
-  avatar: string;
 }
 
+/**
+ * Placeholder testimonials pending real, consenting-customer reviews (per
+ * project notes, ok to ship as plausible placeholder pre-signoff, flag before
+ * real launch). No avatar photo: a stock photo standing in for a named person
+ * would misrepresent a real customer, so cards use a generic icon avatar
+ * instead (see TestimonialCard.tsx) until real customer photos are supplied.
+ */
 export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Rohan Malhotra",
-    trip: "Shivpuri to Rishikesh",
+    trip: "Shivpuri to Nim Beach",
     quote:
-      "The rapids were more thrilling than I imagined and the guides made us feel completely safe the whole way. Best 3 hours of my trip to Rishikesh!",
+      "Honestly wasn't sure what to expect, but the Shivpuri run was so much fun. Our guide kept cracking jokes between rapids, which helped calm my nerves more than I'd like to admit. Would do it again in a heartbeat.",
     rating: 5,
-    avatar: IMAGES.avatar,
   },
   {
     name: "Ananya Kapoor",
-    trip: "Camping + Rafting Combo",
+    trip: "Marine Drive to Nim Beach",
     quote:
-      "Rafting by day and camping by the Ganga at night — the bonfire and stars were magical. The team took care of every little detail.",
+      "We stopped for cliff jumping partway through the Marine Drive route and none of us expected to enjoy it as much as we did. The guides made sure everyone jumped safely and kept the energy up the whole way to Nim Beach.",
     rating: 5,
-    avatar: IMAGES.avatar,
   },
   {
     name: "Vikram Sethi",
-    trip: "Kaudiyala to Shivpuri Extreme",
+    trip: "Kaudiyala to Nim Beach",
     quote:
-      "As an experienced rafter, I wanted a real challenge and this route delivered. Professional equipment, sharp instructions, unforgettable rapids.",
+      "I've rafted a couple of rivers before and this one held up. The Grade IV stretch near Kaudiyala is no joke. Our guide read the water well and kept the raft steady even through the rough parts. Recommended if you actually want a challenge, not just a splash around.",
     rating: 5,
-    avatar: IMAGES.avatar,
   },
 ];

@@ -21,7 +21,7 @@ export function Footer() {
 
       <Container className="grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Logo />
+          <Logo variant="light" />
           <p className="mt-4 text-sm leading-relaxed">{COMPANY.description}</p>
           <ul className="mt-6 space-y-3 text-sm">
             <li className="flex items-start gap-3">

@@ -15,7 +15,7 @@ export function getLocalBusinessSchema() {
     email: COMPANY.email,
     priceRange: "₹₹",
     image: `${COMPANY.url}/opengraph-image`,
-    logo: `${COMPANY.url}${IMAGES.logo}`,
+    logo: `${COMPANY.url}${IMAGES.logoIcon}`,
     address: {
       "@type": "PostalAddress",
       streetAddress: COMPANY.address.street,
@@ -165,7 +165,7 @@ export function getBlogPostingSchema(post: BlogPostMeta) {
       name: COMPANY.name,
       logo: {
         "@type": "ImageObject",
-        url: `${COMPANY.url}${IMAGES.logo}`,
+        url: `${COMPANY.url}${IMAGES.logoIcon}`,
         width: 512,
         height: 512,
       },

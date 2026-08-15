@@ -8,7 +8,7 @@ export const COMPANY = {
   legalName: "Shivalik Ganga Adventure",
   tagline: "River Rafting & Adventure in Rishikesh",
   description:
-    "Shivalik Ganga Adventure offers professional white-water river rafting, camping, and adventure sports on the Ganga in Rishikesh, Uttarakhand. Certified guides, safety-first equipment, and unforgettable adventures.",
+    "Shivalik Ganga Adventure offers professional white-water river rafting on the Ganga in Rishikesh, Uttarakhand, with 5 routes to Nim Beach. Certified guides, safety-first equipment, and unforgettable adventures.",
 
   phone: "+919568868493",
   displayPhone: "+91 95688 68493",

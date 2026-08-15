@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { Quote, Star } from "lucide-react";
+import { Quote, Star, User } from "lucide-react";
 import type { Testimonial } from "@/constants/testimonials";
 import { cn } from "@/lib/utils";
 
@@ -20,13 +19,12 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         &ldquo;{testimonial.quote}&rdquo;
       </blockquote>
       <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
-        <Image
-          src={testimonial.avatar}
-          alt={`Photo of ${testimonial.name}`}
-          width={48}
-          height={48}
-          className="h-12 w-12 rounded-full object-cover"
-        />
+        <span
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary"
+          aria-hidden="true"
+        >
+          <User size={22} strokeWidth={1.75} />
+        </span>
         <figcaption>
           <p className="font-heading text-sm font-bold text-heading">{testimonial.name}</p>
           <p className="text-xs text-muted">{testimonial.trip}</p>

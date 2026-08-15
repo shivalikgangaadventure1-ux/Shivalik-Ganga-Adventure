@@ -7,13 +7,13 @@ import { COMPANY } from "@/constants/config";
 export function GET() {
   const body = `# ${COMPANY.name}
 
-> White-water river rafting, camping, and adventure sports on the Ganga
-> in Rishikesh, Uttarakhand, India. Six rafting routes from Grade II
-> (beginner) to Grade IV (extreme), certified guides, safety-first
-> equipment.
+> White-water river rafting and adventure sports on the Ganga in
+> Rishikesh, Uttarakhand, India. Five rafting routes to Nim Beach, from
+> Grade I-II (beginner) to Grade IV (extreme), certified guides,
+> safety-first equipment.
 
 ## Key pages
-- [Packages](${COMPANY.url}/packages): All 6 rafting routes with grade, distance, duration, price
+- [Packages](${COMPANY.url}/packages): All 5 rafting routes to Nim Beach with grade, distance, duration, price
 - [Grade II vs Grade IV rapids explained](${COMPANY.url}/blog/grade-ii-vs-grade-iv-rapids-explained): Which grade/route to book by experience level
 - [Best time for rafting in Rishikesh](${COMPANY.url}/blog/best-time-for-rafting-rishikesh): Seasonal guide
 - [About / Safety](${COMPANY.url}/about): Safety guidelines, certified guides, equipment inspection

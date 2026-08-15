@@ -2,18 +2,17 @@ import Link from "next/link";
 import type { RaftingPackage } from "@/constants/packages";
 
 const BEST_FOR: Record<string, string> = {
-  "brahmpuri-to-rishikesh": "First-timers, families, children (8+)",
-  "shivpuri-to-rishikesh": "Signature run, fit first-timers",
-  "marine-drive-to-rishikesh": "Rapids + optional cliff jumping",
-  "kaudiyala-to-rishikesh": "Experienced or confident rafters",
-  "camping-rafting-combo": "Groups, overnight trips",
-  "kaudiyala-to-shivpuri-extreme": "Experienced, fit thrill-seekers",
+  "brahmpuri-to-nim-beach": "First-timers, families, children (8+)",
+  "club-house-to-nim-beach": "Beginners wanting a bit more current",
+  "shivpuri-to-nim-beach": "Signature run, most popular",
+  "marine-drive-to-nim-beach": "Rapids plus optional cliff jumping",
+  "kaudiyala-to-nim-beach": "Experienced, fit thrill-seekers",
 };
 
 /**
- * A real <table>, not another card grid — card/grid repeats are commonly
+ * A real <table>, not another card grid. Card/grid repeats are commonly
  * heuristically dropped as boilerplate by text-extraction pipelines after the
- * first instance, which left 5 of 6 packages' facts invisible to AI-search
+ * first instance, which left most packages' facts invisible to AI-search
  * text extraction. A table survives that extraction reliably.
  */
 export function PackageComparisonTable({ packages }: { packages: RaftingPackage[] }) {
@@ -21,7 +20,7 @@ export function PackageComparisonTable({ packages }: { packages: RaftingPackage[
     <div className="overflow-x-auto rounded-2xl border border-border shadow-card">
       <table className="w-full min-w-[640px] border-collapse text-left text-sm">
         <caption className="sr-only">
-          Comparison of all rafting packages — distance, duration, grade, price, and who each
+          Comparison of all rafting packages: distance, duration, grade, price, and who each
           route suits best
         </caption>
         <thead>
@@ -67,7 +66,7 @@ export function PackageComparisonTable({ packages }: { packages: RaftingPackage[
                   <span className="font-semibold text-heading">₹{pkg.price}</span>
                 )}
               </td>
-              <td className="px-5 py-4 text-body">{BEST_FOR[pkg.slug] ?? "—"}</td>
+              <td className="px-5 py-4 text-body">{BEST_FOR[pkg.slug] ?? "N/A"}</td>
             </tr>
           ))}
         </tbody>

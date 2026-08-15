@@ -11,7 +11,7 @@ const securityHeaders = [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: https://images.unsplash.com https://html.physcode.com",
+      "img-src 'self' data: https://images.unsplash.com",
       "font-src 'self' data:",
       "connect-src 'self' https://api.open-meteo.com",
       "frame-src 'self' https://www.google.com",
@@ -33,11 +33,6 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "html.physcode.com",
-        pathname: "/travel/**",
-      },
       {
         protocol: "https",
         hostname: "images.unsplash.com",

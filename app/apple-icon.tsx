@@ -7,7 +7,7 @@ export const contentType = "image/png";
 
 export default function AppleIcon() {
   const logoData = fs.readFileSync(
-    path.join(process.cwd(), "public/images/logo/logo-shivalik-adv-256.png")
+    path.join(process.cwd(), "public/images/logo/favicon.png")
   );
   const logoSrc = `data:image/png;base64,${logoData.toString("base64")}`;
 
