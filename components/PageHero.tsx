@@ -25,7 +25,16 @@ export function PageHero({ title, subtitle, image, breadcrumbs }: PageHeroProps)
   return (
     <section className="relative flex h-[45vh] min-h-[320px] items-end overflow-hidden bg-heading pt-24">
       {image && (
-        <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" aria-hidden="true" />
+        <Image
+          src={image}
+          alt=""
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover"
+          aria-hidden="true"
+        />
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-heading/90 via-heading/60 to-heading/40" />
 

@@ -75,6 +75,7 @@ export function SearchBooking() {
                   value={packageSlug}
                   onChange={(e) => setPackageSlug(e.target.value)}
                   className={cn(fieldClasses, "appearance-none pr-10")}
+                  suppressHydrationWarning
                 >
                   {PACKAGES.map((pkg) => (
                     <option key={pkg.slug} value={pkg.slug}>
@@ -98,6 +99,7 @@ export function SearchBooking() {
                   value={groupSize}
                   onChange={(e) => setGroupSize(e.target.value)}
                   className={cn(fieldClasses, "appearance-none pr-10")}
+                  suppressHydrationWarning
                 >
                   {["1", "2", "3-5", "6-10", "10+"].map((size) => (
                     <option key={size} value={size}>
@@ -121,6 +123,7 @@ export function SearchBooking() {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 className={cn(fieldClasses, "appearance-none")}
+                suppressHydrationWarning
               />
             </Field>
 

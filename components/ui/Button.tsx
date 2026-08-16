@@ -109,6 +109,10 @@ export function Button({
       onClick={onClick}
       aria-label={ariaLabel}
       className={classes}
+      // Form-autofill/password-manager browser extensions commonly inject a
+      // `fdprocessedid` attribute onto buttons before React hydrates, which
+      // otherwise trips a (harmless, environment-only) hydration warning.
+      suppressHydrationWarning
       {...motionProps}
     >
       {content}

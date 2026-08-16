@@ -41,8 +41,8 @@ export const DESTINATIONS: RaftingSpot[] = [
     grade: "Grade III",
     distanceFromRishikesh: "24 km",
     description:
-      "A scenic stretch known for its calm pools with safe, supervised spots for cliff jumping and body surfing between the rapids.",
-    highlights: ["Optional cliff jumping", "Body surfing pools", "Riverside cliffs"],
+      "A scenic stretch known for its calm pools, ideal for swimming and relaxing between the rapids.",
+    highlights: ["Calm pools for swimming", "Riverside cliffs", "Scenic viewpoints"],
     relatedPackageSlug: "marine-drive-to-nim-beach",
   },
   {

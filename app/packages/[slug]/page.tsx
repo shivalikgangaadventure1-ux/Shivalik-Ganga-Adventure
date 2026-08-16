@@ -24,7 +24,7 @@ export async function generateMetadata({
   if (!pkg) return {};
 
   return buildMetadata({
-    title: `${pkg.name} Rafting Package`,
+    title: `${pkg.name} Rafting`,
     description: pkg.description,
     path: `/packages/${pkg.slug}`,
     image: pkg.image,

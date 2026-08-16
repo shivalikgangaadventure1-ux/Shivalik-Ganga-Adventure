@@ -93,7 +93,7 @@ export async function WeatherWidget() {
             </>
           ) : (
             <p className="flex h-full items-center justify-center text-center text-sm text-muted">
-              Live weather is temporarily unavailable — check back soon, or ask us directly.
+              Live weather is temporarily unavailable. Check back soon, or ask us directly.
             </p>
           )}
         </div>

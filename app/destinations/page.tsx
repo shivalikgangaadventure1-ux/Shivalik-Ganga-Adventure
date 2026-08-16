@@ -10,7 +10,7 @@ import { DestinationCard } from "@/components/cards/DestinationCard";
 export const metadata: Metadata = buildMetadata({
   title: "Rafting Destinations on the Ganga",
   description:
-    "Explore the rafting put-in points along the Ganga near Rishikesh — from the beginner-friendly Brahmpuri stretch to the Grade IV rapids at Kaudiyala.",
+    "Explore the rafting put-in points along the Ganga near Rishikesh, from the beginner-friendly Brahmpuri stretch to the Grade IV rapids at Kaudiyala.",
   path: "/destinations",
 });
 

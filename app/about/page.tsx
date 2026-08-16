@@ -10,9 +10,9 @@ import { Button } from "@/components/ui/Button";
 import { Achievements } from "@/sections/Achievements";
 
 export const metadata: Metadata = buildMetadata({
-  title: "About Us",
+  title: "About Our Guides & Safety Standards",
   description:
-    "Shivalik Ganga Adventure runs certified, safety-first white-water rafting trips on the Ganga in Rishikesh. Learn about our crew, our safety standards, and what to expect on the river.",
+    "Meet the team behind Shivalik Ganga Adventure's certified, safety-first white-water rafting trips on the Ganga in Rishikesh.",
   path: "/about",
 });
 
@@ -20,7 +20,7 @@ const SAFETY_POINTS = [
   {
     icon: ShieldCheck,
     title: "Inspected Gear, Every Trip",
-    description: "Life jackets, helmets, and rafts are checked before every departure — no exceptions.",
+    description: "Life jackets, helmets, and rafts are checked before every departure. No exceptions.",
   },
   {
     icon: Users2,
@@ -85,7 +85,7 @@ export default function AboutPage() {
               Safety Guidelines
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-body">
-              River rafting is an adventure sport — here&apos;s how we keep every trip as safe as
+              River rafting is an adventure sport. Here&apos;s how we keep every trip as safe as
               possible without taking the thrill out of it.
             </p>
           </div>

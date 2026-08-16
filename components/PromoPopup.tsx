@@ -123,7 +123,7 @@ export function PromoPopup() {
             </button>
 
             <p className="font-heading text-xs font-bold uppercase tracking-[0.2em] text-primary">
-              Wait — Before You Go
+              Wait, Before You Go
             </p>
             <h2 id="promo-popup-title" className="mt-3 font-heading text-2xl font-extrabold text-heading">
               Get 10% Off

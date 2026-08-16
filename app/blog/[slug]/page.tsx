@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/blog";
 import { buildMetadata } from "@/lib/metadata";
-import { getBlogPostingSchema, getBreadcrumbSchema } from "@/lib/schema";
+import { getBlogPostingSchema, getBreadcrumbSchema, getFAQPageSchema } from "@/lib/schema";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/ui/Container";
 
@@ -43,6 +43,7 @@ export default async function BlogPostPage({
     { name: post.title, path: `/blog/${post.slug}` },
   ]);
   const blogPostingSchema = getBlogPostingSchema(post);
+  const faqSchema = post.faqs.length > 0 ? getFAQPageSchema(post.faqs) : null;
 
   return (
     <>
@@ -56,6 +57,13 @@ export default async function BlogPostPage({
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <PageHero
         title={post.title}
@@ -74,7 +82,7 @@ export default async function BlogPostPage({
       <section className="py-16 sm:py-24">
         <Container className="mx-auto max-w-3xl">
           <div className="relative mb-6 h-56 w-full overflow-hidden rounded-2xl sm:h-72 md:h-80">
-            <Image src={post.coverImage} alt={post.title} fill sizes="(min-width: 1024px) 768px, 100vw" className="object-cover" priority />
+            <Image src={post.coverImage} alt={post.title} fill sizes="(min-width: 1024px) 768px, 100vw" className="object-cover" priority fetchPriority="high" />
           </div>
           {post.authorTitle && (
             <p className="mb-8 text-sm text-muted">

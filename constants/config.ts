@@ -9,6 +9,11 @@ export const COMPANY = {
   tagline: "River Rafting & Adventure in Rishikesh",
   description:
     "Shivalik Ganga Adventure offers professional white-water river rafting on the Ganga in Rishikesh, Uttarakhand, with 5 routes to Nim Beach. Certified guides, safety-first equipment, and unforgettable adventures.",
+  // Shorter variant for <title>/meta description/OG/Twitter tags, kept under the ~155-160
+  // character limit search engines display before truncating. The fuller `description`
+  // above is for body copy (About page, footer) and schema.org, where length doesn't hurt.
+  shortDescription:
+    "River rafting in Rishikesh, Uttarakhand with Shivalik Ganga Adventure. 5 routes to Nim Beach, Grade I to IV, certified guides, safety-first gear.",
 
   phone: "+919568868493",
   displayPhone: "+91 95688 68493",

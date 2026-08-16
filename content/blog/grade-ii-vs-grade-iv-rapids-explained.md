@@ -31,7 +31,7 @@ Powerful, continuous rapids with larger drops, more obstacles, and less margin f
 | Grade I-II | [Brahmpuri to Nim Beach](/packages/brahmpuri-to-nim-beach) | 9 km | Rs 599 | First-timers, families, children (8+) |
 | Grade II | [Club House to Nim Beach](/packages/club-house-to-nim-beach) | 12 km | Rs 699 | Beginners wanting a bit more current |
 | Grade III | [Shivpuri to Nim Beach](/packages/shivpuri-to-nim-beach) | 16 km | Rs 799 | Signature run, most popular |
-| Grade III | [Marine Drive to Nim Beach](/packages/marine-drive-to-nim-beach) | 24 km | Rs 1199 | Rapids plus optional cliff jumping |
+| Grade III | [Marine Drive to Nim Beach](/packages/marine-drive-to-nim-beach) | 24 km | Rs 1199 | Rapids plus calm pools to swim |
 | Grade IV | [Kaudiyala to Nim Beach](/packages/kaudiyala-to-nim-beach) | 32 km | Rs 2499 | Experienced, fit thrill-seekers |
 
 ## So Which Grade Should You Book?

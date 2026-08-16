@@ -21,7 +21,7 @@ export const FEATURES: Feature[] = [
     icon: "BadgeIndianRupee",
     title: "Best Value Packages",
     description:
-      "Transparent pricing with no hidden costs — from short beginner runs to full-day extreme expeditions.",
+      "Transparent pricing with no hidden costs, from short beginner runs to full-day extreme expeditions.",
   },
   {
     icon: "Waves",
@@ -33,7 +33,7 @@ export const FEATURES: Feature[] = [
 
 export const ACHIEVEMENTS = [
   { number: "15,000+", label: "Happy Rafters" },
-  { number: "8", label: "Rafting Routes" },
+  { number: "5", label: "Rafting Routes" },
   { number: "5,000+", label: "Successful Trips" },
   { number: "25+", label: "Expert Guides" },
 ] as const;

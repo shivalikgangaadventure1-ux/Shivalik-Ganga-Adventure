@@ -36,7 +36,7 @@ export function BookingCTA() {
             Book Your Rafting Adventure Today
           </h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-white/80">
-            Chat with us on WhatsApp or give us a call — we&apos;ll help you pick the right package
+            Chat with us on WhatsApp or give us a call, and we&apos;ll help you pick the right package
             and confirm your slot in minutes.
           </p>
 

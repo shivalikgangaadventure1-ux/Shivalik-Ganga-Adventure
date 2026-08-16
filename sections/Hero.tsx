@@ -27,6 +27,7 @@ export function Hero() {
           alt="Rafters paddling through white-water rapids on the Ganga in Rishikesh"
           fill
           priority
+          fetchPriority="high"
           sizes="100vw"
           className="object-cover"
         />

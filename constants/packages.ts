@@ -87,7 +87,7 @@ export const PACKAGES: RaftingPackage[] = [
     rating: 4,
     image: IMAGES.packages[1],
     description:
-      "A 12 km run from Club House to Nim Beach with a bit more current than Brahmpuri, a good next step for anyone who wants slightly more rapids without a big jump in intensity.",
+      "A 12 km rafting run from Club House to Nim Beach, Grade II, with steadier current than Brahmpuri. A good next step before Shivpuri's bigger rapids.",
     longDescription:
       "Club House to Nim Beach sits between our gentlest and our signature runs: 12 km of Grade II rapids with a longer, steadier current than Brahmpuri, plus more time on the water overall. It suits rafters who want a bit more of a workout and a bit more splash without stepping up to Shivpuri's bigger Grade III rapids. A solid mid-length option if you're short on time but still want a proper river experience.",
     itinerary: [
@@ -161,13 +161,13 @@ export const PACKAGES: RaftingPackage[] = [
     rating: 5,
     image: IMAGES.packages[3],
     description:
-      "A 24 km route from Marine Drive to Nim Beach combining rolling Grade III rapids with calm pools for optional cliff jumping and body surfing.",
+      "A 24 km route from Marine Drive to Nim Beach combining rolling Grade III rapids with calm pools for swimming and relaxing along the way.",
     longDescription:
-      "Marine Drive to Nim Beach is the route to pick if you want a longer stretch of rapids plus riverside fun. Between the Grade III rapid sections, there are calm pools with safe spots for optional cliff jumping and body surfing under crew supervision. At 24 km, it runs longer than Shivpuri while keeping a similar rapid intensity, making it a good choice if you want more time on the water without stepping up to a full-day expedition.",
+      "Marine Drive to Nim Beach is the route to pick if you want a longer stretch of rapids plus riverside relaxation. Between the Grade III rapid sections, there are calm pools where you can swim and unwind under crew supervision. At 24 km, it runs longer than Shivpuri while keeping a similar rapid intensity, making it a good choice if you want more time on the water without stepping up to a full-day expedition.",
     itinerary: [
       { time: "8:30 AM / 12:30 PM", activity: "Report at Marine Drive base point (pickup can be arranged from your hotel)" },
       { time: "8:45 AM", activity: "Safety briefing, life jacket and helmet fitting, paddling demonstration" },
-      { time: "9:00 AM", activity: "Launch, raft the rapids, optional supervised cliff jumping and body surfing in calm pools" },
+      { time: "9:00 AM", activity: "Launch, raft the rapids, with calm pools to swim and relax along the way" },
       { time: "1:00 PM", activity: "Disembark at Nim Beach, gear return, drop-off" },
     ],
     inclusions: [
@@ -178,8 +178,8 @@ export const PACKAGES: RaftingPackage[] = [
     ],
     exclusions: ["Personal expenses", "Photography/videography (available on request)", "Transport to/from base point unless pre-arranged"],
     faqs: [
-      { question: "Is cliff jumping compulsory on the Marine Drive route?", answer: "No, it's entirely optional and only offered at safe, crew-supervised spots." },
-      { question: "How does this route compare to Shivpuri?", answer: "Similar rapid grade, longer distance at 24 km versus 16 km, with the added option of cliff jumping and body surfing along the way." },
+      { question: "Can we stop to swim during the Marine Drive route?", answer: "Yes, there are a few calm pools along the way where you can stop to swim and relax under crew supervision." },
+      { question: "How does this route compare to Shivpuri?", answer: "Similar rapid grade, longer distance at 24 km versus 16 km, with more calm stretches to swim and relax along the way." },
       { question: "What happens if it rains or the weather turns bad?", answer: "Light rain doesn't stop a trip. If conditions become genuinely unsafe, we'll reschedule your slot or offer an alternative date." },
       { question: "Is there a minimum age or fitness requirement?", answer: "Minimum age is 12. Reasonable fitness helps given the longer distance, but no prior rafting experience is required." },
       { question: "Can you arrange pickup from my hotel?", answer: "Yes, hotel pickup can be pre-arranged in and around Rishikesh. Let us know when you book." },

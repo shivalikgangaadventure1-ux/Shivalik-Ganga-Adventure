@@ -19,8 +19,34 @@ export interface BlogPostMeta {
   tags: string[];
 }
 
+export interface BlogFaq {
+  question: string;
+  answer: string;
+}
+
 export interface BlogPost extends BlogPostMeta {
   contentHtml: string;
+  faqs: BlogFaq[];
+}
+
+/**
+ * Parses the "## Frequently Asked Questions" section (if present) out of the
+ * post's raw markdown into structured Q&A pairs, so it can also power
+ * FAQPage schema without duplicating the content in frontmatter.
+ */
+function extractFaqs(markdown: string): BlogFaq[] {
+  const sectionMatch = markdown.match(/## Frequently Asked Questions\n\n([\s\S]*?)(?:\n## |$)/);
+  if (!sectionMatch) return [];
+
+  return sectionMatch[1]
+    .trim()
+    .split(/\n\n+/)
+    .map((block) => block.match(/^\*\*(.+?)\*\*\n([\s\S]+)$/))
+    .filter((match): match is RegExpMatchArray => match !== null)
+    .map((match) => ({
+      question: match[1].trim(),
+      answer: match[2].trim().replace(/\n+/g, " "),
+    }));
 }
 
 export function getAllPostSlugs(): string[] {
@@ -52,6 +78,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | undefined>
   return {
     slug,
     contentHtml: processed.toString(),
+    faqs: extractFaqs(content),
     ...(data as Omit<BlogPostMeta, "slug">),
   };
 }

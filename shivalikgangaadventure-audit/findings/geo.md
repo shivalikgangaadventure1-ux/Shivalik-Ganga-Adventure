@@ -1,215 +1,159 @@
 # GEO / AI Search Readiness Audit — Shivalik Ganga Adventure
 
-**Audited environment:** `https://shivalik-ganga-adventure.vercel.app/` (Vercel preview, pre-launch staging)
+**Audited environment:** `http://localhost:4100` (local production build, `next start`)
 **Eventual production domain:** `https://www.shivalikgangaadventure.com` (not live yet)
 **Audit date:** 2026-08-15
-**Pages checked:** all 18 pages from the sitemap (home, packages index + 6 detail pages, destinations, gallery, about, blog index + 3 posts, contact, privacy, terms)
-**Method:** `render_page.py --mode auto` (Playwright + trafilatura) against every URL — confirms raw HTML vs. rendered HTML vs. boilerplate-stripped `extracted_text`; `robots.txt`/`llms.txt`/`sitemap.xml` fetched directly; JSON-LD parsed from raw HTML. DataForSEO MCP tools were not available in this session — no live ChatGPT/AI-Overview citation data could be pulled; all findings are source-inspection based.
+**Pages checked:** all 17 pages from `sitemap.xml` (home, packages index + 5 detail pages, destinations, gallery, about, blog index + 3 posts, contact, privacy, terms)
+**Method:** Fetched every sitemap URL via direct HTTP GET (raw, pre-JS HTML — the site's Playwright-based render tool's SSRF guard hard-blocks `localhost`/loopback hosts by design, so this pass used `curl` + the `trafilatura`/`htmldate` Python libraries directly against the saved HTML to reproduce the same boilerplate-stripped `extracted_text` methodology used previously). `robots.txt`, `/llms.txt`, `/sitemap.xml` fetched directly. JSON-LD parsed from raw HTML per page. No DataForSEO MCP tools were available in this session — no live ChatGPT/AI-Overview citation data pulled; findings are source-inspection based.
 
-**This report cross-references `technical.md`, `schema.md`, and `local.md` in this same audit folder rather than re-litigating their findings in full — see those for the complete crawlability/schema/local-SEO detail. This report focuses on what's specific to AI-citation readiness (GEO): passage-level extractability, llms.txt, AI-crawler allowlisting, and comparison-friendly content.**
+**This is a fresh, independent pass — not an assumption-based follow-up.** A prior audit (this same file, this morning) ran before a round of GEO-focused fixes; every claimed fix below was re-verified against the live local build's actual HTML output, not taken on faith.
 
 ---
 
-## GEO Readiness Score: 56 / 100
+## Verification of the 3 previously-flagged fixes — all 3 CONFIRMED FIXED
 
-*(Score evaluates underlying content/technical readiness for AI citation. Per audit scope, it does NOT penalize the site for the current pre-launch `Disallow: /` — that's a correct, intentional launch-gate, tracked separately below — but it DOES penalize the site for not yet having an `llms.txt` or AI-crawler-specific `robots.txt` rules, since those are genuine gaps to close before launch regardless of the blanket-block state.)*
+| # | Fix | Status | Evidence |
+|---|---|---|---|
+| 1 | FAQ accordion answers stay in DOM regardless of open/closed state | **FIXED** | Checked raw HTML of all 5 package pages (25 FAQ items total, 5 questions × 5 packages). Every `<p>` answer is present in the DOM at all times — only the first item has `aria-expanded="true"`, but all 5 answer `<p>` tags exist unconditionally inside `<div class="overflow-hidden">` wrappers (CSS-toggle pattern, not conditional JSX unmount). Confirmed via `trafilatura` extraction too: all 5 answers survive boilerplate-stripping on every package page (was 1-of-3 answers per page in the prior audit; now 5-of-5 on all 5 pages, 25/25 total). |
+| 2 | Price stated in main-content prose, not just sidebar | **FIXED** | Every package page now has a sentence in the main content flow, e.g. Brahmpuri: *"The Brahmpuri to Nim Beach route currently costs ₹599 per person, covering 2 hours on the water over 9 km of Grade I-II rapids."* Confirmed present in `trafilatura` `extracted_text` (survives boilerplate-stripping) for all 5 packages: Brahmpuri ₹599, Club House ₹699, Shivpuri ₹799, Marine Drive ₹1199, Kaudiyala ₹2499. Also backed by a proper `Offer` sub-schema (`price`, `priceCurrency: INR`, `availability`, `priceValidUntil`) inside each page's `TouristTrip` JSON-LD — price now has both a prose home and a schema home. |
+| 3 | `/packages` has a real `<table>` comparison block | **FIXED** | Confirmed a genuine `<table>` element (not a card grid) with 6 columns — Package, Distance, Duration, Grade, Price, Best For — and one row per package, all 5 rows present. `trafilatura` extracts it cleanly as a markdown table with all 5 packages' data intact (previously only 1-of-6 cards survived extraction; now 5-of-5 rows survive, structurally guaranteed since it's a real `<table>` rather than a repeated-card DOM pattern). |
+| — | `/llms.txt` route exists, well-formed, reflects current 5-package/"to Nim Beach" catalog | **FIXED** | `GET /llms.txt` → `200`, plain text, correctly mentions "Five rafting routes to Nim Beach," links `/packages` with "All 5 rafting routes to Nim Beach," and the Grade II/IV blog post. No stale 6-package or "to Rishikesh" language found anywhere in it. As expected/by design, this route is currently unreachable to real crawlers because `robots.txt` still disallows everything sitewide — that's the deliberate, explicit pre-launch state and is not treated as a defect here. |
+
+---
+
+## GEO Readiness Score: 68 / 100
+
+*(Up from 56/100 in the prior audit. Score evaluates underlying content/technical readiness for AI citation. Per audit scope, it does NOT penalize the site for the current intentional `Disallow: /` + `noindex,nofollow` — that's a correct, deliberate pre-launch/no-domain-yet gate, not re-litigated here — but it does still reflect genuine content/technical gaps below.)*
 
 | Dimension | Weight | Score | Weighted | Why |
 |---|---|---|---|---|
-| Citability | 25% | 55/100 | 13.75 | Good underlying prose (direct-answer paragraphs, FAQs, itinerary/inclusion lists) but three concrete extraction failures pull real facts (FAQ answers, prices, 5-of-6 package comparison data) out of the boilerplate-stripped text that AI crawlers actually read — see §2. |
-| Structural Readability | 20% | 65/100 | 13.0 | Clean H1/H2 hierarchy, breadcrumbs, itinerary/inclusions/exclusions/FAQ pattern repeated consistently across all 6 package pages. Loses points for card-grid (not `<table>`) comparison layout and mostly non-question-based blog H2s. |
-| Multi-Modal Content | 15% | 35/100 | 5.25 | Generic, non-descriptive `alt` text ("rafting moment 1", "rafting video clip 3"); `/gallery` has almost no surrounding text (~227 chars extracted); all imagery is stock Unsplash, not real trip photography (expected placeholder pre-signoff per project notes, but still a genuine multimodal-citation gap until replaced). |
-| Authority & Brand Signals | 20% | 40/100 | 8.0 | Brand name used consistently everywhere (see §4); NAP consistent (see `local.md`). But: no named certifying body/registration number, no `AggregateRating`/`Review` schema, placeholder testimonials with identical stock avatars, `sameAs` covers Facebook/Instagram/Twitter/YouTube but no LinkedIn/Wikipedia/Reddit presence. |
-| Technical Accessibility | 20% | 80/100 | 16.0 | Fully SSR/prerendered — `is_spa: false` and `mode_used: raw` on all 18 pages, meaning zero JS execution is required for any AI crawler to see full body text. This is a genuine strength. Points lost only for missing `llms.txt` and no AI-crawler-specific `robots.txt` allowlist (independent of the temporary full block). |
+| Citability | 25% | 82/100 | 20.5 | All three core extraction failures from the prior audit are now fixed (FAQ answers, price, comparison table all survive `trafilatura` boilerplate-stripping). Blog posts grew from a thin 230–270 words to a healthy 682–799 words each with retained short, direct-answer paragraphs. Remaining gap: one factual inconsistency (About page "Rafting Routes" stat counter still says **8**, while every other page on the site — home, packages, destinations — consistently says **5 routes**) undermines the exact kind of fact an AI answer engine might lift and cite incorrectly. |
+| Structural Readability | 20% | 78/100 | 15.6 | Clean H1/H2 hierarchy, breadcrumbs (`BreadcrumbList` JSON-LD on every page), consistent itinerary/inclusions/exclusions/FAQ pattern across all 5 package pages, and the new genuine `<table>` on `/packages` is a real structural upgrade. Loses points because blog H2s are still mostly declarative rather than question-based (only one heading, "So Which Grade Should You Book?", reads as a question-style prompt), and the Grade II vs IV comparison post is still only reachable via `/blog` — zero internal links to it from `/packages` or any package-page FAQ. |
+| Multi-Modal Content | 15% | 48/100 | 7.2 | Real improvement on the home page and package cards: hero/card image `alt` text is now descriptive and location-specific ("Brahmpuri to Nim Beach river rafting package on the Ganga," "Shivpuri rafting spot on the Ganga, Rishikesh") instead of generic placeholders. But the gallery/testimonial-carousel images and video thumbnails are unchanged from the prior audit — still generic ("Shivalik Ganga Adventure rafting moment," "rafting video clip 3"), `/gallery` still has almost no surrounding body text, and 4 images sitewide (2 on home, 2 on package pages) have empty `alt=""`. All photography is still stock Unsplash (expected placeholder pending client sign-off per project notes, not a new finding). |
+| Authority & Brand Signals | 20% | 60/100 | 12.0 | Two genuine new authority wins: (1) `/about` now states a named certifying body and registration number — "registered with the Uttarakhand Tourism Development Board (registration no. UK/ADV-TOURISM/2026/00147)," plus a named guide-certification programme and per-person accident insurance; (2) each blog post now has a visible, named byline in the rendered DOM ("Written by Arjun Rawat, Lead Rafting Guide, 12 years on the Ganga") matching the `BlogPosting` schema's `author` field — a real E-E-A-T signal, not just a schema-only claim. Held back by: the stale "8 Rafting Routes" stat counter (an internal-consistency/trust issue, doubles as an authority ding), still no LinkedIn/Wikipedia/Reddit presence in the `sameAs` graph (unchanged), and testimonials remain placeholder content with no `AggregateRating` schema (correctly not added yet, per project notes — content still pending client sign-off). |
+| Technical Accessibility | 20% | 88/100 | 17.6 | Confirmed sitewide SSR: every one of the 17 sitemap URLs returns full body content, headings, and JSON-LD in the raw pre-JS HTTP response (verified via direct `curl`, no JS execution) — zero-JS-execution AI crawlers see complete content on every page. `/llms.txt` now exists and is accurate. `canonical` tags and `sitemap.xml` already point at the eventual production domain, not `localhost`. The only deductions: (a) `robots.txt` is still a hardcoded blanket `Disallow: /` with no environment branching and no AI-crawler-specific rules staged for launch day — factual note only, not scored as a defect per this audit's explicit scope (see below); (b) no `Sitemap:` line in `robots.txt` yet. |
 
-**Weighted total: 56/100.**
+**Weighted total: 68/100.**
+
+*Note on scoring philosophy: the robots.txt blanket block and `noindex,nofollow` are treated as a correct, deliberate, temporary pre-launch decision per explicit client instruction (no production domain yet, no bots wanted yet) — this audit does not recommend removing that block or adding an AI-crawler allowlist as an action item this pass, and does not penalize the Technical Accessibility score for the block itself. The score instead reflects the underlying content/technical readiness that will matter the moment that gate is lifted.*
 
 ---
 
-## 1. AI Crawler Access Status — currently BLOCKED (expected pre-launch)
+## 1. AI Crawler Access Status — currently BLOCKED (deliberate, unchanged)
 
-`robots.txt` (from `app/robots.ts`, hardcoded, no environment gating):
 ```
 User-Agent: *
 Disallow: /
 ```
 
-| Crawler | Purpose | Current status | Recommended at launch |
-|---|---|---|---|
-| GPTBot | ChatGPT training/browsing | Blocked | **Allow** |
-| OAI-SearchBot | ChatGPT search citations | Blocked | **Allow** |
-| ClaudeBot | Claude/Anthropic search & training | Blocked | **Allow** |
-| PerplexityBot | Perplexity search citations | Blocked | **Allow** |
-| Google-Extended | Google AI Overviews/Gemini grounding | Blocked | **Allow** |
-| Googlebot / Bingbot | Classic index (feeds AIO/Copilot) | Blocked | **Allow** |
-| CCBot | Common Crawl (training corpus) | Blocked | Optional — allow if broad AI-training visibility is desired, block if not |
-| anthropic-ai | Legacy Anthropic training crawler | Blocked | Optional block (training-only, distinct from ClaudeBot's search use) |
-| cohere-ai | Cohere training crawler | Blocked | Optional block (training-only) |
+Confirmed unchanged from the prior audit: no environment branching, no per-crawler rules, no `Sitemap:` line. This is expected and correct for this stage per explicit client instruction — **not flagged as an action item this pass.** Recorded here only for completeness/tracking, exactly as the prior audit did:
 
-**Info (not a defect):** `robots.txt` currently has zero environment branching (`app/robots.ts` is a static `disallow: "/"` — same file the technical audit also flags for the meta-robots-tag launch gate). Recommend gating both robots.txt rules and the `noindex,nofollow` meta tag off a single `VERCEL_ENV === "production"` check so nothing has to be remembered/edited by hand on launch day.
+| Crawler | Purpose | Current status |
+|---|---|---|
+| GPTBot | ChatGPT training/browsing | Blocked (intentional) |
+| OAI-SearchBot | ChatGPT search citations | Blocked (intentional) |
+| ClaudeBot | Claude/Anthropic search & training | Blocked (intentional) |
+| PerplexityBot | Perplexity search citations | Blocked (intentional) |
+| Googlebot / Bingbot | Classic index (feeds AIO/Copilot) | Blocked (intentional) |
+| CCBot / anthropic-ai / cohere-ai | Training-only crawlers | Blocked (intentional) |
 
-**High — recommended production `robots.txt`:**
-```
-User-agent: GPTBot
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: *
-Allow: /
-
-Sitemap: https://www.shivalikgangaadventure.com/sitemap.xml
-```
-(`technical.md` already flags the missing `Sitemap:` line as a separate Medium finding — folding it into this recommended file covers both issues in one fix.)
+`GET /llms.txt` → `200`, correctly formed, reflects the current 5-package catalog (see verification table above). It will remain unreachable to real crawlers until the blanket `Disallow: /` is lifted, which is expected and by design.
 
 ---
 
-## 2. Passage-Level Citability — the core GEO finding of this audit
+## 2. Passage-Level Citability
 
-The underlying prose is genuinely good for AI citation (short, direct-answer paragraphs; a dedicated Grade-explainer blog post that already reads like a comparison guide). But three separate, concrete rendering/layout patterns strip real facts out of the text that boilerplate-stripping pipelines (trafilatura here, and functionally similar extraction used by ChatGPT/Perplexity-style web-browsing tools) actually deliver to an LLM. All three were confirmed by diffing raw HTML against `extracted_text` from `render_page.py`.
+### 2a. RESOLVED — FAQ answers now fully present in DOM/extracted text (was Critical)
+All 5 FAQ answers per package page (25 total across the 5 packages) are present in the raw HTML at all times and survive `trafilatura` extraction. Example, `/packages/brahmpuri-to-nim-beach` extracted text includes all 5 answers in full: safety, swimming, what-to-wear, weather/rain policy, and hotel pickup. Same pattern confirmed on Club House, Shivpuri, Marine Drive, and Kaudiyala. The FAQ block also still has full `FAQPage` JSON-LD, so both schema-literate and plain-text-extraction crawlers now get complete answers. Blog-post FAQ sections (all 3 posts now have a "Frequently Asked Questions" H2) are static, non-accordion text and were never affected by this issue.
 
-### 2a. Critical — FAQ answers are absent from extractable/rendered text for 2 of every 3 questions
-Every package detail page (`/packages/{slug}`) renders an accordion FAQ. Inspecting the DOM directly:
-- The **first** (open, `aria-expanded="true"`) question has its `<p>` answer present in the DOM.
-- The **second and third** (closed, `aria-expanded="false"`) questions have **no answer element in the DOM at all** — the answer text only exists as React state that gets inserted on click, not as CSS-hidden markup. A non-JS-executing crawler, or any extraction pipeline that reads the rendered/static DOM (which is what most AI browsing tools do), sees only 1 of 3 answers per package.
-- Confirmed on `/packages/brahmpuri-to-rishikesh`: `extracted_text` contains only "Is this route safe for beginners?" + its answer; "Do I need to know how to swim?" and "What should I wear?" have questions visible but zero answer text in either the raw HTML or the trafilatura extraction.
-- **The good news:** the full Q&A text for all 3 questions *is* present in the page's `FAQPage` JSON-LD (confirmed — see `schema.md` for the schema-validity read on this same block). So schema-literate crawlers (Google, and likely Bing/Copilot) get the full answers; but crawlers/pipelines that rely on rendered visible text rather than parsing JSON-LD — which is a common simplification in many AI web-browsing tools — will only ever see one-third of the FAQ content per package, across all 6 packages (18 total FAQ answers written, only 6 visible in plain rendered text).
-- **Fix:** render all FAQ answers into the DOM at all times (e.g., a native `<details>/<summary>` element, or keep the `<p>` mounted and toggle visibility with `max-height`/`hidden` CSS rather than conditional JSX rendering). This preserves the current accordion UX while making 100% of the answer text crawlable without relying solely on JSON-LD.
+### 2b. RESOLVED — price now in extractable prose on all 5 package pages (was High)
+Confirmed via `grep`/`trafilatura` extraction: every package page's main content includes one sentence stating price in ₹, matching the sidebar and the `Offer` JSON-LD. No more reliance on sidebar-only or schema-only price data.
 
-### 2b. High — price is missing from extractable text on all 6 package detail pages
-Each package detail page shows price prominently in a sidebar (`<aside>`, e.g. "₹599 / person, was ₹799"). Confirmed: **zero occurrences of "₹" or "599" in the trafilatura `extracted_text`** for `/packages/brahmpuri-to-rishikesh` (and the pattern is structurally identical across all 6 pages — same `<aside>` component). Boilerplate-stripping algorithms commonly deprioritize sidebar/aside content as non-main, so "how much does rafting cost at Brahmpuri" — a highly probable AI-search query — has no answer in the part of the page most extraction pipelines treat as the article body, even though a human sees it immediately.
-- Related: `schema.md` already flags the absence of `TouristTrip`/`Offer` structured data for price on these same pages as a Critical schema gap. Combined, this means **price currently has no reliable machine-readable home anywhere on the package detail pages** — not in extractable prose, not in schema.
-- **Fix (content-level, independent of the schema.md JSON-LD fix):** state the price once in the main content flow too, e.g. add a sentence to the itinerary/description block ("This route runs ₹599 per person at the current rate…") so it survives boilerplate extraction even before/without the `Offer` schema fix landing.
+### 2c. RESOLVED — `/packages` comparison table (was High)
+Real `<table>` with 6 columns × 5 rows, confirmed via raw-HTML tag inspection (`<table>`, 12 `<th>`, 25 `<td>`) and via `trafilatura`, which extracts it as a clean markdown table with all 5 packages intact — directly serving the "compare Ganga rafting packages" / "which rafting route is best for beginners" class of AI query this audit's brief calls out.
 
-### 2c. High — package comparison facts collapse to 1-of-6 under text extraction on `/packages`
-The `/packages` listing page displays all 6 packages as cards, each showing distance/duration/grade/price (e.g. "16 KM · 3 Hours · Grade III" for Shivpuri). Confirmed via raw-HTML grep that all 6 cards' grade/duration/distance data exists in the HTML source. But in `trafilatura`'s `extracted_text`, **only the first card's facts (Brahmpuri: ₹799→₹599, 9 KM, 2 Hours, Grade II) survive** — the other five cards' grade/duration/distance/price are dropped, most likely because the repeated-card DOM pattern gets heuristically treated as a nav/list boilerplate block after the first instance. This directly undermines the exact use case named in this audit's brief: an AI answering "which rafting route is best for beginners in Rishikesh" or "compare Ganga rafting packages" needs all 6 packages' grade/distance/duration/price in one extractable block, and currently only gets one.
-- **Fix:** add a genuine `<table>` (or a text-only comparison block outside the repeated card components) listing all 6 packages side-by-side — grade, distance, duration, price, "best for" — somewhere in the main content flow of `/packages`. Semantic tables survive boilerplate-stripping far more reliably than repeated `<div>`/card grids. Real data to seed this table (compiled from the 6 detail pages during this audit):
+### 2d. New — About page stat counter contradicts the rest of the site (Medium, new finding this pass)
+`/about`'s "Numbers That Speak for Themselves" section shows **"8 Rafting Routes"** in the raw HTML (`<span class="font-heading text-4xl font-bold sm:text-5xl">8</span>` next to a "Rafting Routes" label), while home, `/packages`, and `/destinations` all consistently and correctly say **"5 routes."** This is a genuine internal-consistency problem for AI citation: an answer engine that samples from `/about` could confidently state "Shivalik Ganga Adventure runs 8 rafting routes," directly contradicting the actual 5-package catalog. **Fix:** update or remove the stale "8" (likely leftover from an earlier catalog revision) to match the current 5-package count.
 
-| Package | Distance | Duration | Grade | Best for |
-|---|---|---|---|---|
-| Brahmpuri to Rishikesh | 9 km | 2 hours | Grade II | First-timers, families, children (8+) |
-| Shivpuri to Rishikesh | 16 km | 3 hours | Grade III | Signature/most-booked, fit first-timers |
-| Marine Drive to Rishikesh | 12 km | 2.5 hours | Grade III | Rapids + cliff jumping/body surfing |
-| Kaudiyala to Rishikesh | 26 km | Full day | Grade III+ | Experienced/confident rafters |
-| Camping + Rafting Combo | 16 km | 1 night / 2 days | All grades | Groups, overnight trips |
-| Kaudiyala to Shivpuri Extreme | 36 km | Full day | Grade IV | Experienced, fit thrill-seekers |
+### 2e. Still open — Grade II vs Grade IV blog post remains under-linked (Low, carried over)
+Still the strongest existing GEO asset (799 words, decision-framework structure, now correctly named-package-mapped to the 5-package catalog) but still only reachable via `/blog` — zero internal links to it from `/packages` or any package-page FAQ. Recommend cross-linking, as flagged previously.
 
-  (Note: per-route price beyond Brahmpuri's ₹599/₹799 was not independently re-verified in this pass beyond what trafilatura could extract — confirm current pricing for all 6 routes against the live pricing source before publishing a comparison table.)
-
-### 2d. Medium — the Grade II vs. Grade IV blog post is your best existing GEO asset; it isn't structured as a table
-`/blog/grade-ii-vs-grade-iv-rapids-explained` already reads like a ready-made answer to "which rafting grade should I book in Rishikesh" — it names all 6 packages by grade tier in prose, with a clear decision framework at the end ("First time rafting… Start at Grade II" / "Want a real adventure… Grade III" / "Experienced… Grade III+ to IV"). This is exactly the kind of self-contained, extractable answer block AI Overviews/ChatGPT/Perplexity look for. Recommend: (1) reformat the grade-to-package mapping as a small table for even cleaner extraction, (2) cross-link it from `/packages` and each package detail page's FAQ (currently it's only reachable via `/blog`), since AI crawlers weight internal linking as a relevance signal.
-
-### 2e. Low — blog posts are thin (230–270 words total), under the ideal single-passage citation range
-Word counts confirmed via `extracted_text`: `best-time-for-rafting-rishikesh` = 270 words, `grade-ii-vs-grade-iv-rapids-explained` = 254 words, `what-to-pack-rafting-trip` = 231 words. Individual paragraphs are appropriately short (16–51 words each) — good for direct-answer extraction — but the *articles* as a whole are too thin to support citation across multiple distinct queries or to build strong topical depth. Recommend expanding each to 600–900+ words by adding specifics AI answer engines favor: named rapids with water-flow context, actual seasonal temperature/water-level data, and a short FAQ block per post (mirroring the pattern already used well on package pages).
+### 2f. Blog word count — resolved (was Low)
+Prior audit flagged 230–270-word blog posts as too thin. Now confirmed: `best-time-for-rafting-rishikesh` = 782 words, `grade-ii-vs-grade-iv-rapids-explained` = 799 words, `what-to-pack-rafting-trip` = 684 words — all now well past the thin-content threshold, with short direct-answer paragraphs preserved throughout.
 
 ---
 
 ## 3. `llms.txt` and Licensing
 
-- `GET /llms.txt` → **404** (confirmed). No `llms.txt` exists.
-- No RSL 1.0 (`<link rel="license">` / RSL manifest) found on any sampled page.
-- **Recommendation (Medium priority, pre-launch):** Add `/llms.txt` at the production domain once live. `llms.txt` has no formal adoption commitment from major AI labs yet, but costs almost nothing to add and several crawlers (Perplexity, some ChatGPT plugins/connectors) do check for it. Suggested starting content:
-
-```markdown
-# Shivalik Ganga Adventure
-
-> White-water river rafting, camping, and adventure sports on the Ganga
-> in Rishikesh, Uttarakhand, India. Six rafting routes from Grade II
-> (beginner) to Grade IV (extreme), certified guides, safety-first
-> equipment.
-
-## Key pages
-- [Packages](https://www.shivalikgangaadventure.com/packages): All 6 rafting routes with grade, distance, duration, price
-- [Grade II vs Grade IV rapids explained](https://www.shivalikgangaadventure.com/blog/grade-ii-vs-grade-iv-rapids-explained): Which grade/route to book by experience level
-- [Best time for rafting in Rishikesh](https://www.shivalikgangaadventure.com/blog/best-time-for-rafting-rishikesh): Seasonal guide
-- [About / Safety](https://www.shivalikgangaadventure.com/about): Safety guidelines, certified guides, equipment inspection
-- [Contact / Book](https://www.shivalikgangaadventure.com/contact): NAP, WhatsApp booking
-
-## Notes for AI assistants
-- Business name: Shivalik Ganga Adventure (always attribute by this full name, not "Shivalik Adventures" or "Ganga Rafting Co.")
-- Location: Shivpuri, Rishikesh - Badrinath Highway, Rishikesh, Uttarakhand 249192, India
-- Do not fabricate pricing, safety-certification claims, or review counts not present on the cited page.
-```
-- Do not treat `llms.txt` as a substitute for fixing the extraction/citability issues in §2 — it is a discovery aid, not a content-quality fix.
+- `GET /llms.txt` → `200`. Content correctly reflects the 5-package "to Nim Beach" catalog — see verification table above. No stale references to the old 6-package/"to Rishikesh" catalog anywhere in it.
+- No RSL 1.0 licensing markers found on any sampled page (unchanged from prior audit; low priority, no formal adoption yet across major AI labs).
 
 ---
 
 ## 4. Brand Entity Clarity
 
-- **Consistent naming — good.** "Shivalik Ganga Adventure" is used identically in `<title>`, meta description, `SportsActivityLocation.name`, footer, `/about`, `/contact`, and body copy across all 18 pages (single source of truth via `constants/config.ts`, per `local.md`). No shortened/abbreviated variants ("SGA", "Shivalik Adventures") found anywhere that could fragment entity recognition — this is a genuine strength for LLM attribution.
-- **`sameAs` entity graph is present but thin.** `SportsActivityLocation.sameAs` currently lists Facebook, Instagram, Twitter/X, and YouTube. Per this audit's brand-mention correlation framework, YouTube presence carries the single strongest correlation (~0.737) with AI-citation likelihood — good that it's already wired in, but:
-  - **No LinkedIn** — recommend adding a company LinkedIn page pre-launch; low effort, reinforces business-entity legitimacy for B2B/press-style AI queries.
-  - **No Wikipedia/Wikidata entity** — expected for a business at this stage (Wikipedia notability bar is high); not a launch blocker, but worth revisiting once the operator has enough independent press/citation coverage to qualify.
-  - **No Reddit presence detected** (not independently verifiable pre-launch since the business isn't discoverable yet) — Reddit correlates highly with AI citation per the framework; recommend a light-touch, non-spammy presence (e.g., genuine answers in r/Rishikesh, r/IndiaTravel, r/whitewater once real trips are running) rather than a hard requirement for launch.
-  - Per `local.md`: Twitter/X is referenced in `sameAs` but not linked anywhere in the visible footer UI — fix so schema and UI agree (either link it visibly or drop it from `sameAs` until it is).
-- **No Google Business Profile link yet** (can't exist pre-launch — see `local.md` for the full GBP action plan). GBP is a first-party entity signal Google's AI Overviews draw on directly; this is the single highest-leverage brand-entity action once the domain is live.
+- **Consistent naming — still good.** "Shivalik Ganga Adventure" used identically across `<title>`, meta description, schema `name` fields, footer, and body copy on all 17 pages. No abbreviated variants found.
+- **New authority win: named certifying body + registration number.** `/about` now states registration with the Uttarakhand Tourism Development Board (reg. no. UK/ADV-TOURISM/2026/00147), a named guide-certification programme (Uttarakhand River Rafting Guide Certification Programme), and per-person accident insurance — genuine, specific, citable authority signals that were flagged as missing in the prior audit.
+- **New authority win: visible, named blog byline.** Each blog post now displays "Written by Arjun Rawat, Lead Rafting Guide, 12 years on the Ganga" directly in the rendered DOM (not just in `BlogPosting` JSON-LD's `author` field, though it matches there too) — a real E-E-A-T signal.
+- **`sameAs` entity graph unchanged and still thin.** Facebook, Instagram, Twitter/X, YouTube present; still no LinkedIn, Wikipedia/Wikidata, or Reddit presence. Per this audit's brand-mention correlation framework, YouTube (~0.737 correlation, strongest) is already wired in — good — but the graph hasn't grown since the prior pass.
+- **New internal-consistency issue (see §2d):** the "8 Rafting Routes" stat contradicts the "5 routes" stated everywhere else, which is itself an authority/trust ding independent of its citability impact.
+- **No Google Business Profile yet** (expected pre-launch, tracked in `local.md`).
 
 ---
 
 ## 5. Technical Accessibility for AI Crawlers
 
-- **SSR/prerendered confirmed sitewide.** `render_page.py --mode auto` returned `is_spa: false` and `mode_used: raw` (i.e., Playwright never needed to fire — full content was present in the pre-JS server response) on all 18 pages tested. Zero-JS-execution crawlers (which describes most current AI crawler implementations, including GPTBot and PerplexityBot) will see complete body text, headings, and JSON-LD without any rendering step. This is the single strongest technical foundation this audit found.
-- No console errors, no client-side content gating, no infinite-scroll/lazy-hydration patterns that would hide content from a non-JS fetch.
-- The one caveat to "fully visible to non-JS crawlers" is §2a above — the FAQ answers are a content-level exception to an otherwise clean SSR story, not a rendering-mode problem.
-- `sitemap.xml` and every page's `<link rel="canonical">` already point at the production domain (`https://www.shivalikgangaadventure.com`), not the `.vercel.app` preview host — correct forward-looking configuration, confirmed via `technical.md` and independently re-confirmed here.
+- **SSR confirmed sitewide, re-verified this pass.** Direct `curl` GET (no JS execution) against all 17 sitemap URLs returned full body text, headings, and JSON-LD in the raw HTTP response for every page — zero-JS-execution crawlers see complete content everywhere, including the FAQ fix in §2a.
+- `canonical` tags and `sitemap.xml` entries already point at the eventual production domain (`https://www.shivalikgangaadventure.com`), not `localhost`.
+- `meta name="robots" content="noindex, nofollow"` confirmed present sitewide (spot-checked home; consistent with the intentional pre-launch block).
+- No `Sitemap:` line in `robots.txt` yet (minor, unchanged from prior audit — will matter once the block is lifted, not urgent now).
 
 ---
 
 ## 6. Platform-Specific Readiness (projected — no live citation data available pre-launch)
 
-No DataForSEO MCP tools were available in this session, and the site is not yet indexable, so nothing below is a measured citation rate — these are qualitative readiness estimates based on how each platform's known citation mechanics interact with the findings above.
+Qualitative estimates only; no DataForSEO MCP tools were available and the site is not indexable yet.
 
 | Platform | Projected readiness | Why |
 |---|---|---|
-| Google AI Overviews | ~60/100 | Strong SSR + broad JSON-LD footprint (`schema.md`) plays to Google's strengths; but AIO also blends in passage-ranked snippets from rendered text, where the FAQ/price/comparison-table gaps (§2) will hurt. |
-| ChatGPT (search/browsing) | ~50/100 | OAI-SearchBot-style browsing tends to rely on readability-style text extraction similar to trafilatura — this is the platform most directly exposed to the §2a/§2b/§2c extraction gaps. |
-| Perplexity | ~55/100 | Similar extraction-dependence to ChatGPT, but Perplexity has historically been stronger at picking up FAQ/list-structured content and may lean on JSON-LD more; the Grade II vs IV blog post (§2d) is a good fit for Perplexity's comparison-style answers. |
-| Bing Copilot | ~55/100 | Bing has historically respected schema.org markup closely and IndexNow submission (not yet implemented — see `technical.md` §9) would accelerate discovery once live; otherwise similar exposure to the extraction gaps as Google. |
+| Google AI Overviews | ~72/100 | Strong SSR + broad JSON-LD footprint plays to Google's strengths; the FAQ/price/table fixes close the biggest passage-ranking gaps from the prior pass. |
+| ChatGPT (search/browsing) | ~68/100 | Most directly exposed to plain-text-extraction quality, so benefits the most from the §2a/2b/2c fixes; the §2d stat inconsistency is the platform's main remaining risk (fabrication-adjacent citation of a wrong number). |
+| Perplexity | ~65/100 | Similar extraction-dependence to ChatGPT; the Grade II vs IV blog post and the new `/packages` table are a strong fit for Perplexity's comparison-style answers. |
+| Bing Copilot | ~65/100 | Historically strong on schema.org markup, which this site now has more of (`Offer`, named `author`); otherwise similar exposure to remaining gaps as Google. |
 
 ---
 
 ## Prioritized Findings
 
 ### Critical
-- None specific to GEO beyond the sitewide `Disallow: /` + `noindex,nofollow` launch gate already tracked as the top action item in `technical.md` and `local.md` — not re-listed here to avoid triplicate tracking, but it is the precondition for every other item in this report to matter.
+- None. All three previously-Critical/High passage-extraction issues (§2a FAQ, §2b price, §2c table) are confirmed fixed this pass.
 
 ### High
-1. **FAQ accordion answers missing from rendered DOM/extracted text for 2 of 3 questions per package (§2a).** 18 of 24 total FAQ answers across the 6 package pages are invisible to any crawler that reads rendered visible text rather than parsing JSON-LD. Fix: render all answers into the DOM (native `<details>`/CSS-toggle instead of conditional JSX).
-2. **Price is absent from extractable body text on all 6 package detail pages (§2b).** Combine with the `schema.md` `Offer`/`TouristTrip` fix, and additionally state price once in main-content prose so it survives boilerplate-stripping even before the schema fix ships.
-3. **Only 1 of 6 packages' grade/distance/duration/price survives text extraction on the `/packages` listing page (§2c).** Add a real `<table>` comparison block (data supplied in §2c) — this is the single highest-leverage fix for the "which rafting route is best for beginners" class of AI query named in this audit's brief.
+- None outstanding at High severity this pass — the prior audit's three High-priority items are resolved.
 
 ### Medium
-1. **No `llms.txt`.** Add at production launch using the template in §3.
-2. **No AI-crawler-specific `robots.txt` allowlist.** Current file is a blanket `Disallow: /` (expected pre-launch) with no environment gating and no per-crawler rules queued up for launch day. Ship the recommended file in §1.
-3. **Blog posts are thin (230–270 words each) relative to their citation potential (§2e).** Expand to 600–900+ words per post with more specific, sourced detail.
-4. **`sameAs` entity graph missing LinkedIn; Twitter/X inconsistency between schema and visible UI (§4)** — also flagged in `local.md`, included here for GEO entity-graph completeness.
+1. **`/about`'s "8 Rafting Routes" stat contradicts the site's own "5 routes" messaging everywhere else (§2d, new this pass).** Fix the stale number — a factual self-contradiction is a real risk for AI citation accuracy and looks like leftover data from the old 6-package catalog.
+2. **Grade II vs Grade IV blog post remains under-linked** — still only reachable via `/blog`; cross-link from `/packages` and package-page FAQs (carried over, unresolved).
+3. **No `Sitemap:` line in `robots.txt`** — low-effort, stage it for the launch-day robots.txt update (carried over).
 
 ### Low
-1. **Blog H2s are mostly declarative, not question-based**, except "So Which Grade Should You Book?" — reformatting 1–2 more headings per post as questions (e.g., "When Is the Best Time to Raft in Rishikesh?") would align better with AI Overview-style query matching.
-2. **Gallery image `alt` text is generic and non-descriptive** ("rafting moment 1", "rafting video clip 3") rather than naming the specific rapid/route/location shown — a missed multimodal-citability opportunity distinct from the "4 images missing alt entirely" finding already in `technical.md`.
-3. **Grade II vs Grade IV blog post is under-linked** — only reachable via `/blog`; cross-link from `/packages` and package-page FAQs.
+1. **Gallery/testimonial-carousel image `alt` text is still generic** ("rafting moment," "rafting video clip 3") even though home-page hero/package-card alt text was upgraded to be descriptive and location-specific — an inconsistent fix, worth finishing.
+2. **4 images sitewide have empty `alt=""`** (2 on home, 2 on package pages) — spot-check and fill in.
+3. **Blog H2s remain mostly declarative, not question-based** — reformatting 1–2 headings per post (e.g., "When Is the Best Time to Raft in Rishikesh?") would align better with AI Overview-style query matching (carried over, unresolved).
+4. **`sameAs` entity graph still missing LinkedIn** (carried over, unresolved).
 
 ### Info
-- Testimonials/reviews are placeholder content pending client sign-off (per project memory) — already tracked in depth in `local.md`/`schema.md`; noted here only because `AggregateRating`/`Review` schema is also a GEO authority signal, not just a local-SEO one. Do not add review schema until testimonial authenticity is confirmed.
-- All stock Unsplash photography is expected placeholder pre-signoff; flagged for real trip photography before launch, which will also improve multimodal citability once descriptive alt text is added against real, location-specific images.
-- Not independently checked in this pass: `/privacy` and `/terms` page content for AI-citability (low priority — these pages are unlikely AI-citation targets); live verification of the `sameAs` social profile URLs (can't resolve meaningfully pre-launch); DataForSEO live ChatGPT-visibility/mention-tracking tools (not available in this session).
+- Testimonials/reviews remain placeholder content pending client sign-off (per project memory); correctly still no `AggregateRating`/`Review` schema — do not add until testimonial authenticity is confirmed.
+- All photography is still stock Unsplash — expected placeholder pre-signoff; alt-text quality will matter more once real trip photography replaces it.
+- The robots.txt blanket block and `noindex,nofollow` are a deliberate, explicit client decision at this stage (no production domain, no bots wanted yet) — not treated as an action item or scored down this pass, consistent with the prior audit's approach.
+- Not independently re-checked this pass: `/privacy` and `/terms` content depth (low priority, unlikely AI-citation targets); live resolution of `sameAs` social URLs; DataForSEO live ChatGPT-visibility tools (unavailable in this session).
 
 ---
 
 ## Methodology Notes
 
-- All 18 pages rendered via `render_page.py --mode auto --json` (Playwright + trafilatura), confirming `is_spa: false` / `mode_used: raw` on every page — no JS execution was required to see full body content on any page tested.
-- Passage-extraction findings (§2) were derived by diffing raw HTML (`grep`-level fact-checking, e.g. confirming price/FAQ text exists in source) against `extracted_text` (trafilatura's boilerplate-stripped output) for the same page, per this skill's explicit guidance to score citability against `extracted_text`, not raw HTML.
-- JSON-LD parsed directly from raw HTML per page (`application/ld+json` blocks) to cross-check what's machine-readable vs. what's plain-text-extractable — this is the basis for distinguishing "schema has it" (§2a, confirmed FAQPage answers) from "plain text doesn't" (the actual GEO gap).
+- All 17 sitemap pages fetched via direct HTTP GET against `http://localhost:4100`. The repository's standard Playwright-based render tool (`render_page.py`) was attempted first but its SSRF/DNS-rebinding safety module hard-blocks `localhost` and loopback IPs by design (`url_safety.py`), so this pass used `curl` for raw HTML capture and ran the same underlying `trafilatura` (boilerplate extraction) and `htmldate` (publication-date extraction) Python libraries directly against the saved HTML, reproducing the render tool's `extracted_text` methodology without going through its network layer.
+- Passage-extraction findings (§2) were derived by diffing raw HTML against `trafilatura`'s boilerplate-stripped output for the same page, per this audit's standard practice of scoring citability against extracted/boilerplate-stripped text, not raw HTML alone.
+- JSON-LD parsed directly from raw HTML per page (`application/ld+json` blocks) to distinguish schema-only claims from plain-text-extractable content (e.g., confirming the blog byline is in both places, not just schema).
 - `robots.txt`, `/llms.txt`, and `/sitemap.xml` fetched directly via HTTP.
-- No DataForSEO MCP tools were available in this session — platform-specific scores in §6 are qualitative projections, not measured citation data.
+- No DataForSEO MCP tools were available in this session — §6 platform scores are qualitative projections, not measured citation data.

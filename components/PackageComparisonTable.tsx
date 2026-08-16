@@ -5,7 +5,7 @@ const BEST_FOR: Record<string, string> = {
   "brahmpuri-to-nim-beach": "First-timers, families, children (8+)",
   "club-house-to-nim-beach": "Beginners wanting a bit more current",
   "shivpuri-to-nim-beach": "Signature run, most popular",
-  "marine-drive-to-nim-beach": "Rapids plus optional cliff jumping",
+  "marine-drive-to-nim-beach": "Rapids plus calm pools to swim",
   "kaudiyala-to-nim-beach": "Experienced, fit thrill-seekers",
 };
 

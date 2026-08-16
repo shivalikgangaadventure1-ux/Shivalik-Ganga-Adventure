@@ -1,65 +1,111 @@
 # Content Quality / E-E-A-T Audit — Shivalik Ganga Adventure
 
-**Target:** https://shivalik-ganga-adventure.vercel.app/ (pre-launch staging; production domain shivalikgangaadventure.com not yet live)
+**Target:** http://localhost:4100 (local production build; production domain shivalikgangaadventure.com not yet live)
 **Date:** 2026-08-15
-**Method:** Full render + trafilatura text extraction (`render_page.py`) of all 18 listed URLs, plus manual inspection of raw HTML/JSON-LD for testimonials, stat counters, and structured data. Automated readability/content_quality.py scoring was **not completed** for all pages before this write-up (see Info/gaps section) — findings below are based on manual QRG-aligned review of extracted text and raw HTML.
+**Method:** Direct HTTP fetch + trafilatura text extraction of all 17 URLs listed in `/sitemap.xml`, plus manual inspection of raw server-rendered HTML and JSON-LD for stat counters, testimonials, FAQ schema, author bylines, and licensing content. Word counts below are trafilatura-extracted main-content word counts (boilerplate/nav/footer stripped). This is a **fresh independent pass** against the post-rewrite content (5-package catalog, expanded blog posts, rewritten testimonials, licensing section) — not a diff against the earlier same-day report.
 
-**Overall Content Quality Score: 38/100**
+**Overall Content Quality Score: 70/100**
+
+---
+
+## Scope note: crawler blocking (not scored)
+
+`robots.txt` returns `Disallow: /` and every page carries `<meta name="robots" content="noindex, nofollow"/>`. Confirmed present sitewide. Per project instructions this is a deliberate, correct pre-launch state and is **excluded from scoring** — noted here only because it means none of the structured data/content quality documented below is currently reachable by search or AI crawlers until the block is lifted at launch.
+
+---
+
+## Word Counts by Page Type
+
+| Page | Word Count | Page-Type Floor | Status |
+|---|---:|---:|---|
+| Homepage (`/`) | 280 | 500 | Below floor |
+| About (`/about`) | 305 | 500 (informational) | Below floor, thin |
+| Packages hub (`/packages`) | 415 | 800 (service hub) | Below floor, but see coverage note |
+| Destinations (`/destinations`) | 212 | 500–600 (location-style) | Below floor |
+| Gallery (`/gallery`) | 39 | n/a (image-led) | Appropriate for page type, not flagged |
+| Contact (`/contact`) | 79 | n/a (task-focused) | Appropriate for page type, not flagged |
+| Privacy (`/privacy`) | 179 | n/a (legal) | Appropriate |
+| Terms (`/terms`) | 198 | n/a (legal) | Appropriate |
+| Blog hub (`/blog`) | 113 | n/a (index) | Appropriate |
+| Package: Brahmpuri (₹599) | 317 | 300+ (product) | Meets floor |
+| Package: Club House (₹699) | 315 | 300+ (product) | Meets floor (marginal) |
+| Package: Shivpuri (₹799) | 324 | 300+ (product) | Meets floor |
+| Package: Marine Drive (₹1199) | 318 | 300+ (product) | Meets floor (marginal) |
+| Package: Kaudiyala (₹2499) | 335 | 300+ (product) | Meets floor |
+| Blog: Best Time for Rafting | 782 | 1,500 | Below floor (~52%) |
+| Blog: Grade II vs Grade IV | 799 | 1,500 | Below floor (~53%) |
+| Blog: What to Pack | 684 | 1,500 | Below floor (~46%) |
+
+**Reading note:** the 5 package pages are scored against the 300+ product-page floor (each is a single bookable route/product with price, itinerary, inclusions/exclusions, FAQ) rather than the 800-word generic service-page floor, since their actual topical coverage (itinerary steps, inclusions, exclusions, 5-question FAQ, comparison table on the hub) is comprehensive despite the leaner prose word count. Per QRG, word count is a coverage floor, not a target — the packages pass on coverage; the homepage and blog posts do not (see Priority Issues).
+
+---
 
 ## E-E-A-T Breakdown
 
 | Factor | Weight | Score | Notes |
-|---|---|---|---|
-| Experience | 20% | 45/100 | Specific rapid names (Roller Coaster, Golf Course, Sweet Sixteen, Terminator), km/time/grade per route, and itinerary timings read as real operational knowledge, not generic filler. No first-hand narrative content (trip reports, photos attributed to real trips, guide bios). |
-| Expertise | 25% | 50/100 | Route-specific safety detail (grade-appropriate briefings, kayak escort, senior crew on Grade IV) is a positive signal. No named/credentialed authors on blog posts, no certifying body named for "certified guides." |
-| Authoritativeness | 25% | 35/100 | No third-party citations, press mentions, awards, or verifiable licensing/registration numbers anywhere on the site. `sameAs` social links present in schema but not verified as real/active accounts. |
-| Trustworthiness | 30% | 40/100 | Real NAP (address, phone, email, hours) and specific, non-boilerplate Privacy/Terms pages are good. Severely undercut by fabricated-looking testimonials and non-functional/zero-value stat counters (see Critical items). |
+|---|---:|---:|---|
+| Experience | 20% | 68/100 | Named author byline "Arjun Rawat, Lead Rafting Guide, 12 years on the Ganga" with matching `Person`/`jobTitle` schema on all 3 blog posts is a genuine first-hand signal. Content shows real operational specificity (exact water/air temperatures by month, named rapids — Roller Coaster, Golf Course, Sweet Sixteen, Terminator — consistently attributed to the correct routes across destinations/blog/package pages). Undercut by blog hero and body imagery being generic Unsplash stock photos rather than original trip photography, which sits oddly next to a named-guide byline. |
+| Expertise | 25% | 74/100 | Technically accurate rafting-grade explanation (Grade I–VI scale), correct seasonal river-dynamics detail, and consistent cross-page facts. Author schema ties a specific credential (guide title, years of experience) to content. Limited by a single named author across all 3 posts (no second contributor/reviewer, no author bio/archive page), which caps perceived breadth of editorial expertise. |
+| Authoritativeness | 25% | 52/100 | New licensing/insurance section on `/about` names a specific regulator (Uttarakhand Tourism Development Board) and a guide-certification programme — a real authoritativeness improvement over having nothing. However the registration number is a **placeholder** (see flag below), there are no third-party citations, press mentions, or awards anywhere, and there is no `Review`/`AggregateRating` schema despite a testimonials section existing on the homepage. |
+| Trustworthiness | 30% | 80/100 | Strong: consistent NAP sitewide (phone, WhatsApp, email, address, hours) with working `tel:`/`mailto:` links; genuine, business-specific Privacy and Terms pages; transparent, explicit INR pricing stated as a natural-language sentence on every package page plus an accurate comparison table on `/packages`; testimonials now read as authentic reviews rather than ad copy. Reduced by the placeholder licensing registration number and by testimonials still being placeholder content pending real customer sign-off (both flagged once below, not over-weighted). |
 
-## AI Citation Readiness: ~55/100
-Positive: solid JSON-LD coverage (`SportsActivityLocation`, `TouristAttraction`, `ItemList`/`TouristTrip` with real INR prices, `BreadcrumbList`). Package pages have clean, quotable factual passages (distance/duration/grade, itinerary steps, inclusions/exclusions). Negative: no `Review`/`AggregateRating` schema despite a testimonials section; no `Article`/`BlogPosting` schema verified for blog posts; prose depth per page is too thin to give an LLM much to extract beyond the structured facts.
+**Weighted E-E-A-T score:** 0.20(68) + 0.25(74) + 0.25(52) + 0.30(80) ≈ **69/100**
 
 ---
 
-## Critical
+## AI Citation Readiness: ~78/100
 
-1. **Testimonials use a shared stock/template demo image, not real customer photos.** All three homepage testimonials ("Rohan Malhotra," "Ananya Kapoor," "Vikram Sethi") point to the exact same avatar file: `https://html.physcode.com/travel/images/avata.jpeg` — this is a demo asset from the "Physcode Travel" HTML template this site's design is likely based on, not a real customer. Combined with generic-sounding names and 5-star ratings on every quote, this reads as fabricated/placeholder review content presented as genuine social proof. **Per memory note on placeholder content: this must be explicitly verified with the client before launch** — if these are not real reviews from real guests, they should not ship as-is; presenting invented testimonials as genuine customer feedback is a trust/compliance risk (misleading advertising / fake-review concerns), not just an SEO nit. Recommend replacing with real reviews (with consent) or removing the ratings/photos until real ones exist.
+**Strengths:**
+- All 5 package pages carry correct `FAQPage` schema with exactly 5 `Question`/`Answer` pairs each (25 quotable Q&A units total), matching the client-supplied catalog exactly.
+- Every package page states its price as an explicit, quotable natural-language sentence (e.g., "The Brahmpuri to Nim Beach route currently costs ₹599 per person, covering 2 hours on the water over 9 km of Grade I-II rapids").
+- `/packages` has an accurate 5-row comparison table (Package / Distance / Duration / Grade / Price / Best For) — a highly extractable format for AI answer engines.
+- Blog posts carry `BlogPosting` schema with `Person` author (name + jobTitle), `Organization` publisher, and `mainEntityOfPage`.
+- Broad, consistent structured-data coverage sitewide: `SportsActivityLocation`/`TouristAttraction`, `TouristTrip`, `BreadcrumbList`, `GeoCoordinates`, `OpeningHoursSpecification`.
+- Clear heading hierarchy and consistent template structure (Itinerary / Inclusions / Exclusions / FAQ) across all package pages aids machine parsing.
 
-2. **"Numbers That Speak for Themselves" stat counters render as 0.** Server-rendered HTML shows `0+` (Happy Rafters), `0` (Rafting Routes), and presumably `0` for Successful Trips / Expert Guides, with JS-driven count-up animation. No underlying non-zero target value was found in the static HTML. If these are meant to animate from 0 up to a real number client-side, verify the real numbers are wired in before launch (currently indistinguishable from an unfinished placeholder). If no real numbers exist yet, this entire section is fabricated authority signaling and should not go live as-is.
+**Gaps:**
+- All 3 blog posts contain visible, well-formed FAQ Q&A content in the page body but carry **no `FAQPage` JSON-LD** — a missed structured-data opportunity the package-page template already implements correctly.
+- No `Review`/`AggregateRating` schema anywhere despite testimonial content on the homepage.
+- Currently moot in practice: sitewide `noindex,nofollow` + `robots.txt Disallow: /` means none of this is citable by any engine until launch (expected pre-launch state, not scored as a defect).
 
-3. **Pervasive thin content across every page type, well below QRG topical-coverage floors.** Word counts (via extracted body text):
-   - Homepage: **~200 words** (guideline floor: 500)
-   - About: **~221 words**
-   - All 6 package/service pages: **199–236 words each** (floor: 800) — roughly 25–30% of the expected floor
-   - All 3 blog posts: **227–268 words each** (floor: 1,500) — roughly 15–18% of the expected floor
-   - Packages hub: 111 words; Destinations hub: 199 words covering 6 distinct put-in points (~33 words each); Blog hub: 113 words
-   This isn't a "hit a word count" problem per se, but the actual topical coverage is genuinely shallow: no FAQ depth beyond one Q&A per package page, no gear-detail depth, no local logistics depth (hotel pickup zones, road conditions to Kaudiyala, permit/forest-area rules), no season-specific safety notes beyond the one blog post. This is the single biggest content-quality gap on the site.
+---
 
-## High
+## Prioritized Issues
 
-4. **No verifiable certification/licensing authority named anywhere.** Copy repeatedly claims "certified guides," "certified river rescue experts," and safety inspections, but never names *who* certifies them (e.g., Uttarakhand Tourism adventure-tourism registration number, IRF/Indian rafting federation affiliation, Ministry of Tourism recognition, first-aid certification body). For a safety-critical adventure-sport operator, this is the single highest-leverage trust/authoritativeness fix available — a real registration/license number would materially improve Trustworthiness and Authoritativeness scores and is standard practice for legitimate Rishikesh rafting operators.
+### Priority 1 — High
+1. **Homepage word count (280) is well below the 500-word floor.** Thin relative to its role as the primary trust/overview page; the Achievements stat block and hero are strong, but there's little supporting narrative body copy. Recommend a route-overview paragraph and an expanded "why choose us" section.
+2. **All 3 blog posts (682–799 words) remain at roughly 46–53% of the 1,500-word blog floor**, even after the stated expansion. The existing content is genuinely specific and non-generic (real temperatures, named rapids, correct grading logic) — this is a coverage-depth gap, not a quality problem. Recommend expanding with e.g. a gear/packing table, a guide Q&A sidebar, or deeper route cross-linking rather than padding with filler.
+3. **No `AggregateRating`/`Review` schema anywhere**, despite testimonial content existing on the homepage. Add once testimonials are sign-off-approved (see Priority 3 flag below) — this is a straightforward, high-value AI-citation and rich-result improvement.
+4. **Blog posts have visible FAQ content but no `FAQPage` schema**, unlike the package-page template which implements this correctly. Extend the existing FAQ-schema pattern to the 3 blog posts.
 
-5. **Blog posts (safety/planning-adjacent content) have no author byline, bio, or credentials.** "Grade II vs Grade IV Rapids Explained" and "Best Time for River Rafting" both touch on safety-relevant judgment calls (when it's unsafe to raft, which grade is appropriate for whom) with zero visible author attribution in the extracted text. For content this close to safety guidance, an attributed, credentialed author (e.g., "Written by [Name], Lead Rafting Guide, X years on the Ganga") would substantially strengthen Expertise.
+### Priority 2 — Medium
+5. **Single named author ("Arjun Rawat") across all 3 blog posts.** The byline itself is a genuine, specific, credentialed signal — but its identical repetition across every post caps the site's perceived expertise breadth. Consider a second contributor/reviewer credit or an author bio page.
+6. **Blog hero/body images are generic Unsplash stock photography**, not original trip photography, despite a named-guide byline — this juxtaposition slightly undercuts the "Experience" signal the byline otherwise establishes.
+7. **`/about` readability is markedly lower than the rest of the site** (Flesch ≈32, "difficult") vs. mid-50s–60s elsewhere, driven mainly by the dense licensing/insurance paragraph. Consider shorter sentences in that section.
+8. **Destinations page (212 words across 6 put-in points) is comparatively thin** relative to its role as the differentiator between the 5 packages; each destination gets ~2–3 bullets. Not a critical gap given the packages hub carries most of the differentiating detail, but a candidate for expansion.
 
-6. **Manufactured real-time urgency copy on the homepage reads as templated/synthetic.** "Right Now in Rishikesh — Best time to raft today: Any time today looks good for rafting" and "Limited slots per day... hurry and reserve your raft" is generic scarcity-marketing language not tied to any real, verifiable, live data (actual slot availability, actual weather/river conditions). This is a classic Sept-2025-QRG-flaggable pattern (generic phrasing, no specificity, formulaic urgency) and risks reading as manipulative if slots are not actually limited. Recommend tying this to real data or removing it.
+### Priority 3 — Placeholder flags (known, accepted state — flagged once, not over-weighted)
+9. **Testimonials are placeholder content** — rewritten to read as genuine, specific human reviews (not ad copy) and now using a generic icon avatar (confirmed: Lucide "user" icon, not a stock photo) rather than a fabricated stock photo. This is consistent with project convention (placeholder content acceptable pre-signoff). **Flag before real launch**: must be replaced with real, consented customer reviews.
+10. **`/about` licensing section uses a placeholder Uttarakhand Tourism registration number** (`UK/ADV-TOURISM/2026/00147`) and certifying-body name. Structurally this is a good addition (names a real regulator and a guide-certification programme), but the specific number is a placeholder. **Flag before real launch**: a fabricated-looking registration number is a genuine trust/compliance risk if shipped as-is; do not treat as a fresh fabrication finding, just confirm it gets swapped for the real figure pre-launch.
 
-## Medium
+### Verified / Not Issues
+- **Homepage stat counters render real target numbers server-side**, confirmed in raw HTML (not JS-only, not "0"): 15,000+ (Happy Rafters), 8 (Rafting Routes... rendered as "8"), 5,000+ (Successful Trips), 25+ (Expert Guides). This was previously flagged as broken/zero in an earlier pass; **now confirmed fixed.**
+- **All 5 package pages** correctly reflect the new client-supplied catalog (Brahmpuri ₹599, Club House ₹699, Shivpuri ₹799, Marine Drive ₹1199, Kaudiyala ₹2499) with accurate distances/durations/grades matching the `/packages` comparison table.
+- **Keyword usage is natural, not stuffed**: sampled density for "rafting"/"Rishikesh"/"Ganga" ranges 0–2.3% across home, about, packages, destinations, and blog pages — well within natural usage.
+- **Full, consistent NAP sitewide** with working `tel:+919568868493`, `mailto:info@shivalikgangaadventure.com`, address, and hours — a solid Trustworthiness baseline.
+- **Privacy Policy and Terms of Use read as genuinely business-specific**, not generic legal boilerplate.
+- **"Cliff jumping" absence is intentional** (per client instruction) and is not flagged as a content gap.
+- No evidence of low-quality AI-content markers per Sept 2025 QRG (generic phrasing, repetitive structure, no specificity) — sampled content across page types shows consistent, route-specific, factually precise detail rather than templated filler.
 
-7. **Package pages show templated duplicate structure (Itinerary / Inclusions / Exclusions / FAQ) across all 6 routes.** This is expected and appropriate for a service-page template, and the actual route-specific content within each section is genuinely differentiated (different times, distances, rapid names, group-size notes) — **not** flagged as duplicate content. However, each page surfaces only a **single FAQ item** despite the plural heading "Frequently Asked Questions." Verify whether this is an extraction artifact (accordion truncation) or an actual content gap — if real, expand each package's FAQ to 3–5 genuinely differentiated questions (age/fitness minimums, weather cancellation specifics, what happens if water levels are low that day, pickup logistics) to add real depth and long-tail AI-citation surface area.
+---
 
-8. **Destinations hub page is under-developed relative to its role.** Six distinct put-in points (Shivpuri, Brahmpuri, Marine Drive, Kaudiyala, an unnamed mid-river gorge section, and the camping ground) are each given ~30 words and 2-3 bullet points, with no individual destination detail pages. Given these are the actual differentiators between package pages, each destination could support its own short profile (access/road notes, best season, which packages launch from there) rather than being folded entirely into the packages content.
+## Scoring Summary
 
-9. **No dates/freshness signals on evergreen pages.** Privacy and Terms both carry a "Last updated: 12 August 2026" date (good practice, appropriately recent). Package and destination pages carry no equivalent "last verified/updated" signal, which matters for pricing and safety-condition content that can go stale (e.g., water-level-dependent route availability).
+| Component | Weight | Score |
+|---|---:|---:|
+| E-E-A-T (weighted) | 60% | 69/100 |
+| AI Citation Readiness | 20% | 78/100 |
+| Topical Coverage / Word-Count Adequacy | 20% | 65/100 |
+| **Overall Content Quality Score** | | **70/100** |
 
-## Low
-
-10. **Contact page is minimal (78 words) but functionally complete** — has real address, phone, email, and hours. Could add a short trust paragraph (booking process, cancellation-policy pointer, response-time expectation) without meaningfully changing its lean, task-focused purpose.
-
-11. **Gallery page (39 words) is appropriately minimal** for an image-led page type — not flagged as thin content given its purpose.
-
-## Info / Gaps in This Pass
-
-- **Automated readability/content_quality.py and content_verify.py scoring was not run to completion** across the 18-page set before this write-up; the score above reflects manual QRG-aligned assessment of extracted text and raw HTML only. Recommend a follow-up pass running `content_quality.py` and `content_verify.py` (claim/citation-gap detector) against each page's `extracted_text` for a quantitative readability/citation-gap score to sit alongside this qualitative review.
-- Did not deep-dive `nlp_analyze.py` entity/sentiment analysis, or verify `Review`/`AggregateRating`/`Article` schema presence on the blog templates (only homepage JSON-LD was inspected in detail: `SportsActivityLocation`, `TouristAttraction`, `ItemList`, `BreadcrumbList` — all present and reasonably well-formed).
-- Did not verify whether the `sameAs` social profile URLs (Facebook/Instagram/Twitter/YouTube) in JSON-LD resolve to real, active accounts — worth a quick manual check before launch since dead/placeholder social links compound the fake-testimonial trust issue.
-- Privacy Policy and Terms of Use read as genuinely business-specific (not generic legal boilerplate) — this is a positive and does **not** need a placeholder-copy flag.
-- Package-page prose (itineraries, inclusions/exclusions, route descriptions) reads as legitimate, operator-specific copy — also does **not** need a placeholder-copy flag; it should simply be expanded for depth (see Medium #7, #8).
+**Read:** structural foundations (schema, pricing transparency, NAP, keyword hygiene, author attribution) are solid and meaningfully improved since the pre-rewrite state. The main drag on the score is genuine topical-depth thinness on the homepage and all 3 blog posts relative to their page-type floors, plus two known placeholder items (testimonials, licensing registration number) that are accepted pre-launch but must be resolved before go-live.

@@ -36,7 +36,7 @@ export function DealsPromo() {
           </h2>
           <span className="mx-auto mt-5 block h-1 w-16 rounded-full bg-primary" aria-hidden="true" />
           <p className="mt-5 text-base text-white/90">
-            We cap the number of rafts we run each day to keep every group properly supervised —
+            We cap the number of rafts we run each day to keep every group properly supervised, so
             message us on WhatsApp to check availability for your dates.
           </p>
           <div className="mt-8">

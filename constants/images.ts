@@ -55,9 +55,4 @@ export const IMAGES = {
     blog: unsplash("1781427012162-8387c78f1dfb"),
     contact: unsplash("1691347869738-16222993cc3a"),
   },
-  blogCovers: [
-    unsplash("1606349779646-b6ca5df78bdf"),
-    unsplash("1641584495089-5914d85d9bcc"),
-    unsplash("1629248457649-b082812aea6c"),
-  ],
 } as const;

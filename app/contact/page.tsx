@@ -12,7 +12,7 @@ import { Testimonials } from "@/sections/Testimonials";
 export const metadata: Metadata = buildMetadata({
   title: "Contact & Book",
   description:
-    "Get in touch with Shivalik Ganga Adventure to book your rafting trip in Rishikesh — call or WhatsApp us directly for the fastest response.",
+    "Get in touch with Shivalik Ganga Adventure to book your rafting trip in Rishikesh. Call or WhatsApp us directly for the fastest response.",
   path: "/contact",
 });
 
@@ -46,7 +46,7 @@ export default function ContactPage() {
           <div>
             <h2 className="font-heading text-2xl font-bold text-heading">Get in Touch</h2>
             <p className="mt-3 text-sm leading-relaxed text-body">
-              The fastest way to book is a quick call or WhatsApp message — tell us your preferred
+              The fastest way to book is a quick call or WhatsApp message. Tell us your preferred
               date, group size, and package, and we&apos;ll confirm your slot right away.
             </p>
 

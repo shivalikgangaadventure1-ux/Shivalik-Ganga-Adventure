@@ -1,13 +1,13 @@
 # Sitemap Audit — Shivalik Ganga Adventure
 
-**Audited:** 2026-08-15
-**Source fetched:** https://shivalik-ganga-adventure.vercel.app/sitemap.xml (200 OK, `Content-Type: application/xml`)
-**Robots fetched:** https://shivalik-ganga-adventure.vercel.app/robots.txt (200 OK, `Content-Type: text/plain`)
-**Status:** Pre-launch Vercel preview. Production domain `https://www.shivalikgangaadventure.com` does not resolve yet. Audited under explicit authorization for pre-launch review.
+**Audited:** 2026-08-15 (fresh independent pass, supersedes prior 18-URL audit)
+**Source fetched:** http://localhost:4100/sitemap.xml (200 OK)
+**Robots fetched:** http://localhost:4100/robots.txt (200 OK)
+**Status:** Pre-launch local dev build. Production domain `https://www.shivalikgangaadventure.com` does not resolve yet; audited locally with production `<loc>` values verified by inspection/config, per the audit's explicit scope.
 
-## Score: 82 / 100
+## Score: 85 / 100
 
-Deducted mainly for: missing `Sitemap:` directive in robots.txt, deprecated `changefreq`/`priority` tags present, and identical `lastmod` timestamps across all URLs. No structural/critical defects — XML is valid and coverage is complete.
+Up from the prior audit's 82. Package catalog restructuring (6 → 5 real client-supplied routes) is clean — no leftover stale slugs, no duplicates, all reachable. Deductions remain for: missing `Sitemap:` directive in robots.txt, deprecated `changefreq`/`priority` tags still present, and identical build-time `lastmod` timestamps despite real per-page `updatedAt` data already existing in blog content that isn't being used.
 
 ---
 
@@ -15,19 +15,25 @@ Deducted mainly for: missing `Sitemap:` directive in robots.txt, deprecated `cha
 
 | Check | Result | Severity | Notes |
 |---|---|---|---|
-| XML well-formed | ✅ PASS | — | Parsed cleanly with `xml.etree.ElementTree`, valid `urlset` namespace (`sitemaps.org/schemas/sitemap/0.9`), no malformed tags |
-| URL count vs 50,000 limit | ✅ PASS | — | 18 URLs, far under limit; single sitemap file is appropriate, no index needed |
-| Duplicate `<loc>` entries | ✅ PASS | — | 0 duplicates found across 18 entries |
-| Crawl coverage (18 expected pages) | ✅ PASS | — | All 18 pages present: home, packages (index), 6 package detail pages, destinations, gallery, about, blog (index), 3 blog posts, contact, privacy, terms — see full list below |
-| Orphan/extra URLs (in sitemap but not in site structure) | ✅ PASS | — | No extras found |
-| Domain consistency (sitemap hostname vs serving host) | ⚠️ INFO — flag for cutover | Info | Sitemap correctly uses production domain `https://www.shivalikgangaadventure.com` (env-configured `NEXT_PUBLIC_SITE_URL` or equivalent) rather than the Vercel preview host. This is **expected and correct** for a pre-launch build — do not "fix" to match the preview URL. **Action required before/at DNS cutover:** re-verify all 18 URLs return 200 once `www.shivalikgangaadventure.com` is live, since none are currently reachable at that host. |
-| `Sitemap:` directive in robots.txt | ❌ FAIL | Medium | `robots.txt` contains only `User-Agent: *` / `Disallow: /` — no `Sitemap: https://www.shivalikgangaadventure.com/sitemap.xml` line. The `Disallow: /` is expected pre-launch and not flagged. But the missing `Sitemap:` reference is a real gap independent of launch status — add it now so it ships correctly at launch (easy to forget once `Disallow: /` is removed). |
-| `priority` tag present | ℹ️ INFO | Info | Present on all 18 URLs (1.0 / 0.8 / 0.6). Google has publicly stated it ignores this field. Not harmful, but adds no value — safe to remove for a leaner sitemap. Bing/other engines give it negligible weight too. |
-| `changefreq` tag present | ℹ️ INFO | Info | Present on all 18 URLs (`weekly`/`monthly`). Also ignored by Google. Safe to remove. |
-| `lastmod` accuracy | ⚠️ WARN | Low | All 18 URLs share the exact same timestamp (`2026-08-12T17:59:54.040Z`), indicating a single build-time/deploy-time stamp rather than actual per-page content modification dates. Not a functional defect, but it reduces the (already limited) signal value `lastmod` provides to crawlers for re-crawl prioritization. Recommend wiring `lastmod` to real content update dates (e.g., CMS/MDX frontmatter `updatedAt`, git file mtime, or DB `updated_at`) once dynamic content (blog posts, package pages) starts changing independently. |
-| Trailing slash / URL format consistency | ✅ PASS | — | All 18 URLs consistently omit trailing slashes; no mixed formats |
+| Sitemap reachable | PASS | — | `GET /sitemap.xml` → 200, `Content-Type: application/xml`, well-formed |
+| robots.txt reachable | PASS | — | `GET /robots.txt` → 200 |
+| XML well-formed | PASS | — | Parsed cleanly with `xml.dom.minidom`, valid `urlset` namespace (`sitemaps.org/schemas/sitemap/0.9`), no malformed tags |
+| URL count vs 50,000 limit | PASS | — | 17 URLs, far under limit; single sitemap file, no index needed |
+| URL count matches expected structure | PASS | — | 17/17: 9 static + 5 package pages (restructured from 6) + 3 blog posts, confirmed against `PACKAGES` (7-entry interface, 5 array items) in `constants/packages.ts` and `getAllPostSlugs()` sourcing 3 files in `content/blog/` |
+| No stale/leftover URLs from old 6-package catalog | PASS | — | Old slugs (`camping-rafting-combo`, `kaudiyala-to-shivpuri-extreme`, `brahmpuri-to-rishikesh`, etc., seen in prior audit) are gone; all 5 current package slugs follow the new `{start}-to-nim-beach` pattern consistently |
+| Duplicate `<loc>` entries | PASS | — | 0 duplicates across 17 entries |
+| Domain in `<loc>` (production vs localhost) | PASS | — | All 17 `<loc>` values correctly emit `https://www.shivalikgangaadventure.com/...` even though the sitemap was generated by hitting `localhost:4100` — confirmed correct. |
+| "env-var-driven" domain behavior | **CORRECTION** | Info | This is **not actually env-var-driven**. `app/sitemap.ts` imports `COMPANY.url` from `constants/config.ts`, which is a **hardcoded string literal** (`url: "https://www.shivalikgangaadventure.com"`), not `process.env.NEXT_PUBLIC_SITE_URL` or similar. No env var of that name exists anywhere in the repo. The output is correct today only because the constant happens to be hardcoded to production — there is no mechanism to point the sitemap at a staging/preview domain without editing source. Not a launch blocker (output is correct), but worth fixing expectations: if a staging deploy ever needs its own sitemap, this constant must be changed by hand or converted to a real env var. |
+| Crawl coverage (17 expected pages, all reachable) | PASS | — | Live-checked all 17 sitemap URLs against `localhost:4100`: every one returns HTTP 200 (home, `/packages`, `/destinations`, `/gallery`, `/about`, `/blog`, `/contact`, `/privacy`, `/terms`, 5 package pages, 3 blog posts) |
+| Orphan/extra URLs (in sitemap but not in site structure) | PASS | — | None found |
+| `Sitemap:` directive in robots.txt | FAIL | Medium | `robots.txt` is `User-Agent: *` / `Disallow: /` only — no `Sitemap: https://www.shivalikgangaadventure.com/sitemap.xml` line. Per the audit brief, `Disallow: /` is a deliberate pre-launch choice and is **not** flagged here. The missing `Sitemap:` line is a separate, independently fixable gap — Google and Bing both support discovering sitemaps via robots.txt regardless of disallow rules, and adding it now avoids it being forgotten later at cutover. |
+| Page-level noindex (consistency check) | INFO | — | Homepage also serves `<meta name="robots" content="noindex, nofollow">`, consistent double-protection with the `Disallow: /` pre-launch stance. Not flagged, informational only. |
+| `priority` tag present | INFO | Info | Present on all 17 URLs (1.0 / 0.8 / 0.6, set in `app/sitemap.ts` line 25). Google publicly ignores this field; Bing gives it negligible weight. Safe to remove for a leaner sitemap. |
+| `changefreq` tag present | INFO | Info | Present on all 17 URLs (`weekly`/`monthly`, `app/sitemap.ts` line 24). Also ignored by Google. Safe to remove. |
+| `lastmod` accuracy | WARN | Low | All 17 URLs share the exact request-time timestamp (`new Date()` called once per request in `app/sitemap.ts` line 23), not real per-page modification dates. **Actionable fix available:** blog post frontmatter in `content/blog/*.md` already has both `publishedAt` and `updatedAt` fields (e.g., `best-time-for-rafting-rishikesh.md` has `publishedAt: "2026-03-01"`, `updatedAt: "2026-08-15"`) that are currently ignored by the sitemap generator. Wire blog route `lastmod` to `updatedAt` from frontmatter; static/package routes can keep a build-time fallback until real per-page edit tracking exists. |
+| Trailing slash / URL format consistency | PASS | — | All 17 URLs consistently omit trailing slashes |
 
-### Full URL list (18/18)
+### Full URL list (17/17)
 
 ```
 https://www.shivalikgangaadventure.com
@@ -39,12 +45,11 @@ https://www.shivalikgangaadventure.com/blog
 https://www.shivalikgangaadventure.com/contact
 https://www.shivalikgangaadventure.com/privacy
 https://www.shivalikgangaadventure.com/terms
-https://www.shivalikgangaadventure.com/packages/brahmpuri-to-rishikesh
-https://www.shivalikgangaadventure.com/packages/shivpuri-to-rishikesh
-https://www.shivalikgangaadventure.com/packages/marine-drive-to-rishikesh
-https://www.shivalikgangaadventure.com/packages/kaudiyala-to-rishikesh
-https://www.shivalikgangaadventure.com/packages/camping-rafting-combo
-https://www.shivalikgangaadventure.com/packages/kaudiyala-to-shivpuri-extreme
+https://www.shivalikgangaadventure.com/packages/brahmpuri-to-nim-beach
+https://www.shivalikgangaadventure.com/packages/club-house-to-nim-beach
+https://www.shivalikgangaadventure.com/packages/shivpuri-to-nim-beach
+https://www.shivalikgangaadventure.com/packages/marine-drive-to-nim-beach
+https://www.shivalikgangaadventure.com/packages/kaudiyala-to-nim-beach
 https://www.shivalikgangaadventure.com/blog/best-time-for-rafting-rishikesh
 https://www.shivalikgangaadventure.com/blog/grade-ii-vs-grade-iv-rapids-explained
 https://www.shivalikgangaadventure.com/blog/what-to-pack-rafting-trip
@@ -52,38 +57,29 @@ https://www.shivalikgangaadventure.com/blog/what-to-pack-rafting-trip
 
 ---
 
-## Missing Pages (in expected crawl but not in sitemap)
-None. All 18 expected pages (per site structure provided) are present.
+## Missing Pages (in crawl but not in sitemap)
+None. All 17 expected pages are present and each returns 200 on localhost.
 
 ## Extra Pages (in sitemap but 404/redirected/not part of site)
-None found. (Cannot fully verify live 200 status of the 18 URLs against production domain since it does not resolve pre-launch — see domain-consistency flag above. Preview-host equivalents were not spot-checked individually since the sitemap intentionally does not reference the preview host.)
+None. All 17 sitemap URLs verified live against `localhost:4100` — 17/17 return HTTP 200. No 404s, no redirects, no noindexed pages leaking into the sitemap.
 
----
-
-## Should privacy/terms be in the sitemap?
-
-**Recommendation: Low priority, arguably excludable — but not wrong to include.**
-
-- Legal/policy pages (`/privacy`, `/terms`) carry no meaningful organic-search intent and are typically excluded from XML sitemaps at small sites to keep the sitemap focused on pages you actually want indexed and ranking.
-- They are not harmful to leave in — Google will not penalize their inclusion — but they add no SEO value and slightly dilute an already-tiny 18-URL sitemap's signal-to-noise ratio.
-- Since `priority`/`changefreq` are being recommended for removal anyway (Google ignores them), there's no "priority demotion" mechanism left to de-emphasize these pages within the sitemap itself — the only lever is inclusion/exclusion.
-- **Verdict:** Optional cleanup, not a defect. If keeping the sitemap generation fully automatic (e.g., auto-including every route) is simpler to maintain, leaving them in is fine. If manually curating, exclude them.
+## Package Catalog Restructuring — Change Verification
+Confirmed clean cutover from 6 → 5 package pages:
+- Old (removed) slugs from prior audit: `brahmpuri-to-rishikesh`, `shivpuri-to-rishikesh`, `marine-drive-to-rishikesh`, `kaudiyala-to-rishikesh`, `camping-rafting-combo`, `kaudiyala-to-shivpuri-extreme`
+- New (current) slugs, all following the consistent `{start-point}-to-nim-beach` pattern: `brahmpuri-to-nim-beach`, `club-house-to-nim-beach`, `shivpuri-to-nim-beach`, `marine-drive-to-nim-beach`, `kaudiyala-to-nim-beach`
+- Source: `constants/packages.ts` `PACKAGES` array is described in-code as "Real pricing/distance data supplied by the client (2026-08-15): 5 routes, all ending at Nim Beach" — matches sitemap output exactly. No stale references found anywhere in `app/sitemap.ts` or elsewhere.
 
 ## Location Page Quality Gate Check
-
-Not applicable. Site structure has 0 programmatic location/city pages (6 package pages are route-specific rafting stretches with presumably unique content — e.g., Brahmpuri to Rishikesh, Shivpuri to Rishikesh — not city-swapped doorway pages). Below the 30-page WARNING threshold by a wide margin. No action needed; re-check this gate if the site later adds per-destination or per-city landing pages at scale.
+Not applicable. 0 programmatic location/city pages. The 5 package pages are distinct rafting stretches with substantive unique content per page (unique `longDescription`, itinerary times, min age, group size, and 5 unique FAQs each — spot-checked all 5 entries in `constants/packages.ts`), not city-swapped doorway pages. Far below the 30-page WARNING threshold. Re-check this gate only if the site later adds per-destination/per-city landing pages at scale.
 
 ## Sitemap Index vs Single Sitemap
-Not needed. 18 URLs is far below the 50,000-URL-per-file limit and below any practical threshold (~a few hundred to low thousands) where a sitemap index becomes useful for crawl-budget segmentation. Flag for revisit only if the site scales into the hundreds/thousands of pages (e.g., many more blog posts, destinations, or package variants).
+Not needed. 17 URLs is far below the 50,000-URL-per-file limit and below any practical threshold where a sitemap index adds value.
 
-## Image Sitemap — Should one be added?
+## Should privacy/terms be in the sitemap?
+Low priority, optional cleanup — same verdict as prior audit. Not harmful to keep; carries no organic-search intent. If sitemap generation stays fully automatic (route-driven, as it currently is), leaving them in is the lower-maintenance choice.
 
-**Recommendation: Medium-value enhancement, not urgent pre-launch.**
-
-- This is a visual adventure-tourism business (rafting, gallery, package pages) where photos are a meaningful discovery surface (Google Images / Google Discover traffic for "Rishikesh rafting" type queries).
-- An `<image:image>` extension in the sitemap (or a dedicated image sitemap) referencing gallery, package, and destination photos would help Google index the higher-value images faster and more completely, especially for a new/pre-launch domain with no crawl history yet.
-- Not required for launch — standard sitemap + proper `<img alt>` text + reasonably crawlable image URLs (not lazy-loaded behind JS with no fallback) will get images indexed anyway, just possibly slower.
-- **Action:** Log as a post-launch backlog item, not a launch blocker.
+## Image Sitemap
+Medium-value, non-blocking enhancement (unchanged from prior audit). Gallery/package photos are a real discovery surface for this business; consider `<image:image>` entries post-launch, not required now.
 
 ---
 
@@ -94,10 +90,11 @@ Not needed. 18 URLs is far below the 50,000-URL-per-file limit and below any pra
 | Critical | 0 | — |
 | High | 0 | — |
 | Medium | 1 | Missing `Sitemap:` directive in robots.txt |
-| Low | 1 | Identical `lastmod` timestamps across all 18 URLs |
-| Info | 4 | `priority` tag present (removable); `changefreq` tag present (removable); domain-mismatch is expected but needs re-verification at DNS cutover; privacy/terms inclusion is optional cleanup |
+| Low | 1 | Identical build-time `lastmod` across all 17 URLs — real `updatedAt` data exists in blog frontmatter and is unused |
+| Info | 3 | `priority`/`changefreq` tags present (both ignored by Google, removable); `COMPANY.url` is a hardcoded constant, not actually env-var-driven (works correctly today, but no staging-domain flexibility); privacy/terms inclusion is optional cleanup |
 
 ## Pre-Launch / DNS Cutover Checklist (time-sensitive, non-scored)
-- [ ] Once `www.shivalikgangaadventure.com` resolves, re-fetch `/sitemap.xml` from the production host and confirm all 18 URLs return 200 (not 404/redirect)
-- [ ] Remove/update `robots.txt` `Disallow: /` and add `Sitemap: https://www.shivalikgangaadventure.com/sitemap.xml`
+- [ ] Once `www.shivalikgangaadventure.com` resolves, re-fetch `/sitemap.xml` from the production host and confirm all 17 URLs return 200
+- [ ] Remove/update `robots.txt` `Disallow: /` and add `Sitemap: https://www.shivalikgangaadventure.com/sitemap.xml` at the same time (don't ship the domain fix without also adding the sitemap line — currently missing regardless of disallow status)
+- [ ] Remove page-level `noindex, nofollow` meta tag alongside the robots.txt change
 - [ ] Submit sitemap in Google Search Console / Bing Webmaster Tools after cutover

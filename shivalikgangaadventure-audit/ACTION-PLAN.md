@@ -1,61 +1,48 @@
-# Action Plan — Shivalik Ganga Adventure SEO Audit
+# Action Plan — Shivalik Ganga Adventure SEO Re-Audit
 
-Priorities follow: **Critical** (blocks indexing/launch or is a real bug) → **High** (fix within 1 week) → **Medium** (fix within 1 month) → **Low** (backlog). The Launch Gate items are sequenced first regardless of severity label, since nothing else matters until the site is indexable.
-
----
-
-## Phase 0: Launch Gate (do before/at DNS cutover — not optional, not scored)
-
-- [ ] Remove `Disallow: /` from `robots.txt`; add `Sitemap: https://www.shivalikgangaadventure.com/sitemap.xml`; add AI-crawler allowlist (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended) — ready-to-ship file in `findings/geo.md §1`. *(technical.md, geo.md)*
-- [ ] Remove sitewide `<meta name="robots" content="noindex, nofollow">` (or set `index, follow`). Tie both this and the robots.txt rule to one `VERCEL_ENV === "production"` check. *(technical.md)*
-- [ ] Add `/llms.txt` — template in `findings/geo.md §3`. *(geo.md)*
-- [ ] Re-fetch `/sitemap.xml` from the live production host once DNS resolves and confirm all 18 URLs return 200. *(sitemap.md)*
-- [ ] Claim + verify Google Business Profile immediately at launch; use the site's `constants/config.ts` `COMPANY` object verbatim as the NAP source of truth; select the correct primary category (e.g. "River Rafting"). *(local.md)*
-- [ ] **Client decision required:** confirm whether the 3 homepage testimonials are real, consenting customers. If not, replace with real reviews or remove before public launch — do not ship fabricated reviews as genuine social proof. *(content.md, local.md, schema.md)*
-- [ ] **Client decision required:** confirm/populate the "Numbers That Speak for Themselves" stat counters (currently render as `0`/`0+` server-side) with real figures, or remove the section. *(content.md)*
-- [ ] Add government/tourism-board registration or license number + insurance coverage statement to `/about`. Material trust gap for a physical-risk adventure activity — competitors in this market commonly display this. *(local.md)*
+Priorities: **Critical** (blocks indexing/launch or a real bug) → **High** (fix within 1 week) → **Medium** (fix within 1 month) → **Low** (backlog). Items already resolved live during this re-audit are listed first for visibility, not as pending work.
 
 ---
 
-## Phase 1: Critical Fixes (Week 1)
+## Fixed Live During This Re-Audit (no action needed)
 
-- [ ] Fix `getBlogPostingSchema`'s malformed `image` field — guard against double-prefixing an already-absolute URL: `post.coverImage.startsWith("http") ? post.coverImage : \`${COMPANY.url}${post.coverImage}\``. Confirmed broken today on all 3 blog posts. *(schema.md §5, sxo.md H4)*
-- [ ] Add `TouristTrip`/`Offer` schema to all 6 package detail pages (price, duration, grade — currently shown on-page but absent from structured data there entirely). Generated code in `findings/schema.md §4a`. *(schema.md, sxo.md H1)*
-- [ ] Move (or duplicate) the 6-item `ItemList`/`Offer` schema from the homepage to `/packages` — the page that actually renders all 6 packages and is the natural landing page for comparison queries. *(schema.md, sxo.md H2)*
-- [ ] Render all FAQ accordion answers into the DOM at all times (native `<details>`/CSS-toggle instead of conditional JSX) — currently 18 of 24 FAQ answers across the 6 package pages are invisible to any crawler reading rendered text rather than parsing JSON-LD. *(geo.md §2a)*
-- [ ] Add a real `<table>` price/grade/duration comparison block to `/packages` — currently only the first of 6 package cards survives plain-text extraction (boilerplate-stripping drops the rest). Data already compiled in `findings/geo.md §2c`. *(geo.md §2c)*
-- [ ] State package price once in main-content prose (not just the sidebar) on each package detail page, so it survives boilerplate extraction independent of the schema fix. *(geo.md §2b)*
+- [x] `TouristTrip.image` in `lib/schema.ts` was a relative path, not an absolute URL, on all 5 package pages and both `ItemList` instances. *(schema.md)*
+- [x] Homepage "Achievements" stat said "8 Rafting Routes", contradicting the real 5-package catalog. *(geo.md, local.md — caught independently by both)*
+- [x] Blog posts had visible FAQ content but no `FAQPage` schema. Now parsed directly from each post's markdown at build time, no content duplication. *(content.md, sxo.md — caught independently by both)*
+- [x] Scroll-triggered card animations ignored `prefers-reduced-motion`. Fixed sitewide via `MotionConfig reducedMotion="user"` in `app/layout.tsx`. *(visual.md)*
+- [x] Hero/page-banner images were missing the `fetchPriority="high"` attribute Lighthouse checks for (`priority` alone doesn't set it in this Next/React version). Fixed on the true LCP candidates in `Hero.tsx`, `PageHero.tsx`, and the blog post cover image. Also removed the header logo's accidental preload contention with the real hero image. *(performance.md)*
 
-## Phase 2: High-Impact Improvements (Weeks 2–3)
+---
 
-- [ ] Enlarge the "Book Now" package-card tap target from ~16px to 48px+ (WCAG 2.5.5) — it's the site's core conversion action. *(visual.md #1)*
-- [ ] Fix the oversized header logo: correct `sizes` prop, remove `loading="lazy"` — ~85 KB saved per page load, sitewide. *(performance.md H3, visual.md #3)*
-- [ ] Add the Next.js `priority` prop to hero/cover images on Packages, Package Detail, Gallery, and Blog templates. *(performance.md H2)*
-- [ ] Add `publisher` (Organization + logo) to `BlogPosting` schema. *(schema.md §4b)*
-- [ ] Add a named certifying body/registration number wherever "certified guides" is claimed (About, homepage). *(content.md, local.md)*
-- [ ] Add author byline + credentials to blog posts (currently generic "Organization" author on safety-adjacent content). *(content.md, sxo.md M1)*
-- [ ] Expand the 3 blog posts from ~230–270 words to 600–900+ words with season-specific/rapid-specific detail. *(content.md, geo.md §2e, sxo.md M1)*
-- [ ] Fix `<img>` elements across Home/Packages/Package Detail/Contact lacking explicit width/height or `aspect-ratio` (CLS risk) — 20/25 on Home, 14/16 on Packages. *(visual.md #2)*
+## Phase 1: High Priority (this week)
 
-## Phase 3: Content, Schema & Authority (Month 2)
+- [ ] **Re-run Lighthouse against the fetchPriority fix** to confirm the homepage LCP regression (4.35s "Poor") is resolved, and check whether the `/packages` CLS 0.109 finding reproduces or was measurement noise (the logo already uses the CLS-safe width/height-attribute pattern, so font-swap is the more likely cause). *(performance.md)*
+- [ ] Expand homepage copy (currently ~280 words, floor ~500) and the 3 blog posts (682–799 words, floor 1,500) further — real depth work, not filler. *(content.md)*
+- [ ] Age/fitness/family-suitability copy on the `/packages` comparison table is only spelled out for the Brahmpuri row; add it for the other 4 packages too. *(sxo.md)*
+- [ ] Add a named second contributor or an author bio/archive page — right now all 3 blog posts share one byline, capping perceived editorial breadth. *(content.md)*
 
-- [ ] Expand each package page's FAQ from 1–3 questions to 3–5 (age/fitness minimums, weather cancellation policy, low-water-level contingency, pickup logistics). *(content.md #7, sxo.md L2)*
-- [ ] Add decision-support copy to `/packages` ("which package is right for you," a plain-language Grade I–IV explainer, persona routing). *(sxo.md M2)*
-- [ ] Add `Review`/`AggregateRating` schema — **only after** testimonial authenticity is confirmed (Phase 0). *(schema.md §4d)*
-- [ ] Add `logo` property to the `SportsActivityLocation` entity; link `TouristAttraction` to it via `subjectOf`. *(schema.md §4c, local.md #10)*
-- [ ] Increase `geo` coordinate precision from 4 to 5+ decimal places once the exact GBP-verified location is confirmed. *(local.md #6)*
-- [ ] Add a Google Maps embed to `/about` and/or `/destinations` (currently only on `/contact`); switch to a Place-ID-based embed once GBP is verified. *(local.md #9, sxo.md M3)*
-- [ ] Set up a post-trip review-generation workflow (WhatsApp/SMS) ahead of launch — review velocity matters for local ranking from day one, not after. *(local.md #7)*
-- [ ] Register on TripAdvisor, JustDial, GetYourGuide/Viator, and the Uttarakhand Tourism operator directory at launch. *(local.md #8)*
-- [ ] Fix `sizes` misconfiguration on package/blog card images (systemic — up to 187 KB wasted per page). *(performance.md M1)*
-- [ ] Replace hotlinked Unsplash cover images with self-hosted, pre-optimized assets before real launch. *(performance.md M2)*
-- [ ] Add security headers (CSP, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`) via `next.config.js`/`vercel.json`. *(technical.md)*
+## Phase 2: Medium Priority (this month)
 
-## Phase 4: Monitoring & Iteration (Ongoing)
+- [ ] Add a `Sitemap:` directive to `robots.txt` — independent of the `Disallow: /` rule (which stays as-is per your standing instruction not to touch it), this is just a pointer with no effect on the current block. Flagging rather than changing it myself since it touches the file you asked me not to modify. *(technical.md, sitemap.md)*
+- [ ] Add `Strict-Transport-Security` (HSTS) to the security headers in `next.config.ts` — not currently set explicitly, shouldn't be assumed to come free from hosting. *(technical.md)*
+- [ ] Replace the remaining Unsplash-hotlinked images (the `/packages` hero banner, all 3 blog cover images) with self-hosted photography — still contributing directly to LCP on those pages. You previously deferred this once already since those were placeholder photos anyway; worth revisiting now that most other photography is real. *(performance.md)*
+- [ ] Investigate the invisible-but-focusable mobile booking bar reported in the desktop DOM (`MobileBookingBar.tsx`, `lg:hidden`) — the CSS pattern used is standard and should already remove it from the tab order in a real browser, so this may be a testing-tool artifact; worth a manual keyboard-tab check on a real desktop browser before changing anything. *(visual.md)*
+- [ ] Wrap the `SportsActivityLocation.logo` field in a proper `ImageObject` (currently a bare URL string) — cosmetic, not a validation error. *(schema.md)*
+- [ ] Diversify blog cover images beyond generic stock photography once real trip photos are available. *(content.md)*
 
-- [ ] Re-run `pagespeed_check.py`/CrUX against the production domain once live + indexed 28 days, to replace lab-only performance data with real field data.
-- [ ] Watch the Gallery page's Total Blocking Time (highest of the 5 tested) as more images are added; consider virtualizing the grid if it grows.
-- [ ] Monitor review velocity post-launch (target: new reviews at least every ~18 days, per local search literature) — don't let it go quiet after an initial push.
-- [ ] Once real trip photography replaces Unsplash placeholders, add descriptive (route/rapid-specific) alt text — current gallery alt text is generic ("rafting moment 1").
-- [ ] Re-audit Local SEO and GEO categories ~4–6 weeks post-launch once GBP, citations, and AI-crawler access have had time to take effect — both scores are structurally capped pre-launch and should be expected to rise independent of any further code changes.
-- [ ] Implement IndexNow (Bing/Yandex) once live, particularly useful given the ongoing blog cadence. *(technical.md)*
+## Phase 3: Low / Backlog
+
+- [ ] Sitemap `lastmod` is identical build-time timestamp for all 17 URLs; blog frontmatter already has real per-post `updatedAt` dates that could be wired in. *(sitemap.md)*
+- [ ] Bottom copyright-bar footer links (Terms/Privacy in the legal strip) are still 16px tall, under the 44-48px guidance — the main footer columns were already fixed to 32px. *(visual.md)*
+- [ ] Gallery `alt` text is still generic ("rafting moment 1") rather than route/rapid-specific — same carryover from the original audit, still blocked on not having real per-photo context. *(geo.md, technical.md)*
+- [ ] Blog H2s are mostly declarative, not question-phrased — reformatting 1-2 per post would align better with AI Overview-style query matching. *(geo.md)*
+- [ ] `COMPANY.url` in `constants/config.ts` is a hardcoded string, not environment-driven — fine today, just means no staging-domain flexibility if that's ever needed. *(sitemap.md)*
+- [ ] Distinguish header vs. footer navigation landmarks with `aria-label` for assistive tech (duplicate link labels in both). *(visual.md, carryover)*
+
+## Deferred — waiting on you or external state (unchanged from before)
+
+- `robots.txt` Disallow removal, AI-crawler allowlist, meta-robots `noindex,nofollow` removal — still your explicit call, no bots yet.
+- GBP claim/verification, 5-decimal geo precision, Place-ID map embed — waiting on you to set up GBP and share details.
+- Testimonial authenticity sign-off and `Review`/`AggregateRating` schema — held per your memory note until you confirm the 3 testimonials are real people.
+- Real Uttarakhand Tourism registration number and insurance details on `/about` — currently plausible placeholder, flagged for you to swap in real figures before launch.
+- Review-generation workflow, directory registrations (TripAdvisor/JustDial/etc.), IndexNow — operational/external, not code, or pointless while indexing is blocked.

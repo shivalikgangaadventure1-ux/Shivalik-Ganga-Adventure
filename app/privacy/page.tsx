@@ -8,7 +8,7 @@ import { Container } from "@/components/ui/Container";
 
 export const metadata: Metadata = buildMetadata({
   title: "Privacy Policy",
-  description: `Privacy policy for ${COMPANY.name} — how we handle information shared when you contact or book with us.`,
+  description: `Privacy policy for ${COMPANY.name}: how we handle information shared when you contact or book with us.`,
   path: "/privacy",
 });
 
@@ -41,8 +41,8 @@ export default function PrivacyPage() {
           <h2>Information We Collect</h2>
           <p>
             When you contact us by phone, WhatsApp, or email to enquire about or book a rafting
-            trip, we collect the information you choose to share — typically your name, phone
-            number, preferred dates, and group size — solely to respond to your enquiry and
+            trip, we collect the information you choose to share, typically your name, phone
+            number, preferred dates, and group size, solely to respond to your enquiry and
             arrange your booking.
           </p>
 

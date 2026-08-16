@@ -1,188 +1,206 @@
 # Local SEO Audit — Shivalik Ganga Adventure
 
-**Audited URL:** https://shivalik-ganga-adventure.vercel.app/ (Vercel preview, pre-launch)
+**Audited URL:** http://localhost:4100 (local production build)
 **Eventual production domain:** https://www.shivalikgangaadventure.com (not live)
 **Audit date:** 2026-08-15
-**Pages reviewed:** `/`, `/about`, `/contact`, `/destinations`, `/packages/brahmpuri-to-rishikesh`, `/packages/shivpuri-to-rishikesh`, `/packages/marine-drive-to-rishikesh`, `/packages/kaudiyala-to-rishikesh`, `/packages/camping-rafting-combo`, `/packages/kaudiyala-to-shivpuri-extreme`
-**Method:** Full HTML fetch of each page (`fetch_page.py`) + source review of `constants/config.ts`, `lib/schema.ts`, `app/layout.tsx`, `app/robots.ts`, `app/sitemap.ts`, `components/Footer.tsx`, `app/contact/page.tsx`, `app/about/page.tsx`, `sections/Testimonials.tsx`, `sections/Achievements.tsx`
+**Pages reviewed:** `/`, `/about`, `/contact`, `/destinations`, `/packages/brahmpuri-to-nim-beach`, `/packages/club-house-to-nim-beach`, `/packages/shivpuri-to-nim-beach`, `/packages/marine-drive-to-nim-beach`, `/packages/kaudiyala-to-nim-beach`, plus `robots.txt` and `sitemap.xml` for crawl/index-state verification.
+**Method:** Direct HTTP fetch of rendered HTML (`curl`) for each page; JSON-LD, meta tags, and visible copy extracted and diffed page-to-page.
+**Context:** Fresh pass following a same-day round of local-SEO fixes. This audit specifically re-verifies: (1) Maps embed added to `/about`, (2) new "Licensing & Insurance" section on `/about`, (3) `logo` added to the `SportsActivityLocation` schema — in addition to a full re-check of NAP, GBP proxy signals, reviews, schema, and the (now 5-package) route catalog.
 
 ---
 
 ## Business Type & Vertical
 
-- **Business type:** Hybrid, leaning brick-and-mortar. Fixed physical base address is shown site-wide ("Shivpuri, Rishikesh - Badrinath Highway, Rishikesh, Uttarakhand 249192, India"), with a Google Maps embed on `/contact`. No "we come to you" / service-area-only language — customers travel to the put-in point, which is standard for rafting operators. Correctly modeled as a fixed-location Local Service business, not a pure SAB.
-- **Industry vertical:** Adventure tourism / outdoor recreation (river rafting). Closest match in Google/Schema.org's supported LocalBusiness vocabulary is `SportsActivityLocation` (no dedicated "RaftingCompany" type exists) — this is the correct choice, paired with `TouristAttraction` for the activity/experience itself. This is a defensible, non-generic schema decision.
-- **Multi-location note:** This is **not** a true multi-location business (no separate branches with independent NAP/GBP listings). The 6 package pages represent different put-in/take-out **routes** on the same river, operated from one base. Traditional "doorway page swap test" / per-location NAP consistency does not apply here — instead these pages were evaluated as dedicated service/route pages, which is the #1 local organic ranking factor per Whitespark 2026.
+- **Business type:** Hybrid, leaning brick-and-mortar. A fixed physical base address ("Shivpuri, Rishikesh - Badrinath Highway, Rishikesh, Uttarakhand 249192, India") is shown site-wide, now with **two** Maps embeds (`/about` and `/contact`). No SAB-style "we come to you" language — correctly modeled as a fixed-location Local Service business.
+- **Industry vertical:** Adventure tourism / outdoor recreation (river rafting). `SportsActivityLocation` (no dedicated "RaftingCompany" schema type exists) paired with `TouristAttraction` remains the correct, defensible schema choice.
+- **Catalog structure:** Not a multi-location business. **5 packages**, confirmed live: Brahmpuri (₹599), Club House (₹699, new), Shivpuri (₹799), Marine Drive (₹1,199), Kaudiyala (₹2,499) — all routed "to Nim Beach." Each has genuinely distinct copy, grade, distance, and price (verified via `TouristTrip` schema diff across all 5 pages). This replaces the prior 6-package set; sitemap.xml confirms no stale package URLs remain.
 
 ---
 
-## Local SEO Score: 46 / 100
+## Local SEO Score: 48 / 100
 
-**This score reflects pre-launch technical readiness, not live local search performance.** Since the site is unindexed and pre-launch, GBP existence, citations, and real reviews cannot exist yet — those dimensions score low by definition, not due to a site defect. On-page foundations (NAP structure, schema, dedicated route pages) are comparatively strong.
+**Same caveat as the prior pass applies: this reflects pre-launch technical readiness, not live local search performance.** GBP, citations, and real reviews structurally cannot exist yet — those dimensions score low by definition, not as a site defect. The three targeted fixes (About page Maps embed, Licensing & Insurance section, schema `logo`) landed correctly and move the score up modestly from the prior 46.
 
 | Dimension | Weight | Score | Weighted | Notes |
 |---|---|---|---|---|
-| GBP Signals | 25% | 40/100 | 10.0 | No live GBP possible pre-launch; on-page Maps embed exists but only on `/contact`, not tied to a verified Place ID |
-| Reviews & Reputation | 20% | 25/100 | 5.0 | Testimonials are placeholder content, no `aggregateRating` in schema, no link-out to a real review platform |
-| Local On-Page SEO | 20% | 80/100 | 16.0 | Strong: dedicated, uniquely-written pages per route; consistent NAP block on every page |
-| NAP Consistency & Citations | 15% | 35/100 | 5.25 | Perfect internal consistency (single source of truth), but zero external citations exist yet (expected pre-launch) |
-| Local Schema Markup | 10% | 75/100 | 7.5 | Solid `SportsActivityLocation` + `TouristAttraction` implementation; geo precision and entity linkage gaps |
-| Local Link & Authority Signals | 10% | 20/100 | 2.0 | Cannot be assessed — no backlinks/citations possible pre-launch |
-| **Total** | | | **~46** | |
+| GBP Signals | 25% | 45/100 | 11.25 | Maps embed now present on **both** `/about` and `/contact` (was `/contact`-only); still lat/long-based, not Place ID-based — expected, no verified GBP yet |
+| Reviews & Reputation | 20% | 28/100 | 5.6 | Testimonials still placeholder but now show varied ratings (5★, 4★, 5★) instead of uniform 5★, and use a generic icon rather than a fake stock photo — a small authenticity improvement. Still unconfirmed real customers; no `aggregateRating` (correctly omitted pre-launch) |
+| Local On-Page SEO | 20% | 78/100 | 15.6 | Still strong: dedicated per-route pages with `TouristTrip` schema (itinerary + offer), consistent NAP, FAQ content. Docked slightly for a stale "8 Rafting Routes" stat that no longer matches the 5-package/6-destination catalog |
+| NAP Consistency & Citations | 15% | 35/100 | 5.25 | Perfect internal consistency; zero external citations possible yet (expected pre-launch, unchanged from prior pass) |
+| Local Schema Markup | 10% | 85/100 | 8.5 | `logo` now present on `SportsActivityLocation` (confirmed fixed); `TouristTrip` schema per package links to business via `provider.@id`; `TouristAttraction` links via `subjectOf` — entity graph is more joined-up than the prior pass found |
+| Local Link & Authority Signals | 10% | 20/100 | 2.0 | Unchanged — cannot be assessed pre-launch |
+| **Total** | | | **~48** | |
 
 ---
 
 ## NAP Consistency Audit
 
-Sourced from `constants/config.ts` (`COMPANY` object), which is used as the single source of truth by the footer, `/contact`, `/about`, and `lib/schema.ts`. Because every surface pulls from this one object, **on-site NAP is internally 100% consistent** — this is a genuine strength and low future-maintenance risk.
+Sourced from a single config object used consistently across footer, `/contact`, `/about`, `/destinations`, all 5 package pages, and JSON-LD. Verified directly in fetched HTML (not assumed from source):
 
 | Source | Name | Address | Phone | Email |
 |---|---|---|---|---|
 | Visible HTML — Footer (all pages) | Shivalik Ganga Adventure | Shivpuri, Rishikesh - Badrinath Highway, Rishikesh, Uttarakhand 249192, India | +91 95688 68493 | info@shivalikgangaadventure.com |
-| Visible HTML — `/contact` | Shivalik Ganga Adventure | (same) | (same) | (same) |
-| Visible HTML — `/about` | Shivalik Ganga Adventure | (address not repeated in body copy; only in footer) | tel: link present | mailto: link present |
-| JSON-LD `SportsActivityLocation` (all pages, via `app/layout.tsx`) | Shivalik Ganga Adventure | streetAddress "Shivpuri, Rishikesh - Badrinath Highway" / locality Rishikesh / region Uttarakhand / postalCode 249192 / country IN | +919568868493 | info@shivalikgangaadventure.com |
-| JSON-LD `TouristAttraction` | "Ganga River Rafting, Rishikesh" (entity name, not business name — expected, different entity) | locality/region/country only, no street | — | — |
-| Meta tags (`og:site_name`, title) | Shivalik Ganga Adventure | — | — | — |
-| Social profiles (facebook/instagram/twitter/youtube — referenced in `sameAs`) | Not independently verifiable — accounts likely not publicly populated pre-launch | N/A | N/A | N/A |
+| Visible HTML — `/contact` (main content block) | Shivalik Ganga Adventure | Same, plus hours "Mon - Sun 6:00 AM - 8:00 PM" | Same | Same |
+| Visible HTML — `/about` ("Find Our Base Point" section) | Shivalik Ganga Adventure | Same, next to Maps embed | tel: link present | mailto: link present |
+| JSON-LD `SportsActivityLocation` (all 9 pages checked) | Shivalik Ganga Adventure | streetAddress / locality / region / postalCode / country, identical on every page | +919568868493 | info@shivalikgangaadventure.com |
+| JSON-LD `TouristAttraction` | "Ganga River Rafting, Rishikesh" (distinct entity, expected) | locality/region/country only, no street (unchanged) | — | — |
+| JSON-LD `TouristTrip` (5 package pages) | N/A (references business via `provider.@id`) | — | — | — |
+| Meta tags (`og:site_name`, `<title>`) | Shivalik Ganga Adventure | — | — | — |
 
-**No discrepancies found** between visible HTML, JSON-LD, and meta tags. Flag: **Twitter/X profile is referenced in schema `sameAs` (`lib/schema.ts` → `Object.values(COMPANY.social)`) but is not linked anywhere in the visible UI** — `components/Footer.tsx`'s `SOCIAL_LINKS` array only includes Facebook, Instagram, YouTube. Minor inconsistency between what schema claims and what a user/crawler can actually click through to.
+**No discrepancies found.** Address, phone, and email are byte-identical across every visible and structured-data surface checked.
+
+**Persisting minor flag:** the schema `sameAs` array on every page still lists `https://twitter.com/shivalikganga`, but the footer's visible "Follow Us" social icon row only links Facebook, Instagram, and YouTube — Twitter/X is claimed in structured data but not click-through-able anywhere in the UI. Unchanged from the prior audit; still worth a one-line fix (either add the footer icon or drop it from `sameAs`).
 
 ---
 
 ## GBP Signals (On-Page Proxy Check)
 
-No live Google Business Profile could be found or verified — expected, since the production domain (shivalikgangaadventure.com) is not live and the preview domain is disallowed from indexing (see Critical finding below). Checked what's crawlable/verifiable on-page instead:
+No live Google Business Profile exists yet — confirmed still pending per project context, and correctly out of scope as an action item this pass. Checked what's crawlable/verifiable on-page:
 
 | Signal | Status |
 |---|---|
-| Visible NAP block | Present on every page (footer) |
-| Google Maps embed | Present on `/contact` only — **not** on `/`, `/about`, or `/destinations` |
-| Maps embed tied to a verified Google Place ID | No — uses a generic `?q={lat},{lng}` embed, not a Place ID-based embed. Will not reflect the actual GBP listing (hours, reviews, photos) once one exists |
-| "Get Directions" link | Not present as a distinct CTA (map embed itself is clickable, but no explicit directions link/button) |
-| Review widget pulling live Google reviews | Not present — testimonials are static, hardcoded, not sourced from GBP |
+| Visible NAP block | Present on every page (footer + page-specific content) |
+| Google Maps embed | **Now present on `/about` AND `/contact`** — confirmed fix landed. Not present on `/`, `/destinations`, or package pages (acceptable; a base-location map doesn't need to repeat on every route page) |
+| Maps embed tied to a verified Google Place ID | No — still a generic `?q={lat},{lng}&z=14&output=embed` query embed on both instances, not a Place ID embed. Correct interim choice with no verified GBP yet; needs upgrading once GBP exists |
+| "Get Directions" link | Still not present as a distinct CTA on `/about` or `/contact` — only the embed itself is interactive |
+| Review widget pulling live Google reviews | Not present — testimonials remain static/hardcoded |
 | GBP posts / photo evidence indicators | N/A — no live listing yet |
-| Click-to-call | Present site-wide (`tel:` links in header/footer/contact/mobile booking bar) |
-| Click-to-WhatsApp | Present site-wide, well-implemented (desktop floating button + mobile booking bar + CTAs) |
+| Click-to-call | Present site-wide (header bar, mobile nav, `/contact`, footer) |
+| Click-to-WhatsApp | Present site-wide, well-implemented (header CTA, About/Safety CTAs, footer CTA, `/contact`) |
 
 ---
 
 ## Review Health Snapshot
 
-- **Rating shown on-site:** All 3 testimonials hardcoded at 5/5 stars (`constants/testimonials.ts`). This is placeholder content — per project memory, placeholder copy is acceptable pre-signoff but **must be flagged before real launch**.
-- **Review count:** None (3 testimonials, not a review count claim)
-- **`aggregateRating` in schema:** **Missing.** `getLocalBusinessSchema()` in `lib/schema.ts` does not include an `aggregateRating` or `review` property. Acceptable pre-launch (no real reviews exist to reference — adding a fake `aggregateRating` would violate Google's structured data policy), but this needs to be added once real GBP reviews accumulate post-launch.
-- **Review velocity:** N/A pre-launch. Flag for post-launch: Sterling Sky's "18-day rule" — rankings fall off if no new reviews land within 3 weeks, and the "Magic 10" threshold gives a ranking boost at 10 reviews. A review-generation workflow (WhatsApp/SMS follow-up after each trip) should be planned before launch, not after.
-- **Response rate to reviews:** N/A, no live listing yet.
-- **All 3 testimonial avatars use the same generic stock image** (`IMAGES.avatar`) — a launch-blocking authenticity issue once these are presented as real customer reviews; should use real photos or remove avatars.
+- **Rating shown on-site:** 3 testimonials on the homepage, star ratings **5★, 4★, 5★** — an improvement over a uniform 5★/5★/5★ pattern seen previously, which reads more credibly. Each is tied to a named reviewer (e.g., "Rohan Malhotra") and the specific route taken (e.g., "Shivpuri to Nim Beach"), and now uses a generic person icon rather than a stock photo avatar — removes the "identical fake photo" authenticity red flag noted last time, though the reviews themselves remain unconfirmed as real customers.
+- **Review count:** None (3 testimonials; not framed as a review-count claim).
+- **`aggregateRating` in schema:** Still **absent** from `SportsActivityLocation` on every page checked. This is correct pre-launch behavior (no real review data to reference) and should stay this way until real GBP/on-site reviews exist.
+- **Review velocity:** N/A pre-launch. Sterling Sky's 18-day rule (ranking cliff after 3 weeks without a new review) and the "Magic 10" review-count threshold remain relevant for post-launch planning — unchanged recommendation from the prior pass.
+- **Package-level `rating: 5` field:** Each of the 5 package cards on the homepage carries a static `rating: 5` value (rendered as filled stars on the package card), separate from the testimonials. Like the testimonials, this is not backed by an `aggregateRating`/`review` schema property, so it's a visual trust cue only, not a structured-data claim — low risk, but worth being aware it exists as another "5-star" visual alongside the testimonials.
 
 ---
 
 ## Trust & Safety / E-E-A-T Signals (Adventure Tourism-Specific)
 
-Adventure tourism carries elevated E-E-A-T expectations (physical risk to the customer) and, in India specifically, rafting operators are expected to hold registration with the Uttarakhand Tourism Development Board / district administration. Checked all 10 pages for licensing, insurance, and accreditation language.
+This is the section with the most material change since the last pass.
 
 | Signal | Status |
 |---|---|
-| "Certified guides" claim | Present (About page, homepage) — but **generic**, no naming of the certifying body (e.g., no mention of a specific rafting/lifeguard certification, IRF, or first-aid certification standard) |
-| Government/tourism department license or registration number | **Not found anywhere on the site** |
-| Insurance coverage statement (customer accident/liability insurance) | **Not found anywhere on the site** |
-| Named safety equipment standards (e.g., ISI-marked life jackets, helmet standard) | Not found — safety copy on `/about` is qualitative ("gear is inspected") but not backed by a standard/certification name |
-| Guide bios / individual credentials | Not found — guides referenced only as a collective ("certified guides," "25+ Expert Guides" in Achievements counter) |
-| First-aid / medical support claim | Present ("First-aid support on hand at every base point") — good, but not tied to a certification |
-| Weather/river-condition contingency policy | Present, briefly (About page safety section) |
-| Age/health restrictions, waiver/consent process | Not found on the audited pages (may exist in Terms of Use — not in scope of this fetch, worth checking) |
+| Government/tourism department license or registration number | **Now present.** `/about` → "Licensing & Insurance" section states: *"Shivalik Ganga Adventure is registered with the Uttarakhand Tourism Development Board (registration no. UK/ADV-TOURISM/2026/00147)."* Confirmed fix landed. |
+| Insurance coverage statement | **Now present.** Same section: *"Every rafter is covered by per-person accident insurance for the duration of the trip, arranged through our insurance partner."* |
+| Named certifying body for guides | **Now present**, and appears in two places: the Licensing & Insurance section ("all guides carry current certification under the **Uttarakhand River Rafting Guide Certification Programme**") and the Safety Guidelines section higher on the same page, which uses identical wording. |
+| Named safety equipment standard | **Now present** — "all rafts operate with **ISI-marked life jackets and helmets**," closing a gap flagged in the prior audit. |
+| "Certified guides" claim | Present and now specific (previously flagged as generic/unnamed — now resolved by the two items above). |
+| First-aid / medical support claim | Present ("First-aid support is on hand at every base point") — unchanged, good. |
+| Weather/river-condition contingency policy | Present, briefly, in both the Safety Guidelines section and package-level FAQs (e.g., "if river or weather conditions become unsafe, we'll reschedule your slot"). |
+| Guide bios / individual credentials | Still not present — guides referenced only as a collective ("25+ Expert Guides" in the Achievements counter). Not critical, low priority. |
+| Age/health restrictions, waiver/consent process | Partially surfaced — package FAQs mention a "minimum age of 8" for the beginner route; a formal waiver/consent flow was not checked (`/terms` out of scope for this pass, as before). |
 
-This is the single biggest **content trust gap** on the site relative to the risk profile of the activity being sold. Competing Rishikesh rafting operators commonly display their Uttarakhand Tourism registration number and named insurance coverage prominently — this site currently has neither.
+**Placeholder flag (per project convention, not a new finding):** the registration number, insurance-partner reference, and certification-programme name in the Licensing & Insurance section are placeholder content pending real figures from the client. This is acceptable pre-signoff per project memory, but **must be swapped for verified figures before real launch** — publishing an invented UTDB registration number or insurance claim to a live, indexable site would be a compliance and consumer-trust risk for a physical-risk activity. Flagging once here; do not treat as a fresh defect.
+
+**Minor accuracy flag (new this pass):** the "Our Achievements" counter on `/about` (and reused elsewhere) still shows **"8 Rafting Routes,"** which no longer matches the current catalog — there are 5 bookable packages and 6 named destinations on `/destinations` (Shivpuri, Brahmpuri, Marine Drive, Kaudiyala, Club House, plus an informational-only "Byasi Rapids" card that links to the general `/packages` hub rather than a dedicated route page). Low severity, but a "we run X routes" number that doesn't reconcile with the visible catalog is exactly the kind of inconsistency that erodes trust once real traffic/GBP scrutiny arrives — worth aligning to a real, defensible number before launch.
 
 ---
 
 ## Local Schema Validation
 
-**Schema type used:** `SportsActivityLocation` (site-wide, injected once in `app/layout.tsx`, present on all 10 pages) + `TouristAttraction` (also site-wide) + `BreadcrumbList` (per-page) + `ItemList` (homepage, package list) + `FAQPage` (package pages only).
+**Schema types found:** `SportsActivityLocation` (site-wide, on all 9 pages checked) + `TouristAttraction` (site-wide) + `BreadcrumbList` (per-page) + `TouristTrip` (per package page, new/more fleshed out than "ItemList" noted previously) + `FAQPage` (package pages).
 
 ### `SportsActivityLocation` (functions as the LocalBusiness entity)
 
 | Property | Required/Recommended | Status |
 |---|---|---|
 | `name` | Required | Present — "Shivalik Ganga Adventure" |
-| `address` (PostalAddress) | Required | Present, complete (streetAddress, locality, region, postalCode, country) |
-| `geo` | Recommended, 5 decimal places min | **Present but under-precise** — `30.1667, 78.3667` is only 4 decimal places (~11m accuracy vs. the recommended ~1.1m at 5 decimals). Needs to be replaced with the exact GBP-verified coordinates at launch |
+| `address` (PostalAddress) | Required | Present, complete |
+| `logo` | Recommended (Google entity/Knowledge Panel signal) | **Now present** — `https://www.shivalikgangaadventure.com/images/logo/favicon.png`. Confirmed fix landed on every page checked (home, about, contact, destinations, all 5 package pages). Note: it points at the small favicon-sized asset rather than a larger square logo file — functionally valid, but worth using the higher-resolution logo asset if one exists, since Google's Merchant/Knowledge-Panel guidance recommends ≥112×112px. |
+| `geo` | Recommended, 5 decimal places min | **Still under-precise** — `30.1667, 78.3667`, unchanged at 4 decimal places (~11m accuracy). Not addressed this pass; still needs the exact GBP-verified pin once available. |
 | `telephone` | Recommended | Present, matches on-page NAP |
-| `openingHoursSpecification` | Recommended | Present — Mon-Sun 06:00-20:00, matches visible "Mon - Sun 6:00 AM - 8:00 PM" |
-| `url` | Recommended | Present, points to `COMPANY.url` (the future production domain, not the current preview URL — correct forward-looking choice, but see Critical launch note below) |
-| `priceRange` | Recommended | Present but generic (`"₹₹"`) — not reflective of actual per-person package pricing spread |
+| `openingHoursSpecification` | Recommended | Present — Mon–Sun 06:00–20:00 |
+| `url` | Recommended | Present, points to the future production domain |
+| `priceRange` | Recommended | Still generic (`"₹₹"`) — real per-package prices now range ₹599–₹2,499, which schema doesn't reflect |
 | `image` | Recommended | Present (`opengraph-image`) |
-| `sameAs` | Recommended for entity linking | Present, links to all 4 social profiles including Twitter/X (which isn't linked in the visible UI — see NAP section) |
-| `aggregateRating` / `review` | Recommended | **Missing** — expected pre-launch, add once real reviews exist |
+| `sameAs` | Recommended | Present, 4 profiles including Twitter/X, which still isn't linked in the visible footer (see NAP section) |
+| `aggregateRating` / `review` | Recommended | Still absent — correct pre-launch |
 | `@id` | Best practice | Present (`{url}/#business`) |
 
 ### `TouristAttraction`
 
-Present with `name`, `description`, `url`, `touristType`, `address` (partial — no street), `geo`, `@id` (`{url}/#attraction`). **Not linked** to the `SportsActivityLocation` entity via `subjectOf`/`mainEntityOfPage`/`about` — the two entities exist independently in the graph rather than being explicitly connected, which is a missed opportunity for entity clarity (low-severity, schema is not a direct ranking factor per Google, but affects entity understanding for AI search).
+Present with `name`, `description`, `url`, `touristType`, partial `address`, `geo`, `@id`. **Linked** to the business entity via `subjectOf: {"@id": ".../#business"}` — this entity-linkage gap flagged in the prior audit is actually already resolved/present in the current build.
 
-### Multi-schema footprint per package page
+### `TouristTrip` (new, one per package page)
 
-Each of the 6 package pages carries `SportsActivityLocation` + `TouristAttraction` + `BreadcrumbList` + `FAQPage` (the last two injected per-page and route-specific, which is correct). This is a reasonable, non-spammy structured data footprint.
+Each of the 5 package pages carries a `TouristTrip` object with `name`, `description`, `image`, `touristType`, a full `itinerary` (`ItemList` of timed stops), `provider: {"@id": ".../#business"}` (explicitly linked to the LocalBusiness entity), and an `offers` block (`price`, `priceCurrency: "INR"`, `availability`, `priceValidUntil`, `validFrom`). This is a strong, non-generic implementation — it's both a rich-result opportunity and a clean example of the "dedicated service page" pattern Whitespark 2026 flags as the #1 local organic ranking factor.
+
+### `FAQPage` (per package page)
+
+Present, 5 route-specific Q&As per page (safety, swimming requirement, packing, weather policy, hotel pickup) — genuinely differentiated content per route, not templated boilerplate.
+
+### `BreadcrumbList`
+
+Present and correct on every page checked, including 3-level breadcrumbs on package pages (Home → Packages → [Route Name]).
 
 ---
 
 ## Citation Presence
 
-**Cannot be meaningfully assessed pre-launch.** The production domain is not live, so no directory (Yelp, BBB, JustDial, TripAdvisor, GetYourGuide, Uttarakhand Tourism directory, etc.) can plausibly reference it yet. Note that Yelp/BBB (the skill's default Tier 1 set) are low-relevance for an India-based rafting operator — the higher-value citation targets for this business at launch are:
+**Still cannot be meaningfully assessed** — the production domain is not live and the site is fully deindexed (see below), so no external directory can plausibly reference it yet. This is unchanged from the prior pass and is not a defect at this stage. Recommended Tier-1 targets for launch remain the same as previously identified:
 
-- Google Business Profile (primary — see Critical actions below)
-- TripAdvisor (very high consumer trust for adventure/tour activities)
+- Google Business Profile (primary — already tracked as a known pending item, not re-flagged as an action here)
+- TripAdvisor (high consumer trust for adventure/tour activities)
 - JustDial (India's dominant local directory)
-- GetYourGuide / Viator (bookable-activity marketplaces with strong SERP presence for "Rishikesh rafting" queries)
-- Uttarakhand Tourism Development Board operator directory (also doubles as the registration/licensing signal noted in the Trust & Safety section)
-- Instagram/Facebook Business (already have handles reserved per `constants/config.ts`)
-
-This is flagged as a limitation, not a defect — no action is possible until the domain and GBP go live.
+- GetYourGuide / Viator (bookable-activity marketplaces)
+- Uttarakhand Tourism Development Board operator directory — doubles as public verification of the registration number now shown in the Licensing & Insurance section
+- Instagram/Facebook Business (handles already reserved and wired into schema/footer)
 
 ---
 
-## Location Page Quality (Route Pages)
+## Location / Route Page Quality
 
-Not a traditional multi-location scenario (see note above), but evaluated the 6 package/route pages as the local-intent equivalent:
+Evaluated the 5 package pages plus `/destinations` as the local-intent equivalent of location pages:
 
-- Each route page (Brahmpuri, Shivpuri, Marine Drive, Kaudiyala, Kaudiyala-to-Shivpuri Extreme, Camping+Rafting Combo) has **distinct, non-templated content** — different rapid names (Roller Coaster, Golf Course, Sweet Sixteen, Terminator), different grades (II through IV), different framing (beginner-friendly vs. full-day expedition). Confirmed via direct text-length/content comparison across 4 sampled route pages (2,318–2,798 characters of body content each, non-identical).
-- Each has its own `FAQPage` schema and `BreadcrumbList` — good internal signal of a dedicated page rather than a thin doorway page.
-- This aligns well with the #1 local organic ranking factor identified in Whitespark 2026 (dedicated service pages).
-- Gap: none of the route pages state the specific put-in/take-out GPS coordinates or distance/drive-time from the main base address — would strengthen both user trust (pickup logistics) and geo-relevance signaling.
+- Each of the 5 route pages has **distinct, non-templated content**: different distances (9–32 km), different grades (I–II through IV), different rapid names, different prices, and a distinct `TouristTrip` itinerary and FAQ set per page. Confirmed via direct JSON-LD diff across all 5 pages.
+- `/destinations` presents 6 cards (5 tied to bookable packages, 1 informational — "Byasi Rapids," which links to the general `/packages` hub rather than a dedicated page). Not a defect, but if Byasi Rapids is meant to be a real, separately marketable put-in point, a dedicated page for it would extend the "dedicated service page" advantage already earned by the other 5 routes.
+- Internal linking is solid: homepage "Most Popular Rafting Packages" section links to all 5 packages, `/destinations` cards link to matching package pages, breadcrumbs reinforce hierarchy on every package page.
+- Gap (unchanged from prior pass): none of the route pages state specific put-in/take-out GPS coordinates or drive-time from the base address.
+
+---
+
+## Crawlability State (Factual Note, Not a Defect)
+
+Confirmed via direct fetch of `robots.txt` (`User-Agent: *` / `Disallow: /`) and per-page `<meta name="robots" content="noindex, nofollow">` on every page checked. This is the deliberate, expected pre-launch state per project context — noted for completeness, not flagged as an issue, and scored around consistently with the prior pass (GBP/reviews/citations dimensions already reflect that nothing external can accrue while this is in place).
 
 ---
 
 ## Top 10 Prioritized Actions
 
 **Critical**
-1. **Flip `robots.ts` (currently `disallow: "/"`) and `layout.tsx` metadata (`robots: { index: false, follow: false }`) to allow indexing before/at production launch.** Site is currently 100% blocked from crawling — no local (or any) SEO signal can accrue until this changes. Confirm this is intentional for the current pre-launch phase, but track as a hard launch-day gate.
-2. **Claim and verify a Google Business Profile** on the production domain the moment it's live. Select the correct primary category (highest-weighted ranking factor in Whitespark 2026, score 193) — likely "River Rafting" or closest available GBP category; wrong category is the #1 negative factor (score 176). Note that GBP's verification **address** (not the on-site copy) becomes the ranking-relevant anchor once claimed.
-3. **Add government/tourism-board registration or license info and insurance coverage statement to `/about`.** For an adventure-risk activity, the total absence of licensing/insurance language is a material E-E-A-T and consumer-trust gap, and a common competitor differentiator in this market.
-4. **Ensure GBP NAP will match the site's `COMPANY` object exactly** (name, address, phone) at claim time — the site's centralized NAP is launch-ready and should be used as the literal source of truth for GBP setup, not re-typed.
+1. **At production launch, flip `robots.txt` and per-page `robots` meta to allow indexing**, and set the real Google Business Profile up on the live domain with the correct primary category (highest-weighted ranking factor in Whitespark 2026; wrong category is the single biggest negative factor). This is already well understood as pending — listed here only as the hard launch-day gate, not a new task.
+2. **Replace the placeholder UTDB registration number, insurance-partner reference, and certification-programme name in the `/about` Licensing & Insurance section with real, verifiable figures before public launch.** Per project convention this is acceptable placeholder content pre-signoff, but publishing a fabricated government registration number or insurance claim to a live, indexable page is a compliance and consumer-trust risk for a physical-risk activity — flag once, resolve before go-live.
+3. **Confirm testimonials before launch** (real customers vs. clearly-marked illustrative copy). Acceptable as placeholder pre-signoff per project memory; the varied star ratings and generic-icon avatars are a believability improvement over a uniform stock-photo pattern, but the underlying content is still unconfirmed.
 
 **High**
-5. **Replace placeholder testimonials with real customer reviews (or clearly mark as illustrative) before public launch**, and add distinct avatar images. Per project convention this is acceptable as placeholder pending sign-off, but must be resolved before go-live — publishing fabricated-looking 5-star reviews with identical stock avatars is a credibility risk once real traffic arrives.
-6. **Increase `geo` coordinate precision from 4 to 5+ decimal places** in `constants/config.ts` once the exact operating/put-in location is confirmed, and align it with the eventual GBP pin.
-7. **Set up a post-trip review-generation workflow** (WhatsApp/SMS prompt) ahead of launch — Sterling Sky's 18-day rule means review velocity, not just volume, drives rankings; plan this before day 1 rather than reactively.
-8. **Register on TripAdvisor, JustDial, and GetYourGuide/Viator** at launch — higher-relevance citation sources for an India-based adventure/tour operator than the generic Yelp/BBB set.
+4. **Increase `geo` coordinate precision from 4 to 5+ decimal places** once the exact base/put-in location is confirmed, and align it with the eventual GBP pin. Unaddressed since the prior pass.
+5. **Reconcile the "8 Rafting Routes" Achievements stat** with the actual catalog (5 bookable packages / 6 destination cards) — pick a real, defensible number before launch.
+6. **Upgrade both Maps embeds (`/about` and `/contact`) from lat/long query embeds to Place-ID-based embeds** once GBP is verified, so the on-page map reflects the same photos/hours/reviews as the live listing.
+7. **Register on TripAdvisor, JustDial, and GetYourGuide/Viator** at launch — higher-relevance citation sources for an India-based adventure/tour operator than the generic Yelp/BBB Tier-1 set.
 
 **Medium**
-9. **Add the Google Maps embed to `/about` and/or `/destinations`**, not just `/contact` — reinforces location signal on higher-traffic entry pages, and switch the embed from a generic lat/long query to a Place-ID-based embed once GBP is verified.
-10. **Link the `SportsActivityLocation` and `TouristAttraction` schema entities together** (e.g., `TouristAttraction.subjectOf` referencing the business `@id`), add `aggregateRating` once real reviews exist, and either remove the Twitter/X link from schema `sameAs` or add it to the visible footer so schema and UI agree.
+8. **Add a distinct "Get Directions" CTA** near both Maps embeds, not just a clickable iframe — small conversion and usability win, also reinforces the location signal.
+9. **Reconcile `priceRange: "₹₹"` in schema with the real ₹599–₹2,499 spread** across the 5 packages — either a numeric `PriceSpecification` or a more representative range indicator.
+10. **Either add the Twitter/X icon to the visible footer or remove it from schema `sameAs`** — same unresolved inconsistency flagged in the prior pass; low effort, one-line fix.
 
 **Low**
-- Reconcile generic `priceRange: "₹₹"` with actual package pricing tiers for more accurate schema representation.
+- Consider a dedicated page for "Byasi Rapids" if it's a real bookable put-in point, to extend the dedicated-service-page advantage the other 5 routes already have.
+- Use a higher-resolution square logo asset for schema `logo` rather than the favicon-sized file, per Google's Knowledge Panel image-size guidance.
 - Add specific put-in/take-out GPS coordinates or drive-time-from-base info to each route page.
-- Confirm `www` vs. apex domain redirect strategy is configured correctly at DNS/hosting cut-over (schema/canonical URLs already point to `https://www.shivalikgangaadventure.com`).
 
 ---
 
 ## Limitations Disclaimer
 
-- **No live Google Business Profile exists** (production domain not yet launched) — GBP category, verification status, photo count, Q&A, posts, popular times, and live review data could not be assessed. All GBP findings in this report are on-page proxy checks only.
-- **DataForSEO MCP tools were not available/used in this session** — `local_business_data` and `google_local_pack_serp` live data were not queried. If available in a later pass, re-run this audit post-launch for real Maps SERP position and live GBP completeness scoring.
-- **Social media profiles (Facebook, Instagram, Twitter/X, YouTube) referenced in `constants/config.ts` could not be independently verified for content/activity** — likely not populated pre-launch; only confirmed that the URLs are correctly wired into site schema/footer.
+- **No live Google Business Profile exists** (by design, pending client setup) — GBP category, verification status, photo count, Q&A, posts, popular times, and live review data could not be assessed. All GBP findings in this report are on-page proxy checks against the local build only.
+- **DataForSEO MCP tools were not available/used in this session** — `local_business_data` and `google_local_pack_serp` live data were not queried. Re-run this audit post-launch for real Maps SERP position and live GBP completeness scoring.
 - **Citation presence (TripAdvisor, JustDial, GetYourGuide, Uttarakhand Tourism directory, etc.) could not be checked** since the business isn't discoverable under its production domain yet.
-- **Terms of Use / waiver / consent content was not fetched in this pass** (out of the page list provided) — recommend a follow-up check for age restrictions, liability waiver language, and refund/cancellation policy, all of which intersect with E-E-A-T for a physical-risk activity.
-- **Proximity** (55.2% of local ranking variance per Search Atlas ML study) is outside on-page control entirely and not scoreable via this audit.
+- **`/terms` and `/privacy` were not fetched in this pass** (outside the specified page list) — a follow-up check for age restrictions, liability waiver language, and cancellation policy would further round out the E-E-A-T picture for a physical-risk activity.
+- **Proximity** (55.2% of local ranking variance per Search Atlas ML study) remains outside on-page control entirely and is not scoreable via this audit.
+- This audit was run against `http://localhost:4100` (local production build), not the eventual live domain — all URL, canonical, and schema `url` values correctly point forward to `https://www.shivalikgangaadventure.com`, which was verified but obviously could not be fetched directly.

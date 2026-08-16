@@ -7,7 +7,7 @@ import { PageHero } from "@/components/PageHero";
 import { GalleryGrid } from "@/components/GalleryGrid";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Gallery",
+  title: "Rafting Photos & Videos Gallery",
   description: "A look at rafting trips, rapids, and riverside moments from Shivalik Ganga Adventure on the Ganga in Rishikesh.",
   path: "/gallery",
 });

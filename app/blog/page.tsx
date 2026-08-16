@@ -9,7 +9,7 @@ import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/ui/Container";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Blog",
+  title: "Rafting Tips & Planning Guides",
   description: "Tips, guides, and planning advice for river rafting in Rishikesh from Shivalik Ganga Adventure.",
   path: "/blog",
 });

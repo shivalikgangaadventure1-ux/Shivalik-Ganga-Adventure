@@ -87,7 +87,7 @@ export function getPackagesItemListSchema(packages: RaftingPackage[] = PACKAGES)
           name: `${pkg.name} Rafting`,
           description: pkg.description,
           url,
-          image: pkg.image,
+          image: `${COMPANY.url}${pkg.image}`,
           touristType: "Adventure travelers",
           offers: {
             "@type": "Offer",
@@ -112,7 +112,7 @@ export function getPackageTouristTripSchema(pkg: RaftingPackage) {
     name: `${pkg.name} Rafting`,
     description: pkg.description,
     url,
-    image: pkg.image,
+    image: `${COMPANY.url}${pkg.image}`,
     touristType: ["Adventure travelers", "Families", "Groups", "Solo travelers"],
     itinerary: {
       "@type": "ItemList",

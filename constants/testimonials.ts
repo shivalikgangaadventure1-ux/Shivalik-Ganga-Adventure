@@ -24,7 +24,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Ananya Kapoor",
     trip: "Marine Drive to Nim Beach",
     quote:
-      "We stopped for cliff jumping partway through the Marine Drive route and none of us expected to enjoy it as much as we did. The guides made sure everyone jumped safely and kept the energy up the whole way to Nim Beach.",
+      "We stopped at one of the calm pools partway through the Marine Drive route just to float and take in the view before continuing. Beautiful scenery the whole way down to Nim Beach, and the guides kept things fun without ever feeling unsafe.",
     rating: 5,
   },
   {
