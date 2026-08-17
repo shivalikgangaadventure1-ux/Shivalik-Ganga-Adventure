@@ -257,14 +257,28 @@
       "Bash(curl -s http://localhost:4200/)",
       "Bash(grep -A1 \"description:$\" constants/packages.ts)",
       "Bash(curl -s http://localhost:4300/)",
-      "Bash(powershell -Command 'Get-NetTCPConnection -LocalPort 4300 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }')"
+      "Bash(powershell -Command 'Get-NetTCPConnection -LocalPort 4300 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }')",
+      "Bash(cd /c/Shivalik-Ganga-Adventure *)",
+      "Bash(powershell -Command 'Get-NetTCPConnection -LocalPort 4400 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }')",
+      "Bash(nohup npm run start -- -p 4400)",
+      "Bash(curl -s -o /dev/null -w \"server status: %{http_code}\\\\n\" http://localhost:4400/)",
+      "Bash(curl -s http://localhost:4400/sitemap.xml)",
+      "Bash(sed 's/<loc>//;s/<\\\\/loc>//')",
+      "Bash(curl -s http://localhost:4400/robots.txt)",
+      "Bash(curl -s http://localhost:4400/)",
+      "Bash(npx --yes lighthouse --version)",
+      "Bash(powershell -Command 'Get-NetTCPConnection -LocalPort 4500 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }')",
+      "Bash(curl -s http://localhost:4500/contact)",
+      "Bash(curl -s http://localhost:4500/about)",
+      "Bash(curl -s http://localhost:4500/)"
     ],
     "additionalDirectories": [
       "\\tmp",
       "c:\\Shivalik-Ganga-Adventure\\public\\videos\\gallery",
       "C:\\Users\\Aditya bisht\\AppData\\Local\\Temp\\claude\\c--Shivalik-Ganga-Adventure\\f6c0f4e1-a6b9-4c67-8e5c-9eb3442c3136\\scratchpad",
       "C:\\Shivalik-Ganga-Adventure\\public\\images\\gallery\\public\\images\\gallery",
-      "C:\\Shivalik-Ganga-Adventure\\public\\images\\gallery"
+      "C:\\Shivalik-Ganga-Adventure\\public\\images\\gallery",
+      "c:\\Shivalik-Ganga-Adventure\\.next"
     ]
   }
 }

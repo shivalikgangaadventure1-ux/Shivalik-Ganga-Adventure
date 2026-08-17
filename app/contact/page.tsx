@@ -21,8 +21,6 @@ export default function ContactPage() {
     { name: "Home", path: "/" },
     { name: "Contact", path: "/contact" },
   ]);
-  const mapEmbedSrc = `https://www.google.com/maps?q=${COMPANY.geo.latitude},${COMPANY.geo.longitude}&z=14&output=embed`;
-
   return (
     <>
       <script
@@ -51,7 +49,7 @@ export default function ContactPage() {
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Button href={getCallLink()} variant="call" className="flex-1" ariaLabel={`Call ${COMPANY.name} now`}>
+              <Button href={getCallLink()} variant="call" className="flex-1" ariaLabel={`${CTA.callNow} to reach ${COMPANY.name}`}>
                 {CTA.callNow}
               </Button>
               <Button
@@ -60,7 +58,7 @@ export default function ContactPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1"
-                ariaLabel="Book via WhatsApp"
+                ariaLabel={`${CTA.whatsappBooking}: message us on WhatsApp`}
               >
                 {CTA.whatsappBooking}
               </Button>
@@ -92,11 +90,12 @@ export default function ContactPage() {
 
           <div className="h-[320px] overflow-hidden rounded-2xl border border-border shadow-card lg:h-full lg:min-h-[420px]">
             <iframe
-              src={mapEmbedSrc}
+              src={COMPANY.mapEmbedUrl}
               title={`${COMPANY.name} location map`}
               loading="lazy"
+              allowFullScreen
               className="h-full w-full border-0"
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerPolicy="strict-origin-when-cross-origin"
             />
           </div>
         </Container>

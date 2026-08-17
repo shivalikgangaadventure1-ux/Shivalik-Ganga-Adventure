@@ -60,11 +60,11 @@ export function Hero() {
               icon={MessageCircle}
               target="_blank"
               rel="noopener noreferrer"
-              ariaLabel="Book your adventure via WhatsApp"
+              ariaLabel={`${CTA.bookYourAdventure} via WhatsApp`}
             >
               {CTA.bookYourAdventure}
             </Button>
-            <Button href="/packages" variant="outline" size="lg" ariaLabel="View rafting packages">
+            <Button href="/packages" variant="outline" size="lg" ariaLabel={`${CTA.viewPackages}: browse our rafting routes`}>
               {CTA.viewPackages}
             </Button>
           </div>

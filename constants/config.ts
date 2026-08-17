@@ -30,10 +30,16 @@ export const COMPANY = {
     full: "Shivpuri, Rishikesh - Badrinath Highway, Rishikesh, Uttarakhand 249192, India",
   },
 
+  // Real, client-supplied coordinates for the office (verified 2026-08-17), replacing
+  // the earlier rough placeholder.
   geo: {
-    latitude: 30.1667,
-    longitude: 78.3667,
+    latitude: 30.128218,
+    longitude: 78.320081,
   },
+
+  // Exact Google Maps embed for the office, supplied directly by the client.
+  mapEmbedUrl:
+    "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3450.8111111081835!2d78.32008077555693!3d30.128218074881545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzDCsDA3JzQxLjYiTiA3OMKwMTknMjEuNiJF!5e0!3m2!1sen!2sin!4v1786981310843!5m2!1sen!2sin",
 
   hours: "Mon - Sun 6:00 AM - 8:00 PM",
 

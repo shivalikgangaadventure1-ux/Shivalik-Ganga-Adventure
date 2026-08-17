@@ -23,10 +23,10 @@ export default function NotFound() {
         </p>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button href="/" variant="primary" ariaLabel="Go to the homepage">
+          <Button href="/" variant="primary">
             Back to Home
           </Button>
-          <Button href="/packages" variant="ghost" className="border-2 border-border" ariaLabel="View rafting packages">
+          <Button href="/packages" variant="ghost" className="border-2 border-border">
             {CTA.viewPackages}
           </Button>
           <Button
@@ -34,7 +34,7 @@ export default function NotFound() {
             variant="whatsapp"
             target="_blank"
             rel="noopener noreferrer"
-            ariaLabel="Message us on WhatsApp"
+            ariaLabel={`${CTA.whatsappBooking}: message us on WhatsApp`}
           >
             {CTA.whatsappBooking}
           </Button>

@@ -48,7 +48,7 @@ export function BookingCTA() {
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto"
-              ariaLabel="Book your rafting adventure via WhatsApp"
+              ariaLabel={`${CTA.whatsappBooking}: chat with us to book your rafting adventure`}
             >
               {CTA.whatsappBooking}
             </Button>
@@ -57,7 +57,7 @@ export function BookingCTA() {
               variant="outline"
               icon={Phone}
               className="w-full sm:w-auto"
-              ariaLabel="Call to book your rafting adventure"
+              ariaLabel={`${CTA.callNow} to book your rafting adventure`}
             >
               {CTA.callNow}
             </Button>

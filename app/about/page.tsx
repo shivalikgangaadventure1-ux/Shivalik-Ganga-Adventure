@@ -109,7 +109,7 @@ export default function AboutPage() {
               size="lg"
               target="_blank"
               rel="noopener noreferrer"
-              ariaLabel="Book your rafting adventure via WhatsApp"
+              ariaLabel={`${CTA.bookNow}: book your rafting adventure via WhatsApp`}
             >
               {CTA.bookNow}
             </Button>
@@ -149,11 +149,12 @@ export default function AboutPage() {
           </div>
           <div className="mx-auto mt-8 h-[320px] max-w-4xl overflow-hidden rounded-2xl border border-border shadow-card">
             <iframe
-              src={`https://www.google.com/maps?q=${COMPANY.geo.latitude},${COMPANY.geo.longitude}&z=14&output=embed`}
+              src={COMPANY.mapEmbedUrl}
               title={`${COMPANY.name} location map`}
               loading="lazy"
+              allowFullScreen
               className="h-full w-full border-0"
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerPolicy="strict-origin-when-cross-origin"
             />
           </div>
         </Container>

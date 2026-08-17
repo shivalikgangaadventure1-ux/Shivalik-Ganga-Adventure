@@ -46,7 +46,7 @@ export function Achievements() {
             icon={MessageCircle}
             target="_blank"
             rel="noopener noreferrer"
-            ariaLabel="Book your rafting adventure via WhatsApp"
+            ariaLabel={`${CTA.bookNow}: book your rafting adventure via WhatsApp`}
           >
             {CTA.bookNow}
           </Button>

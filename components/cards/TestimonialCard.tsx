@@ -29,7 +29,7 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
           <p className="font-heading text-sm font-bold text-heading">{testimonial.name}</p>
           <p className="text-xs text-muted">{testimonial.trip}</p>
         </figcaption>
-        <div className="ml-auto flex gap-0.5" aria-label={`Rated ${testimonial.rating} out of 5`}>
+        <div className="ml-auto flex gap-0.5" role="img" aria-label={`Rated ${testimonial.rating} out of 5`}>
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
               key={i}

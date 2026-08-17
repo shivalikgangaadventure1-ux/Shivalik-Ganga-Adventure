@@ -49,7 +49,7 @@ export function DealsPromo() {
               icon={MessageCircle}
               target="_blank"
               rel="noopener noreferrer"
-              ariaLabel="Claim the monsoon special offer via WhatsApp"
+              ariaLabel={`${CTA.reserveYourRaft}: claim the monsoon special offer via WhatsApp`}
             >
               {CTA.reserveYourRaft}
             </Button>

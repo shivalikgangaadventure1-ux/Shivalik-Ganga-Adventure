@@ -16,7 +16,7 @@ export function MobileBookingBar() {
     >
       <Link
         href="/contact"
-        aria-label="Book your rafting adventure"
+        aria-label={`${CTA.bookNow}: book your rafting adventure`}
         className="flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-full bg-primary font-heading text-sm font-bold uppercase tracking-wide text-heading active:bg-primary-dark"
       >
         {CTA.bookNow}

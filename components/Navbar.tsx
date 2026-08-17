@@ -87,7 +87,7 @@ export function Navbar() {
               variant={scrolled ? "call" : "outline"}
               size="sm"
               icon={Phone}
-              ariaLabel={`Call ${COMPANY.name} now`}
+              ariaLabel={`${CTA.callNow} to reach ${COMPANY.name}`}
             >
               {CTA.callNow}
             </Button>
@@ -98,7 +98,7 @@ export function Navbar() {
               icon={MessageCircle}
               target="_blank"
               rel="noopener noreferrer"
-              ariaLabel="Book via WhatsApp"
+              ariaLabel={`${CTA.whatsappBooking}: message us on WhatsApp`}
             >
               {CTA.whatsappBooking}
             </Button>
@@ -184,7 +184,7 @@ export function Navbar() {
                 variant="call"
                 icon={Phone}
                 className="w-full"
-                ariaLabel={`Call ${COMPANY.name} now`}
+                ariaLabel={`${CTA.callNow} to reach ${COMPANY.name}`}
               >
                 {CTA.callNow}
               </Button>
@@ -195,7 +195,7 @@ export function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full"
-                ariaLabel="Book via WhatsApp"
+                ariaLabel={`${CTA.whatsappBooking}: message us on WhatsApp`}
               >
                 {CTA.whatsappBooking}
               </Button>

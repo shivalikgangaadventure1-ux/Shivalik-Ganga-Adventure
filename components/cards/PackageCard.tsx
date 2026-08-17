@@ -71,7 +71,7 @@ export function PackageCard({ pkg, index = 0 }: { pkg: RaftingPackage; index?: n
         <p className="mt-2 flex-1 text-sm leading-relaxed text-body">{pkg.description}</p>
 
         <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
-          <div className="flex items-center gap-0.5" aria-label={`Rated ${pkg.rating} out of 5`}>
+          <div className="flex items-center gap-0.5" role="img" aria-label={`Rated ${pkg.rating} out of 5`}>
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}

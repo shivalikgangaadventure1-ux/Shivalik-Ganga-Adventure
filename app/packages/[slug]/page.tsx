@@ -184,7 +184,7 @@ export default async function PackageDetailPage({
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 w-full"
-              ariaLabel={`Book ${pkg.name} on WhatsApp`}
+              ariaLabel={`${CTA.whatsappBooking}: book ${pkg.name} directly`}
             >
               {CTA.whatsappBooking}
             </Button>

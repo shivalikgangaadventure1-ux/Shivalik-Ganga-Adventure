@@ -140,7 +140,7 @@ export function PromoPopup() {
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="mt-6 w-full"
-              ariaLabel="Claim 10% off via WhatsApp"
+              ariaLabel="Claim 10% Off via WhatsApp"
             >
               Claim 10% Off
             </Button>
