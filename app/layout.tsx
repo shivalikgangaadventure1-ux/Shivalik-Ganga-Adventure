@@ -62,12 +62,15 @@ export const metadata: Metadata = {
     description: COMPANY.shortDescription,
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
     },
+  },
+  verification: {
+    google: "2zUMxllnpNLYEViQGYrwL3PkKVbA3VNNjkL8rinRwpQ",
   },
 };
 

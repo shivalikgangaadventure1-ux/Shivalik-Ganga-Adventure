@@ -270,7 +270,16 @@
       "Bash(powershell -Command 'Get-NetTCPConnection -LocalPort 4500 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }')",
       "Bash(curl -s http://localhost:4500/contact)",
       "Bash(curl -s http://localhost:4500/about)",
-      "Bash(curl -s http://localhost:4500/)"
+      "Bash(curl -s http://localhost:4500/)",
+      "Bash(powershell -Command 'Get-NetTCPConnection -LocalPort 4600 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }')",
+      "Bash(curl -s http://localhost:4600/)",
+      "Bash(powershell -Command 'Get-NetTCPConnection -LocalPort 4700 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }')",
+      "Bash(curl -s http://localhost:4700/robots.txt)",
+      "Bash(curl -s http://localhost:4700/)",
+      "Bash(curl -s http://localhost:4700/packages/shivpuri-to-nim-beach)",
+      "Bash(curl -s http://localhost:4700/this-page-does-not-exist)",
+      "Bash(nohup npm run start -- -p 4700)",
+      "Bash(curl -s -o /dev/null -w \"server up: %{http_code}\\\\n\" http://localhost:4700/)"
     ],
     "additionalDirectories": [
       "\\tmp",
