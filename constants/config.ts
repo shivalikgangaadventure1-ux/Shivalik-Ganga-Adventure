@@ -44,10 +44,10 @@ export const COMPANY = {
   hours: "Mon - Sun 6:00 AM - 8:00 PM",
 
   social: {
-    facebook: "https://facebook.com/shivalikgangaadventure",
-    instagram: "https://instagram.com/shivalikgangaadventure",
+    facebook: "https://www.facebook.com/shivalikgangaadventure/",
+    instagram: "https://www.instagram.com/shivalikgangaadventure",
     twitter: "https://twitter.com/shivalikganga",
-    youtube: "https://youtube.com/@shivalikgangaadventure",
+    youtube: "https://www.youtube.com/@Shivalikgangaadventure",
   },
 
   url: "https://www.shivalikgangaadventure.com",
