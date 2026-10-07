@@ -1,9 +1,17 @@
 import { PACKAGES } from "@/constants/packages";
-import { getBreadcrumbSchema, getPackagesItemListSchema } from "@/lib/schema";
+import { HOME_FAQS } from "@/constants/homeContent";
+import { getBreadcrumbSchema, getFAQPageSchema, getPackagesItemListSchema } from "@/lib/schema";
 import { Hero } from "@/sections/Hero";
+import {
+  ExperienceStory,
+  HomeFAQ,
+  PlanYourTrip,
+  RaftingIntro,
+  RiverSafety,
+  RoutesGuide,
+} from "@/sections/HomeContent";
 import { SearchBooking } from "@/sections/SearchBooking";
 import { WhyChooseUs } from "@/sections/WhyChooseUs";
-import { PopularTours } from "@/sections/PopularTours";
 import { Destinations } from "@/sections/Destinations";
 import { Achievements } from "@/sections/Achievements";
 import { WeatherWidget } from "@/components/WeatherWidget";
@@ -11,9 +19,9 @@ import { DealsPromo } from "@/sections/DealsPromo";
 import { Testimonials } from "@/sections/Testimonials";
 
 export default function HomePage() {
-  // Scoped to 3 items to match what <PopularTours limit={3}> actually renders on
-  // this page. The full 5-package list lives on /packages, which renders all 5.
-  const itemListSchema = getPackagesItemListSchema(PACKAGES.slice(0, 3));
+  // <RoutesGuide> renders all 5 packages on this page, so the schema lists all 5.
+  const itemListSchema = getPackagesItemListSchema(PACKAGES);
+  const faqSchema = getFAQPageSchema(HOME_FAQS);
   const breadcrumbSchema = getBreadcrumbSchema([{ name: "Home", path: "/" }]);
 
   return (
@@ -29,15 +37,26 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <Hero />
       <SearchBooking />
+      <RaftingIntro />
       <WhyChooseUs />
-      <PopularTours limit={3} showViewAllLink />
+      <RoutesGuide />
+      <ExperienceStory />
       <Destinations limit={6} showViewAllLink />
       <Achievements />
+      <RiverSafety />
       <WeatherWidget />
       <DealsPromo />
+      <PlanYourTrip />
       <Testimonials />
+      <HomeFAQ />
     </>
   );
 }

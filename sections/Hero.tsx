@@ -45,11 +45,11 @@ export function Hero() {
             {COMPANY.tagline}
           </p>
           <h1 className="mx-auto max-w-4xl font-heading text-4xl font-extrabold uppercase leading-tight text-white sm:text-5xl lg:text-6xl">
-            Find Your Perfect Rafting Adventure Today
+            River Rafting in Rishikesh – Your Ganga Adventure Starts Here
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base text-white/85 sm:text-lg">
-            Ride the white-water rapids of the Ganga with certified guides, top-grade safety
-            gear, and unforgettable views of the Himalayan foothills.
+          <p className="mx-auto mt-6 max-w-2xl text-base text-white/85 sm:text-lg">
+            Ride the rapids, feel the rush, and experience the Ganga from a whole new perspective.
+            Choose your route. Gather your people. Meet the Ganga.
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -68,6 +68,10 @@ export function Hero() {
               {CTA.viewPackages}
             </Button>
           </div>
+
+          <p className="mt-8 text-xs font-semibold uppercase tracking-widest text-white/75 sm:text-sm">
+            9 KM to 32 KM · Multiple Rafting Routes · Trained Guides · Safety-Focused Equipment
+          </p>
         </motion.div>
       </Container>
     </section>
