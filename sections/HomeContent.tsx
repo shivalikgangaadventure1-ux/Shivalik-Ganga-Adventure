@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import Image from "next/image";
 import { COMPANY, CTA, getWhatsAppLink } from "@/constants/config";
 import {
   HOME_FAQS,
@@ -23,20 +24,40 @@ export function RaftingIntro() {
       <Container>
         <SectionHeading eyebrow="Ganga River Rafting" title="White Water Rafting in Rishikesh on the Ganga" />
         <div className="mx-auto max-w-3xl space-y-4 text-center text-base leading-relaxed text-body">
-          <p>There is something different about experiencing the Ganga from the river itself.</p>
+          <p>
+            The mountains stand around you, the Ganga keeps moving, and somewhere ahead the river is about to get a
+            little more exciting.
+          </p>
+          <p>
+            At Shivalik Ganga Adventure, we bring you into that experience with guided river rafting in Rishikesh.
+            Whether you&apos;re trying rafting for the first time, planning an adventure with friends and family, or
+            looking for a longer journey through more challenging rapids, you can choose a route that fits your day.
+          </p>
+          <p>
+            Our white water rafting in Rishikesh takes you through different stretches of the Ganga, from shorter and
+            gentler routes to longer adventures with more demanding rapids.
+          </p>
+          <p>
+            From the first safety briefing to the final stretch towards Nim Beach, the journey is about more than
+            simply getting from one point to another. It&apos;s about paddling together, feeling the river move beneath
+            you, and seeing Rishikesh from a completely different perspective.
+          </p>
+          <p className="font-heading font-bold text-heading">Choose your route. Gather your people. Meet the Ganga.</p>
+          <p className="pt-6">There is something different about experiencing the Ganga from the river itself.</p>
           <p>
             From the shore, you see the mountains, flowing water and forested riverbanks. Once you&apos;re in the raft,
             you become part of the scene. Some stretches are calm enough to look around and enjoy the scenery. Then the
             water changes, the guide calls out a command, everyone starts paddling, and suddenly you&apos;re right in the
             middle of the adventure.
           </p>
+          <p>That&apos;s the experience of Ganga river rafting.</p>
           <p>
             Our Rishikesh river rafting routes give you different ways to experience the river, from shorter trips for
             people who want a gentler introduction to longer journeys with more demanding rapids. The right choice
             depends on your time, experience, physical ability, comfort level and the conditions on the day.
           </p>
           <p className="font-heading font-bold text-heading">
-            We don&apos;t believe the longest route is automatically the best one. The best rafting route is the one
+            And that&apos;s why we don&apos;t believe the longest route is automatically the best one. The best rafting route is the one
             that fits you.
           </p>
         </div>
@@ -46,7 +67,8 @@ export function RaftingIntro() {
           <p className="mx-auto -mt-6 mb-10 max-w-2xl text-center text-base leading-relaxed text-body">
             A great rafting trip isn&apos;t only about the biggest rapid. It&apos;s also about knowing what you&apos;re
             doing before the raft leaves the shore. Before getting on the river, participants receive a safety briefing
-            and essential rafting equipment, including life jackets and helmets.
+            and essential rafting equipment, including life jackets and helmets. Your guide explains the instructions and
+            paddling commands you need to follow on the water.
           </p>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {PREPARATION_POINTS.map((point) => (
@@ -68,43 +90,62 @@ export function RoutesGuide() {
     <section id="packages" className="scroll-mt-24 bg-light py-20 sm:py-28">
       <Container>
         <SectionHeading eyebrow="Routes to Nim Beach" title="Rishikesh Rafting Packages & Prices" />
-        <p className="mx-auto -mt-6 mb-12 max-w-2xl text-center text-base leading-relaxed text-body">
+        <p className="mx-auto -mt-6 mb-12 max-w-3xl text-center text-base leading-relaxed text-body">
           Looking for Rishikesh rafting prices or trying to decide which package is right for you? Start with three
-          simple things: distance, duration and rapid grade. Then think about your group. Here are our current listed
-          Rishikesh rafting packages:
+          simple things: distance, duration and rapid grade. Then think about your group. Are you new to rafting?
+          Travelling with family? Looking for a few hours on the Ganga with friends? Or ready for a longer and more
+          challenging adventure? Here are our current listed Rishikesh rafting packages:
         </p>
 
-        <div className="mx-auto grid max-w-4xl gap-6">
-          {PACKAGES.map((pkg) => {
+        <div className="mx-auto grid max-w-5xl gap-8">
+          {PACKAGES.map((pkg, index) => {
             const copy = ROUTE_COPY[pkg.slug];
             const price = pkg.salePrice ?? pkg.price;
+            const routeName = pkg.name.split(" to ")[0];
             return (
-              <article key={pkg.slug} className="rounded-2xl border border-border bg-white p-6 shadow-sm sm:p-8">
-                <h3 className="font-heading text-xl font-bold text-heading sm:text-2xl">
-                  {pkg.name.split(" to ")[0]} Rafting – {pkg.distanceKm} KM to Nim Beach
-                </h3>
-                <p className="mt-2 font-heading text-sm font-semibold text-primary-dark">
-                  {pkg.distanceKm} KM · {pkg.duration} · {pkg.grade} · {formatPrice(price)}
-                </p>
-                {copy && (
-                  <div className="mt-4 space-y-3 text-sm leading-relaxed text-body">
-                    <p className="font-semibold text-heading">{copy.lead}</p>
-                    {copy.body.map((line) => (
-                      <p key={line}>{line}</p>
-                    ))}
+              <article
+                key={pkg.slug}
+                className={`grid overflow-hidden rounded-2xl border border-border bg-white shadow-sm md:grid-cols-5 ${
+                  index % 2 === 1 ? "md:[&>div:first-child]:order-2" : ""
+                }`}
+              >
+                <div className="relative aspect-[16/10] md:col-span-2 md:aspect-auto md:min-h-full">
+                  <Image
+                    src={pkg.image}
+                    alt={`${routeName} river rafting route to Nim Beach, Rishikesh`}
+                    fill
+                    loading="lazy"
+                    sizes="(min-width: 768px) 40vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-6 sm:p-8 md:col-span-3">
+                  <h3 className="font-heading text-xl font-bold text-heading sm:text-2xl">
+                    {routeName} Rafting – {pkg.distanceKm} KM to Nim Beach
+                  </h3>
+                  <p className="mt-2 font-heading text-sm font-semibold text-primary-dark">
+                    {pkg.distanceKm} KM · {pkg.duration} · {pkg.grade} · {formatPrice(price)}
+                  </p>
+                  {copy && (
+                    <div className="mt-4 space-y-3 text-sm leading-relaxed text-body">
+                      <p className="font-semibold text-heading">{copy.lead}</p>
+                      {copy.body.map((line) => (
+                        <p key={line}>{line}</p>
+                      ))}
+                    </div>
+                  )}
+                  <div className="mt-5">
+                    <Button href={`/packages/${pkg.slug}`} variant="primary" size="sm">
+                      Explore {routeName} Rafting
+                    </Button>
                   </div>
-                )}
-                <div className="mt-5">
-                  <Button href={`/packages/${pkg.slug}`} variant="primary" size="sm">
-                    Explore {pkg.name.split(" to ")[0]} Rafting
-                  </Button>
                 </div>
               </article>
             );
           })}
         </div>
 
-        <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-primary/30 bg-primary/10 p-6">
+        <div className="mx-auto mt-10 max-w-5xl rounded-2xl border border-primary/30 bg-primary/10 p-6">
           <h3 className="font-heading text-lg font-bold text-heading">Please Note</h3>
           <p className="mt-2 text-sm leading-relaxed text-body">
             Listed prices and durations are subject to confirmation. Route availability, permitted operations and
@@ -216,7 +257,8 @@ export function PlanYourTrip() {
       <Container>
         <SectionHeading eyebrow="Plan Ahead" title="Plan Your River Rafting Trip in Rishikesh" />
         <p className="mx-auto -mt-6 mb-12 max-w-2xl text-center text-base leading-relaxed text-body">
-          Wondering when to go, which route to choose or what you should bring? Tell us your preferred date, group size
+          Wondering when to go, which route to choose or what you should bring? The best place to start is with your own
+          trip. Tell us your preferred date, group size
           and the type of experience you&apos;re looking for. We can help you understand the available Rishikesh rafting
           routes and what you should know before booking. Because rafting takes place in a natural river environment,
           current conditions and route availability should always be confirmed before your trip.
