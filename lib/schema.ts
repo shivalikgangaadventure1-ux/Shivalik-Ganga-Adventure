@@ -166,8 +166,8 @@ export function getBlogPostingSchema(post: BlogPostMeta) {
       logo: {
         "@type": "ImageObject",
         url: `${COMPANY.url}${IMAGES.logoIcon}`,
-        width: 512,
-        height: 512,
+        width: 256,
+        height: 256,
       },
     },
     image: post.coverImage.startsWith("http") ? post.coverImage : `${COMPANY.url}${post.coverImage}`,

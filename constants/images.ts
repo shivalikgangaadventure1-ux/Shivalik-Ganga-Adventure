@@ -13,10 +13,8 @@ export const IMAGES = {
   // Real client-supplied photography (converted to WebP, already compressed).
   heroPoster: "/images/hero/hero-home.webp",
   achievementsBg: "/images/home/achievements-bg.webp",
-  // Full horizontal lockup (icon + wordmark), color version for light/white backgrounds.
-  logo: "/images/logo/logo-white.webp",
-  // Same lockup, light-colored artwork for dark/photo backgrounds (transparent PNG source).
-  logoLight: "/images/logo/logo-transparent.webp",
+  // Square badge logo (own dark background), used in header, footer and mobile nav.
+  logo: "/images/logo/logo-badge.webp",
   // Icon mark only, square, for favicons and the schema.org `logo` field.
   logoIcon: "/images/logo/favicon.png",
   bgPopular: unsplash("1512675628397-28288d1220ef"),

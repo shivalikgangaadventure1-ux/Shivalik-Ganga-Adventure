@@ -46,7 +46,6 @@ export const COMPANY = {
   social: {
     facebook: "https://www.facebook.com/shivalikgangaadventure/",
     instagram: "https://www.instagram.com/shivalikgangaadventure",
-    twitter: "https://twitter.com/shivalikganga",
     youtube: "https://www.youtube.com/@Shivalikgangaadventure",
   },
 
