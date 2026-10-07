@@ -1,4 +1,4 @@
-import { Check, MessageCircle } from "lucide-react";
+import { Check } from "lucide-react";
 import { COMPANY, CTA, getWhatsAppLink } from "@/constants/config";
 import {
   HOME_FAQS,
@@ -244,7 +244,6 @@ export function PlanYourTrip() {
             href={getWhatsAppLink()}
             variant="primary"
             size="lg"
-            icon={MessageCircle}
             target="_blank"
             rel="noopener noreferrer"
             ariaLabel="Plan your rafting trip via WhatsApp"
