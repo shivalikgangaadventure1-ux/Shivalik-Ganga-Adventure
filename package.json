@@ -9,6 +9,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@portabletext/to-html": "^6.0.0",
+    "@portabletext/types": "^4.0.2",
+    "@sanity/client": "^8.9.0",
+    "@sanity/image-url": "^2.1.1",
     "framer-motion": "^11.11.17",
     "gray-matter": "^4.0.3",
     "lenis": "^1.3.26",

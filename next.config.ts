@@ -11,7 +11,7 @@ const securityHeaders = [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: https://images.unsplash.com",
+      "img-src 'self' data: https://images.unsplash.com https://cdn.sanity.io",
       "font-src 'self' data:",
       "connect-src 'self' https://api.open-meteo.com",
       "frame-src 'self' https://www.google.com",
@@ -36,6 +36,10 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
       },
     ],
     formats: ["image/avif", "image/webp"],

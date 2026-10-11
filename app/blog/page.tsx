@@ -14,8 +14,11 @@ export const metadata: Metadata = buildMetadata({
   path: "/blog",
 });
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+// Re-fetch from Sanity at most once a minute so new posts appear without a redeploy.
+export const revalidate = 60;
+
+export default async function BlogPage() {
+  const posts = await getAllPosts();
   const breadcrumbSchema = getBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Blog", path: "/blog" },
@@ -51,7 +54,7 @@ export default function BlogPage() {
                 <div className="relative aspect-[16/10] w-full overflow-hidden">
                   <Image
                     src={post.coverImage}
-                    alt={post.title}
+                    alt={post.coverImageAlt || post.title}
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"

@@ -7,8 +7,11 @@ import { getBlogPostingSchema, getBreadcrumbSchema, getFAQPageSchema } from "@/l
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/ui/Container";
 
-export function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
+// Re-fetch from Sanity at most once a minute; slugs not known at build time render on demand.
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  return (await getAllPostSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -82,7 +85,7 @@ export default async function BlogPostPage({
       <section className="py-16 sm:py-24">
         <Container className="mx-auto max-w-3xl">
           <div className="relative mb-6 h-56 w-full overflow-hidden rounded-2xl sm:h-72 md:h-80">
-            <Image src={post.coverImage} alt={post.title} fill sizes="(min-width: 1024px) 768px, 100vw" className="object-cover" priority fetchPriority="high" />
+            <Image src={post.coverImage} alt={post.coverImageAlt || post.title} fill sizes="(min-width: 1024px) 768px, 100vw" className="object-cover" priority fetchPriority="high" />
           </div>
           {post.authorTitle && (
             <p className="mb-8 text-sm text-muted">

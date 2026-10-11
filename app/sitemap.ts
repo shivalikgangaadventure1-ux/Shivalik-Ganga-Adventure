@@ -3,7 +3,9 @@ import { COMPANY } from "@/constants/config";
 import { PACKAGES } from "@/constants/packages";
 import { getAllPostSlugs } from "@/lib/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 3600;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     "",
     "/packages",
@@ -16,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms",
   ];
   const packageRoutes = PACKAGES.map((pkg) => `/packages/${pkg.slug}`);
-  const blogRoutes = getAllPostSlugs().map((slug) => `/blog/${slug}`);
+  const blogRoutes = (await getAllPostSlugs()).map((slug) => `/blog/${slug}`);
 
   return [...staticRoutes, ...packageRoutes, ...blogRoutes].map((path) => ({
     url: `${COMPANY.url}${path}`,
