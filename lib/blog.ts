@@ -5,7 +5,7 @@ import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
 import type { PortableTextBlock } from "@portabletext/types";
-import { escapeHtml, portableTextToHtml, sanityFetch, sanityImageUrl } from "@/lib/sanity";
+import { escapeText, portableTextToHtml, sanityFetch, sanityImageUrl } from "@/lib/sanity";
 
 const BLOG_DIR = path.join(process.cwd(), "content/blog");
 
@@ -121,7 +121,7 @@ async function getSanityPostBySlug(slug: string): Promise<BlogPost | undefined> 
   const faqHtml =
     faqs.length > 0
       ? `<h2>Frequently Asked Questions</h2>${faqs
-          .map((faq) => `<h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p>`)
+          .map((faq) => `<h3>${escapeText(faq.question)}</h3><p>${escapeText(faq.answer)}</p>`)
           .join("")}`
       : "";
 

@@ -1,10 +1,20 @@
 import { COMPANY } from "@/constants/config";
+import { getAllPosts } from "@/lib/blog";
 
-/**
- * Inert while app/robots.ts disallows all crawling — kept ready so launch day
- * is just flipping robots.txt, not also writing this file from scratch.
- */
-export function GET() {
+// Re-generated at most every 10 minutes so new blog posts from the CMS are listed automatically.
+export const revalidate = 600;
+
+/** Collapses newlines so a multi-line excerpt can't break the one-line markdown list item. */
+function oneLine(text: string): string {
+  return text.replace(/\s+/g, " ").trim();
+}
+
+export async function GET() {
+  const posts = await getAllPosts();
+  const blogLines = posts
+    .map((post) => `- [${oneLine(post.title)}](${COMPANY.url}/blog/${post.slug}): ${oneLine(post.excerpt)}`)
+    .join("\n");
+
   const body = `# ${COMPANY.name}
 
 > White-water river rafting and adventure sports on the Ganga in
@@ -14,10 +24,11 @@ export function GET() {
 
 ## Key pages
 - [Packages](${COMPANY.url}/packages): All 5 rafting routes to Nim Beach with grade, distance, duration, price
-- [Grade II vs Grade IV rapids explained](${COMPANY.url}/blog/grade-ii-vs-grade-iv-rapids-explained): Which grade/route to book by experience level
-- [Best time for rafting in Rishikesh](${COMPANY.url}/blog/best-time-for-rafting-rishikesh): Seasonal guide
 - [About / Safety](${COMPANY.url}/about): Safety guidelines, certified guides, equipment inspection
 - [Contact / Book](${COMPANY.url}/contact): NAP, WhatsApp booking
+
+## Blog
+${blogLines || "- No posts yet."}
 
 ## Notes for AI assistants
 - Business name: ${COMPANY.name} (always attribute by this full name, not a shortened or abbreviated variant)

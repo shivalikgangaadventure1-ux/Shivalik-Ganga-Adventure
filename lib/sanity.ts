@@ -42,6 +42,22 @@ export async function sanityFetch<T>(query: string, params: Record<string, unkno
   return client.fetch<T>(query, params, { next: { revalidate: 60 } });
 }
 
+/**
+ * Text nodes only need & < > escaped. The Portable Text serializer also encodes
+ * quotes and apostrophes (&#39; / &quot;), which is noise in the page source and
+ * for crawlers. Decode those in text only: attribute values live inside tags,
+ * where an encoded quote is required, so tags are left untouched. The serializer
+ * encodes every > inside a tag, so splitting on <...> is safe.
+ */
+function relaxQuoteEntities(html: string): string {
+  return html
+    .split(/(<[^>]*>)/)
+    .map((part) =>
+      part.startsWith("<") ? part : part.replace(/&#39;|&#x27;|&apos;/g, "'").replace(/&quot;/g, '"'),
+    )
+    .join("");
+}
+
 export function portableTextToHtml(blocks: PortableTextBlock[]): string {
   // Editors often leave stray empty paragraphs; drop them instead of rendering <p></p>.
   const nonEmpty = blocks.filter(
@@ -49,37 +65,45 @@ export function portableTextToHtml(blocks: PortableTextBlock[]): string {
       block._type !== "block" ||
       (block.children as { text?: string }[] | undefined)?.some((child) => child.text?.trim()),
   );
-  return toHTML(nonEmpty, {
+  const html = toHTML(nonEmpty, {
     components: {
       types: {
         image: ({ value }: { value: SanityImage }) => {
           if (!value?.asset?._ref) return "";
-          const alt = escapeHtml(value.alt ?? "");
-          const caption = value.caption ? `<figcaption>${escapeHtml(value.caption)}</figcaption>` : "";
+          const alt = escapeAttr(value.alt ?? "");
+          const caption = value.caption ? `<figcaption>${escapeText(value.caption)}</figcaption>` : "";
           const size = value.asset._ref.match(/-(\d+)x(\d+)-/);
           const dimensions = size ? ` width="${size[1]}" height="${size[2]}"` : "";
-          return `<figure><img src="${sanityImageUrl(value, 1200)}" alt="${alt}"${dimensions} loading="lazy" decoding="async" style="height:auto" />${caption}</figure>`;
+          return `<figure><img src="${escapeAttr(sanityImageUrl(value, 1200))}" alt="${alt}"${dimensions} loading="lazy" decoding="async" style="height:auto" />${caption}</figure>`;
         },
       },
       marks: {
         link: ({ children, value }) => {
           const href: string = value?.href ?? "";
-          const safe = href.startsWith("/") || uriLooksSafe(href);
-          if (!safe) return children;
+          const isInternalPath = href.startsWith("/") && !href.startsWith("//");
+          if (href.startsWith("//")) return children; // protocol-relative links can point off-site unnoticed
+          if (!isInternalPath && !uriLooksSafe(href)) return children;
           const external = /^https?:\/\//.test(href);
           const rel = external ? ' rel="noopener noreferrer"' : "";
-          return `<a href="${escapeHtml(href)}"${rel}>${children}</a>`;
+          return `<a href="${escapeAttr(href)}"${rel}>${children}</a>`;
         },
       },
     },
   });
+  return relaxQuoteEntities(html);
 }
 
-export function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
+/** Escapes only what is required inside an HTML text node. */
+export function escapeText(text: string): string {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+/** Escapes text for a double-quoted HTML attribute value. */
+export function escapeAttr(text: string): string {
+  return escapeText(text).replace(/"/g, "&quot;");
+}
+
+/** Serializes JSON-LD for an inline <script>, preventing "</script>" in content from breaking out. */
+export function jsonLd(data: unknown): string {
+  return JSON.stringify(data).replace(/</g, "\\" + "u003c");
 }
