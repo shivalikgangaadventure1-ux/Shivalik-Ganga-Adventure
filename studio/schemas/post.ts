@@ -18,7 +18,12 @@ export const post = defineType({
       type: "slug",
       description: 'Click "Generate". The post will live at /blog/<slug>. Do not change after publishing.',
       options: { source: "title", maxLength: 80 },
-      validation: (rule) => rule.required(),
+      validation: (rule) =>
+        rule.required().custom((slug) =>
+          !slug?.current || /^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug.current)
+            ? true
+            : "Use only lowercase letters, numbers and single hyphens (click Generate).",
+        ),
     }),
     defineField({
       name: "excerpt",
