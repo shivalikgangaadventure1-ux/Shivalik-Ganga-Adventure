@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { getAllPostSlugs, getPostBySlug } from "@/lib/blog";
+import { getAllPosts, getAllPostSlugs, getPostBySlug } from "@/lib/blog";
 import { buildMetadata } from "@/lib/metadata";
 import { jsonLd } from "@/lib/sanity";
 import { getBlogPostingSchema, getBreadcrumbSchema, getFAQPageSchema } from "@/lib/schema";
+import { BlogCard } from "@/components/cards/BlogCard";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/ui/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 // Re-fetch from Sanity at most once a minute; slugs not known at build time render on demand.
 export const revalidate = 60;
@@ -40,6 +42,8 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) notFound();
+
+  const relatedPosts = (await getAllPosts()).filter((other) => other.slug !== post.slug).slice(0, 3);
 
   const breadcrumbSchema = getBreadcrumbSchema([
     { name: "Home", path: "/" },
@@ -101,6 +105,19 @@ export default async function BlogPostPage({
           />
         </Container>
       </section>
+
+      {relatedPosts.length > 0 && (
+        <section className="bg-light py-16 sm:py-24">
+          <Container>
+            <SectionHeading eyebrow="Keep Reading" title="More From Our Blog" />
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedPosts.map((related) => (
+                <BlogCard key={related.slug} post={related} headingAs="h3" />
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
     </>
   );
 }
