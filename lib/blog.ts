@@ -90,7 +90,7 @@ const POST_FIELDS = `
 
 function toMeta(raw: SanityPostRaw): BlogPostMeta {
   return {
-    slug: raw.slug,
+    slug: raw.slug.trim(), // tolerate stray whitespace typed into the slug field
     title: raw.title,
     excerpt: raw.excerpt,
     publishedAt: raw.publishedAt,
@@ -112,7 +112,7 @@ async function getSanityPosts(): Promise<BlogPostMeta[]> {
 
 async function getSanityPostBySlug(slug: string): Promise<BlogPost | undefined> {
   const raw = await sanityFetch<SanityPostRaw>(
-    `*[_type == "post" && slug.current == $slug && defined(coverImage.asset)][0] {${POST_FIELDS}, body, faqs}`,
+    `*[_type == "post" && slug.current in [$slug, $slug + " "] && defined(coverImage.asset)][0] {${POST_FIELDS}, body, faqs}`,
     { slug },
   );
   if (!raw) return undefined;
