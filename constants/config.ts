@@ -21,13 +21,13 @@ export const COMPANY = {
   email: "info@shivalikgangaadventure.com",
 
   address: {
-    street: "Shivpuri, Rishikesh - Badrinath Highway",
+    street: "Nagar Panchayat Tapovan Laxmanjhula",
     locality: "Rishikesh",
     region: "Uttarakhand",
     postalCode: "249192",
     country: "IN",
     countryName: "India",
-    full: "Shivpuri, Rishikesh - Badrinath Highway, Rishikesh, Uttarakhand 249192, India",
+    full: "Nagar Panchayat Tapovan Laxmanjhula, Rishikesh, Uttarakhand 249192, India",
   },
 
   // Real, client-supplied coordinates for the office (verified 2026-08-17), replacing
