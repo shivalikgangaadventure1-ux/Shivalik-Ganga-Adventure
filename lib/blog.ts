@@ -88,9 +88,23 @@ const POST_FIELDS = `
   "slug": slug.current,
   title, excerpt, publishedAt, updatedAt, coverImage, author, authorTitle, tags`;
 
+/**
+ * Editors sometimes type the slug by hand and add a leading "/" or stray spaces
+ * (e.g. "/my-post "), which would produce URLs like /blog//my-post. Always
+ * publish the clean form.
+ */
+function cleanSlug(slug: string): string {
+  return slug.trim().replace(/^\/+|\/+$/g, "").trim();
+}
+
+/** Every raw spelling an editor could have stored for a clean slug, so lookups still match. */
+function slugVariants(slug: string): string[] {
+  return ["", "/"].flatMap((prefix) => ["", " ", "/"].map((suffix) => `${prefix}${slug}${suffix}`));
+}
+
 function toMeta(raw: SanityPostRaw): BlogPostMeta {
   return {
-    slug: raw.slug.trim(), // tolerate stray whitespace typed into the slug field
+    slug: cleanSlug(raw.slug),
     title: raw.title,
     excerpt: raw.excerpt,
     publishedAt: raw.publishedAt,
@@ -112,8 +126,8 @@ async function getSanityPosts(): Promise<BlogPostMeta[]> {
 
 async function getSanityPostBySlug(slug: string): Promise<BlogPost | undefined> {
   const raw = await sanityFetch<SanityPostRaw>(
-    `*[_type == "post" && slug.current in [$slug, $slug + " "] && defined(coverImage.asset)][0] {${POST_FIELDS}, body, faqs}`,
-    { slug },
+    `*[_type == "post" && slug.current in $slugs && defined(coverImage.asset)][0] {${POST_FIELDS}, body, faqs}`,
+    { slugs: slugVariants(cleanSlug(slug)) },
   );
   if (!raw) return undefined;
 
