@@ -43,6 +43,15 @@ export const COMPANY = {
 
   hours: "Mon - Sun 6:00 AM - 8:00 PM",
 
+  // Google Business Profile (verified from the live listing, Nov 2026). `reviewsUrl`
+  // opens the profile straight on its Reviews tab.
+  googleReviews: {
+    rating: "5.0",
+    count: 57,
+    reviewsUrl:
+      "https://www.google.com/maps/place/Shivalik+Ganga+Adventure+-Rishikesh/@30.1281674,78.3225273,17z/data=!4m8!3m7!1s0x390917768b10a921:0x617feb38c437b04!8m2!3d30.1281674!4d78.3225273!9m1!1b1!16s%2Fg%2F11nw7y39x8?hl=en",
+  },
+
   social: {
     facebook: "https://www.facebook.com/shivalikgangaadventure/",
     instagram: "https://www.instagram.com/shivalikgangaadventure",
